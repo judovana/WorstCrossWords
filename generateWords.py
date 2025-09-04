@@ -12,10 +12,10 @@ class DeskWithWords:
             wwp.hideAll()
             if wwp.direction==">":
                 for i, character in enumerate(wwp.word):
-                    self.desk[wwp.y][wwp.x+i]=chr(index+65);
+                    self.desk[wwp.y][wwp.x+i]=idToLetter(index)
             if wwp.direction=="ˇ":
                 for i, character in enumerate(wwp.word):
-                    self.desk[wwp.y+i][wwp.x]=chr(index+65);
+                    self.desk[wwp.y+i][wwp.x]=idToLetter(index)
 
     def prettyPrint(self):
         for y in self.desk:
@@ -37,7 +37,6 @@ class DeskWithWords:
     
     def gaveUp(self):
         for index, wwp in enumerate(self.wordsWithPlacement):
-            if wwp.word == word:
                 wwp.showAll()
                 if wwp.direction==">":
                     for i, character in enumerate(wwp.word):
@@ -46,6 +45,27 @@ class DeskWithWords:
                     for i, character in enumerate(wwp.word):
                         self.desk[wwp.y+i][wwp.x]=character
 
+    def helpRandomLetter(self):
+        wwpCopy=list(self.wordsWithPlacement)
+        random.shuffle(wwpCopy)
+        for index, wwp in enumerate(wwpCopy):
+            indexes=[]
+            for i, boool in enumerate(wwp.found):
+                if not boool:
+                    indexes.append(i)
+            if len(indexes) > 0:
+                random.shuffle(indexes)
+                ch=wwp.word[indexes[0]]
+                if wwp.direction==">":
+                    y=wwp.y; x=wwp.x+indexes[0]
+                if wwp.direction=="ˇ":
+                    y=wwp.y+indexes[0]; x=wwp.x
+                self.desk[y][x]=ch
+                wwp.found[indexes[0]] = True;
+                return wwp.word[indexes[0]]+" at "+str(x)+","+str(y);
+        return "Puzzle solved!"
+ 
+        
 
 class WordWithPlacement:
     def __init__(self, x, y, word, direction):
@@ -83,8 +103,8 @@ def generate(words, maxWords):
     wordsWithPlacement = []
     word=words.pop();
     # to place first randmly w/h is changing the order in theb elow loop...
-    initx=int(random.randint(0, len(desk[0])-len(word)-1)/2)*2-1
-    inity=int(random.randint(0, len(desk)-1)/2)*2
+    initx=int(random.randint(0, len(desk[0])-len(word)-2)/2)*2
+    inity=int(random.randint(0, len(desk)-2)/2)*2
     placeHor(desk, initx, inity, word);
     wordsWithPlacement.append(WordWithPlacement(initx,inity,word, ">"))
     while maxWords > 0 and len(words) > 1: #two pops in below
@@ -161,9 +181,12 @@ def isFree(desk, x, y, invasiveChar):
         return 1
     return -1;
 
+def idToLetter(i):
+    return chr(i+65)    
+
 def cheat(desk):
     for index,wwp in enumerate(desk.wordsWithPlacement):
-        print(chr(index+65)+": "+wwp.toStr())
+        print(idToLetter(index)+": "+wwp.toStr())
 
 def main():
     words=caches.readWorlist("cs")
@@ -195,6 +218,11 @@ def main():
             print("?number[a-z] to fill Nth letter of selected word")
             print("?[a-z] to fill whole word of given word")
             print("everything else is considered as guess")
+            continue
+        if '?' == cmd:
+            ret=desk.helpRandomLetter();
+            print(ret)
+            desk.prettyPrint()
             continue
         hit=desk.solve(cmd);
         if hit:
