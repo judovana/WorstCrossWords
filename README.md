@@ -1,5 +1,5 @@
 # WorstCrossWords
- * This is AI powered, multilanguage, *terminal*,  worst crossword game ever created
+ * This is AI powered, multi-language, *terminal*,  worst crossword game ever created
  * it is powered by awesome `transformers` and `diffusers` by https://huggingface.co
  * I'm no python master non python enthusiastic, so I apologies for bad practices
 
@@ -17,15 +17,16 @@
    * each word is translated from your language to English
      * if you play in English this step is skipped 
    * then the image and textual explanation is generated
-     * the explanation is translated back to your language (unless in english)
-   *  obviouslyplaying in english is much more easy
+     * the explanation is translated back to your language (unless in English)
+   *  obviously playing in English is much more easy, as one level of AI intervenes disappears
+     * The English to English worked pretty well, so saving at least some time.
  * this is optimized to run on **CPU**. But all AI operations are costly, on pretty good CPU without GPU:
    * translation - few seconds
    * text explanation - around minute
    * image - about 5 minutes
  * With GPU it should go much faster but is for now untested
 
-## depndencies
+## dependencies
  * It have many dependencies, run `sh deps` to get them all.
  * each model is downloaded on first usage.
    * I recommend to try each model first as standalone (caching however do not (intentionally) work)
@@ -174,4 +175,36 @@ ok!
 . . . . . . . . . . . . . . L L L L L L L L L .
 ```
 </details>
+
+## crosswords generation issue:
+Note, the generation is not perfect, and never was intended to be, so it can create things like:
+```
+word1word2
+```
+where word1 and word2 are words. (no intersection, they were connected by accident from different crossing)
+or
+```
+word1w
+     o
+     r
+     d
+     2
+```
+where word1 and word2 are words. (no intersection, they were connected by accident from different crossing)
+or
+```
+word1word2
+```
+where word1w (note the intersection, connected intentionally) and word2 are words
+or
+```
+word1w
+     o
+     r
+     d
+     2
+```
+where word1w (note the intersection, connected intentionally) and word2 are words
+Especially the `word1word2` case with intersection is very confusing, sorry.
+
 
