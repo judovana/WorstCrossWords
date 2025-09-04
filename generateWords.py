@@ -188,6 +188,23 @@ def cheat(desk):
     for index,wwp in enumerate(desk.wordsWithPlacement):
         print(idToLetter(index)+": "+wwp.toStr())
 
+def reusableRepl(cmd, desk) :
+    if 'cheat' == cmd:
+        cheat(desk)
+        return True
+    if '?' == cmd:
+        ret=desk.helpRandomLetter();
+        print(ret)
+        desk.prettyPrint()
+        return True
+    hit=desk.solve(cmd);
+    if hit:
+        print("ok!")
+    else:
+        print("nope:(")
+    desk.prettyPrint()
+    return True;
+
 def main():
     words=caches.readWorlist("cs")
     random.shuffle(words)
@@ -206,11 +223,8 @@ def main():
             desk.gaveUp()
             desk.prettyPrint()
             break
-        if 'cheat' == cmd:
-            cheat(desk)
-            continue
         if 'help' == cmd:
-            print("Type `exit` to gave up (solution and statistics will be printed)");
+            print("Type `exit` to gave up (solution will be printed)");
             print("Type `cheat` to reprint all words");
             print("? to fill random letter")
             print("?number to fill random Nth letter")
@@ -219,17 +233,8 @@ def main():
             print("?[a-z] to fill whole word of given word")
             print("everything else is considered as guess")
             continue
-        if '?' == cmd:
-            ret=desk.helpRandomLetter();
-            print(ret)
-            desk.prettyPrint()
+        if reusableRepl(cmd, desk):
             continue
-        hit=desk.solve(cmd);
-        if hit:
-            print("ok!")
-        else:
-            print("nope:(")
-        desk.prettyPrint()
 
 if __name__ == "__main__":
     main()
