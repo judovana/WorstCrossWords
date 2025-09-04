@@ -33,7 +33,9 @@ def checkAndCreateFile(file):
             pass 
 
 def getTransCacheFile(lang):
-    r = cacheDir+"/transaltions/"+lang+"2en"
+    dirr=cacheDir+"/transaltions"
+    r = dirr + "/"+lang+"2en"
+    checkAndCreateDir(dirr)
     checkAndCreateFile(r)
     return r
 
