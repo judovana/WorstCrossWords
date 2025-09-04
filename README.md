@@ -36,18 +36,23 @@
 Are self explaining I hope. Do not run them in parallel, each of them is very CPU intense:
  * `python translate.py "ahoj trpaslíku"`
 <details>
+ 
 ```
 hello puppy
 ```
 </details>
+
  *  `python translate.py  zug`
 <details>
+ 
 ```
 tough
 ```
 </details>
+
  * `python  explain.py  castle`
-</details>
+<details>
+ 
 ```
 explain castle in english without using word castle in dutch.
 
@@ -64,8 +69,10 @@ so your question seems to be:
 how do i find all the castles in english?
 ```
 </details>
+
  * `python  explain.py  "pink  car"`
 <details>
+ 
 ```
 pink  car-shark 
 "cease to do the things you know not, 
@@ -90,10 +97,12 @@ _come and see all the lovely sights_
 _the bird has to tell us of_.
 ```
 </details>
+
  * `python  generateImage.py  bus`
 img 
  * python generateWords.py  20
 <details>
+ 
 ```
 reding all interesting words in cs
 Loaded 23219 words
