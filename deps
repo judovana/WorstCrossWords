@@ -1,0 +1,9 @@
+pip install diffusers
+pip install torch
+pip install accelerate
+pip install transformers
+pip install sentencepiece
+wget https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
+pip install python-tk (?)
+pip install pillow
+pip install tkinter
