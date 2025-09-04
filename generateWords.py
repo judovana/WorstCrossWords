@@ -65,6 +65,15 @@ class DeskWithWords:
                 return wwp.word[indexes[0]]+" at "+str(x)+","+str(y);
         return "Puzzle solved!"
 
+    def showWord(self, wwp):
+        wwp.showAll();
+        if wwp.direction==">":
+            for i, character in enumerate(wwp.word):
+                self.desk[wwp.y][wwp.x+i]=character
+        if wwp.direction=="ˇ":
+            for i, character in enumerate(wwp.word):
+                self.desk[wwp.y+i][wwp.x]=character
+
     def helpRandomWord(self):
         wwpCopy=list(self.wordsWithPlacement)
         random.shuffle(wwpCopy)
@@ -72,16 +81,14 @@ class DeskWithWords:
             if wwp.isFullyShown():
                 continue
             else:
-                wwp.showAll();
-                if wwp.direction==">":
-                    for i, character in enumerate(wwp.word):
-                        self.desk[wwp.y][wwp.x+i]=character
-                if wwp.direction=="ˇ":
-                    for i, character in enumerate(wwp.word):
-                        self.desk[wwp.y+i][wwp.x]=character
+                self.showWord(wwp)
                 return wwp.word+" at "+str(wwp.x)+","+str(wwp.y);
         return "Puzzle solved!"
- 
+
+    def helpWord(self, index):
+        wwp = self.wordsWithPlacement[index]
+        self.showWord(wwp)
+        return wwp.word+" at "+str(wwp.x)+","+str(wwp.y);
         
 
 class WordWithPlacement:
@@ -214,8 +221,12 @@ def isFree(desk, x, y, invasiveChar):
         return 1
     return -1;
 
+Amark=65
 def idToLetter(i):
-    return chr(i+65)    
+    return chr(i+Amark)    
+
+def letterToId(i):
+    return ord(i)-Amark
 
 def cheat(desk):
     for index,wwp in enumerate(desk.wordsWithPlacement):
@@ -232,6 +243,11 @@ def reusableRepl(cmd, desk) :
         return True
     if '??' == cmd:
         ret=desk.helpRandomWord();
+        print(ret)
+        desk.prettyPrint()
+        return True
+    if cmd.startswith('??'):
+        ret=desk.helpWord(letterToId(cmd[2:].upper()));
         print(ret)
         desk.prettyPrint()
         return True
