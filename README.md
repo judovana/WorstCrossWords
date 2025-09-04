@@ -6,31 +6,32 @@
 ## How it works
  * This is dummy crossword game, where the hints are provided by AI
  * You can play in any language, you only need file with words to be used, which name correspond to its language code, and can be passed to model as source language ID
-  * exemplar `cs`, `de` and `en` packs are available
+   * exemplar `cs`, `de` and `en` packs are included
  * the crossword is generated in your language, and hints for individual words are provided by AI as
-  * image
+   * image
   * text
  * **Note, that it is like playing it with friendly alien, who really wants to help, but have really weird opinions about each word**
  * The communication with AI is exclusively in English
-  * trying to pass to it queries in different language leads to absolute nonsenses
+   * trying to pass to it queries in different language leads to absolute nonsenses
  * so:
-  * each word is translated from your language to English
-   * if you play in English this step is skipped 
-  * then the image and textual explanation is generated
-   * the explanation is translated back to your language
+   * each word is translated from your language to English
+     * if you play in English this step is skipped 
+   * then the image and textual explanation is generated
+     * the explanation is translated back to your language (unless in english)
+   *  obviouslyplaying in english is much more easy
  * this is optimized to run on **CPU**. But all AI operations are costly, on pretty good CPU without GPU:
-  * translation - few seconds
-  * text explanation - around minute
-  * image - about 5 minutes
+   * translation - few seconds
+   * text explanation - around minute
+   * image - about 5 minutes
  * With GPU it should go much faster but is for now untested
 
 ## depndencies
  * It have many dependencies, run `sh deps` to get them all.
  * each model is downloaded on first usage.
-  * I recommend to try each model first as standalone (caching however do not (intentionally) work)
+   * I recommend to try each model first as standalone (caching however do not (intentionally) work)
  * each model have around 1-2GB and are optimised for local usage on CPU
  * Feel free to replace them, based on you HW
-  * eg migrating to `stable-diffusion-v1-5` for image generations moved it from minutes to days on my HW.
+   * eg migrating to `stable-diffusion-v1-5` for image generations moved it from minutes to days on my HW.
 
 ## individual components
 Are self explaining I hope. Do not run them in parallel, each of them is very CPU intense:
