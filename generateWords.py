@@ -34,6 +34,17 @@ class DeskWithWords:
                     for i, character in enumerate(wwp.word):
                         self.desk[wwp.y+i][wwp.x]=character
         return hit
+    
+    def gaveUp(self):
+        for index, wwp in enumerate(self.wordsWithPlacement):
+            if wwp.word == word:
+                wwp.showAll()
+                if wwp.direction==">":
+                    for i, character in enumerate(wwp.word):
+                        self.desk[wwp.y][wwp.x+i]=character
+                if wwp.direction=="ˇ":
+                    for i, character in enumerate(wwp.word):
+                        self.desk[wwp.y+i][wwp.x]=character
 
 
 class WordWithPlacement:
@@ -150,6 +161,9 @@ def isFree(desk, x, y, invasiveChar):
         return 1
     return -1;
 
+def cheat(desk):
+    for index,wwp in enumerate(desk.wordsWithPlacement):
+        print(chr(index+65)+": "+wwp.toStr())
 
 def main():
     words=caches.readWorlist("cs")
@@ -158,21 +172,35 @@ def main():
     if len(sys.argv) > 1:
         wcount=int(sys.argv[1])
     desk=generate(words, wcount)
-    for index,wwp in enumerate(desk.wordsWithPlacement):
-        print(chr(index+65)+": "+wwp.toStr())
+    cheat(desk)
     desk.prettyPrint()
+    print()
     desk.hideAll()
     desk.prettyPrint()
     for line in sys.stdin:
         cmd=line.strip()
         if 'exit' == cmd:
+            desk.gaveUp()
+            desk.prettyPrint()
             break
+        if 'cheat' == cmd:
+            cheat(desk)
+            continue
+        if 'help' == cmd:
+            print("Type `exit` to gave up (solution and statistics will be printed)");
+            print("Type `cheat` to reprint all words");
+            print("? to fill random letter")
+            print("?number to fill random Nth letter")
+            print("?[a-z] to fill random letter of selected word")
+            print("?number[a-z] to fill Nth letter of selected word")
+            print("?[a-z] to fill whole word of given word")
+            print("everything else is considered as guess")
+            continue
+        hit=desk.solve(cmd);
+        if hit:
+            print("ok!")
         else:
-            hit=desk.solve(cmd);
-            if hit:
-                print("ok!")
-            else:
-                print("nope:(")
+            print("nope:(")
         desk.prettyPrint()
 
 if __name__ == "__main__":
