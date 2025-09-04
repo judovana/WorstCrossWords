@@ -99,8 +99,11 @@ _the bird has to tell us of_.
 </details>
 
  * `python  generateImage.py  bus`
-img 
- * python generateWords.py  20
+<details>
+![bus by ai](https://github.com/user-attachments/assets/2e674011-9f6b-48ab-96b5-17e31641a8f1)
+</details>
+ 
+ * `python generateWords.py  20`
 <details>
  
 ```
