@@ -205,6 +205,13 @@ def reusableRepl(cmd, desk) :
     desk.prettyPrint()
     return True;
 
+def reusableHelp():
+        print("? to fill random letter")
+        print("?number to fill random Nth letter")
+        print("?[a-z] to fill random letter of selected word")
+        print("?number[a-z] to fill Nth letter of selected word")
+        print("??[a-z] to fill whole word of given word")
+
 def main():
     words=caches.readWorlist("cs")
     random.shuffle(words)
@@ -226,11 +233,7 @@ def main():
         if 'help' == cmd:
             print("Type `exit` to gave up (solution will be printed)");
             print("Type `cheat` to reprint all words");
-            print("? to fill random letter")
-            print("?number to fill random Nth letter")
-            print("?[a-z] to fill random letter of selected word")
-            print("?number[a-z] to fill Nth letter of selected word")
-            print("?[a-z] to fill whole word of given word")
+            reusableHelp()
             print("everything else is considered as guess")
             continue
         if reusableRepl(cmd, desk):

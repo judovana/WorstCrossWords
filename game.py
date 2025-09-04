@@ -4,6 +4,7 @@ import explain
 import show_image
 import caches
 import random
+import generateWords
 from PIL import Image
 import pathlib
 import sys
@@ -15,7 +16,7 @@ caches.loadCache(wordsFile)
 words=caches.readWorlist(wordsFile)
 random.shuffle(words)
 word=words[0]
-#word="čert"
+word="čert"
 #word="sem"
 print("eg " + word)
 if wordsFile == "en":
@@ -53,7 +54,7 @@ for file in explanationImages:
     print(file)
     show_image.display_image(file)
 
-qhelp="exit ? ?n (? ?n I In II T Tn TT newI newT delIn delTn)[a-z]"
+qhelp="exit ? ?n (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
 history=[];
 comandsUsage = {}
 print(qhelp)
@@ -72,11 +73,7 @@ for line in sys.stdin:
         print("Tnumber[a-z] to show Nth hint (from all) for given word")
         print("II[a-z] to show all images for given word")
         print("TT[a-z] to show all texts for given word")
-        print("? to fill random letter")
-        print("?number to fill random Nth letter")
-        print("?[a-z] to fill random letter of selected word")
-        print("?number[a-z] to fill Nth letter of selected word")
-        print("?[a-z] to fill whole word of given word")
+        generateWords.reusableHelp()
         print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all")
         print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all")
         print("delInumber[a-z] to remove Nth image. Check by In before")
