@@ -54,7 +54,7 @@ for file in explanationImages:
     print(file)
     show_image.display_image(file)
 
-qhelp="exit ? ?n (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
+qhelp="exit ? ?n ?? (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
 history=[];
 comandsUsage = {}
 print(qhelp)

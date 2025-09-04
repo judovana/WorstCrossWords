@@ -64,6 +64,23 @@ class DeskWithWords:
                 wwp.found[indexes[0]] = True;
                 return wwp.word[indexes[0]]+" at "+str(x)+","+str(y);
         return "Puzzle solved!"
+
+    def helpRandomWord(self):
+        wwpCopy=list(self.wordsWithPlacement)
+        random.shuffle(wwpCopy)
+        for index, wwp in enumerate(wwpCopy):
+            if wwp.isFullyShown():
+                continue
+            else:
+                wwp.showAll();
+                if wwp.direction==">":
+                    for i, character in enumerate(wwp.word):
+                        self.desk[wwp.y][wwp.x+i]=character
+                if wwp.direction=="ˇ":
+                    for i, character in enumerate(wwp.word):
+                        self.desk[wwp.y+i][wwp.x]=character
+                return wwp.word+" at "+str(wwp.x)+","+str(wwp.y);
+        return "Puzzle solved!"
  
         
 
@@ -76,6 +93,14 @@ class WordWithPlacement:
         self.found = []
         for index, character in enumerate(self.word):
                 self.found.append(True)
+    def visibility(self):
+        r=""
+        for state in self.found:
+            if state:
+                r+="t"
+            else:
+                r+="f"
+        return r
 
     def hideAll(self):
         for index, character in enumerate(self.word):
@@ -85,8 +110,16 @@ class WordWithPlacement:
         for index, character in enumerate(self.word):
             self.found[index]=True
 
+    def isFullyHidden(self):
+        sset = {e for e in self.found}
+        return len(sset)==1 and sset.pop() == False
+
+    def isFullyShown(self):
+        sset = {e for e in self.found}
+        return len(sset)==1 and sset.pop() == True
+
     def toStr(self):
-        return str(self.x)+","+str(self.y)+self.direction+" " + self.word + " ("+str(len(self.word))+")"
+        return str(self.x)+","+str(self.y)+self.direction+" " + self.word + " ("+str(len(self.word))+") - " + self.visibility()
 
 def init(width, height):
     desk=[]
@@ -197,6 +230,11 @@ def reusableRepl(cmd, desk) :
         print(ret)
         desk.prettyPrint()
         return True
+    if '??' == cmd:
+        ret=desk.helpRandomWord();
+        print(ret)
+        desk.prettyPrint()
+        return True
     hit=desk.solve(cmd);
     if hit:
         print("ok!")
@@ -210,6 +248,7 @@ def reusableHelp():
         print("?number to fill random Nth letter")
         print("?[a-z] to fill random letter of selected word")
         print("?number[a-z] to fill Nth letter of selected word")
+        print("?? to random whole word")
         print("??[a-z] to fill whole word of given word")
 
 def main():
