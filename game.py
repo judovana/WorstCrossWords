@@ -10,8 +10,8 @@ import pathlib
 import sys
 import re
 
-#wordsFile="cs-20-2025-09-05_14:36:15"
-wordsFile="cs"
+wordsFile="cs-20-2025-09-05_14:36:15"
+#wordsFile="cs"
 #wordsFile="de"
 lang= re.sub('[^a-z]+', '', wordsFile)
 print("lang is "+lang)
