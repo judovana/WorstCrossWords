@@ -43,6 +43,7 @@ Are self explaining I hope. Do not run them in parallel, each of them is very CP
 hello puppy
 ```
 </details>
+<hr>
 
  *  `python translate.py  zug`
 <details>
@@ -51,6 +52,37 @@ hello puppy
 tough
 ```
 </details>
+<hr>
+
+ *  `python translate.py  cs zug`
+<details>
+ 
+```
+záhoda
+```
+</details>
+<hr>
+
+ *  `python translate.py  de okoun koza`
+<details>
+ 
+```
+okoun->umgeben
+koza->ziege
+```
+</details>
+<hr>
+
+ *  `python translate.py  en okoun koza`
+<details>
+ 
+```
+okoun->admin
+koza->cottage
+```
+Wait, realy???
+</details>
+<hr>
 
  * `python  explain.py  castle`
 <details>
@@ -71,6 +103,7 @@ so your question seems to be:
 how do i find all the castles in english?
 ```
 </details>
+<hr>
 
  * `python  explain.py  "pink  car"`
 <details>
@@ -99,12 +132,14 @@ _come and see all the lovely sights_
 _the bird has to tell us of_.
 ```
 </details>
+<hr>
 
  * `python  generateImage.py  bus`
 <details>
 ![bus by ai](https://github.com/user-attachments/assets/2e674011-9f6b-48ab-96b5-17e31641a8f1)
 </details>
- 
+ <hr>
+
  * `python generateWords.py  20`
 <details>
  
@@ -175,6 +210,7 @@ ok!
 . . . . . . . . . . . . . . L L L L L L L L L .
 ```
 </details>
+<hr>
 
  * ` python shuffle.py  cs 20`
 <details>
@@ -209,7 +245,44 @@ barbiturát
 ```
 </details>
 
-   * shuffle.py is serving to generate subsets, which you can then pre-generate explanations and images over night and use them next morning to play (ROFL)
+   * `shuffle.py` is serving to generate subsets, which you can then pre-generate explanations and images over night and use them next morning to play (ROFL)
+   <hr>
+
+ * `python caches.py cs 2  okoun chata`
+<details>
+
+```
+...
+done: 2025-09-05_17:26:04 - 2025-09-05_18:11:33
+okoun->admin
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsYWRtaW4xshkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsYWRtaW4xshkhilkdfseyula.jpg
+chata->chat
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsY2hhdDE=shkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsY2hhdDE=shkhilkdfseyula.jpg
+okoun->admin
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsYWRtaW4yshkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsYWRtaW4yshkhilkdfseyula.jpg
+chata->chat
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsY2hhdDI=shkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsY2hhdDI=shkhilkdfseyula.jpg
+
+```
+note the times...
+</details>
+
+   * `caches.py` is crucial if you want to play smooth real time game.
+   Use shuffle to generate susbet of your language set. Then generate cache for its content. Note, that someone can  can manually prepare translations, and so make it much more reliable (but not the player, they will know the words). Cache generation for file is eg
+   * ` python caches.py  cs 5 cs-20-2025-09-05_14\:36\:15`
+<details>
+
+```
+...
+```
+</details>
+
+   * once you have the content of file cached, yuo can play croswords withiout hours of waiting
+   * You can verify content of caches by ` python  caches.py  lang print`. eg ` python  caches.py  cs print` (as all except images are transalted somwhere in process)
 
 ## crosswords generation issue:
 Note, the generation is not perfect, and never was intended to be, so it can create things like:

@@ -1,3 +1,7 @@
+import translate
+import generateImage
+import explain
+
 import pathlib
 import base64
 import sys
@@ -80,6 +84,33 @@ def addToCache(key, value, lang):
         for k, v in transCache.items():
                f.write(k+":"+v+"\n")
     _log("saved " + str(len(transCache))+ " items to cache")
+
+def getTranslated(lang, word):
+    if lang == noTranslationLang:
+        _log(" -> " +  word + " (skipped)")
+        return word
+    else:
+        if word in getCurrentTransCache():
+            translatedId = getCurrentTransCache()[word]
+            if translatedId.strip() == "":
+                translatedId=word;
+            _log(" -> " +  translatedId + " (cached)")
+            return translatedId
+        else:
+            translatedId=translate.translateToEn(word)
+            _log(" -> " +  translatedId + " (translated)")
+            addToCache(word, translatedId, lang)
+            return translatedId
+
+def imageToCache(translatedId):
+    img = generateImage.generateImg(translatedId)
+    return putImageToAiCache(translatedId, img);
+
+def explainToCache(lang, translatedId):
+    explanation=explain.generate(translatedId)
+    if not lang == noTranslationLang:
+        explanation=translate.translateTo(explanation, lang)
+    return putTextToAiTransaltedCache(lang, translatedId, explanation)
 
 def getFilesFromAiExplainCache(word):
     return getFilesFromAiCache(getExCacheFile(), word, ".txt")
@@ -196,16 +227,32 @@ def main():
     words=sys.argv[3:]
     if pathlib.Path(sys.argv[3]).exists():
         words=readWorlist(sys.argv[3])
+    loadCache(lang)
+    results=[]
     totalCount=iterations*len(words)
     total=0
     startStamp=datetime.today().strftime('%Y-%m-%d_%H:%M:%S')
+    doLog=True
     for iteration in range(0, iterations):
         for word in words:
             total+=1
             word=word.lower()
             print(str(total)+"/"+str(totalCount)+" " + word + "("+str(iteration+1)+")")
+            print("  Translating!")
+            transId=getTranslated(lang, word);
+            results.append(word + "->" + transId)
+            print("  Explaining!")
+            result=explainToCache(lang, transId)
+            results.append(result)
+            print("    try: " + result)
+            print("  Drawing!")
+            result=imageToCache(transId)
+            print("    try: " + result)
+            results.append(result)
     stopStamp=datetime.today().strftime('%Y-%m-%d_%H:%M:%S')
     print("done: "+startStamp+" - "+stopStamp)
+    for result in results:
+        print(result)
     
 if __name__ == "__main__":
     main()

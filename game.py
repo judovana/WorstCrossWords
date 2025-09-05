@@ -3,8 +3,9 @@ import generateImage
 import explain
 import show_image
 import caches
-import random
 import generateWords
+
+import random
 from PIL import Image
 import pathlib
 import sys
@@ -22,42 +23,25 @@ word=words[0]
 word="čert"
 #word="sem"
 print("eg " + word)
-if lang == caches.noTranslationLang:
-    translatedId=word
-    print(" -> " +  word + " (skipped)")
-else:
-    if word in caches.getCurrentTransCache():
-        translatedId = caches.getCurrentTransCache()[word]
-        if translatedId.strip() == "":
-            translatedId=word;
-        print(" -> " +  translatedId + " (cached)")
-    else:
-        translatedId=translate.translateToEn(word)
-        print(" -> " +  translatedId + " (translated)")
-        caches.addToCache(word, translatedId, lang)
+translatedId=caches.getTranslated(lang, word)
 
 explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
 if not explanationFilesTransalted:
-    explanation=explain.generate(translatedId)
-    if not lang == caches.noTranslationLang:
-        explanation=translate.translateTo(explanation, lang)
-    caches.putTextToAiTransaltedCache(lang, translatedId, explanation)
+    caches.explainToCache(lang, translatedId)
     explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
 for file in explanationFilesTransalted:
     print(file)
     print(pathlib.Path(file).read_text())
 
-
 explanationImages=caches.getFilesFromAiImageCache(translatedId)
 if not explanationImages:
-    img = generateImage.generateImg(translatedId)
-    caches.putImageToAiCache(translatedId, img);
+    caches.imageToCache(lang, translatedId)
     explanationImages=caches.getFilesFromAiImageCache(translatedId)
 for file in explanationImages:
     print(file)
     show_image.display_image(file)
 
-qhelp="exit ? ?n ?? (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
+qhelp="help exit ? ?n ?? (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
 history=[];
 comandsUsage = {}
 print(qhelp)
