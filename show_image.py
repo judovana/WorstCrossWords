@@ -4,17 +4,21 @@ from tkinter import *
 import PIL
 from PIL import ImageTk, Image
 
-def display_image(filename):
+#the title must be id of searched word AAAAAAA or simialrly
+def display_image(filename, title="image"):
     image = Image.open(filename)
     root = tk.Tk()
+    root.title(title)
     tk_image = ImageTk.PhotoImage(image)
     label = Label(root, image = tk_image)
     label.pack()
     root.mainloop()
 
-def display_text(filename):
+#the title must be id of searched word AAAAAAA or simialrly
+def display_text(filename,title="text"):
     content = open(filename, 'r').read()
     root = tk.Tk()
+    root.title(title)
     text_var = tk.StringVar()
     text_var.set(content)
     label = Label(root, textvariable=text_var, )
