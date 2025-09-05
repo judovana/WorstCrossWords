@@ -176,6 +176,41 @@ ok!
 ```
 </details>
 
+ * ` python shuffle.py  cs 20`
+<details>
+
+```
+reding all interesting words in cs
+Loaded 23219 words
+Written 20 to cs-20-2025-09-05_14:36:15
+```
+```
+cat cs-20-2025-09-05_14\:36\:15 
+dálkařka
+konkurs
+sypavka
+primabalerína
+příraz
+kudlička
+blaženka
+plachetnice
+mravouka
+překládka
+autoatlas
+předkrm
+káhira
+šedesátina
+podbíječka
+francouzák
+eiffelka
+dichlorid
+afganistan
+barbiturát
+```
+</details>
+
+   * shuffle.py is serving to generate subsets, which you can then pre-generate explanations and images over night and use them next morning to play (ROFL)
+
 ## crosswords generation issue:
 Note, the generation is not perfect, and never was intended to be, so it can create things like:
 ```
@@ -205,6 +240,6 @@ word1w
      2
 ```
 where word1w (note the intersection, connected intentionally) and word2 are words
-Especially the `word1word2` case with intersection is very confusing, sorry.
+Especially the `word1word2` case with intersection is very confusing, sorry. (as it writes as AAAAABBBBB (where correct is something like AAAAA(AB)BBBB)
 
 

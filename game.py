@@ -10,10 +10,11 @@ import pathlib
 import sys
 import re
 
+#wordsFile="cs-20-2025-09-05_14:36:15"
 wordsFile="cs"
 #wordsFile="de"
 lang= re.sub('[^a-z]+', '', wordsFile)
-
+print("lang is "+lang)
 caches.loadCache(lang)
 words=caches.readWorlist(wordsFile)
 random.shuffle(words)
@@ -21,7 +22,7 @@ word=words[0]
 word="čert"
 #word="sem"
 print("eg " + word)
-if lang == "en":
+if lang == caches.noTranslationLang:
     translatedId=word
     print(" -> " +  word + " (skipped)")
 else:
@@ -38,7 +39,7 @@ else:
 explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
 if not explanationFilesTransalted:
     explanation=explain.generate(translatedId)
-    if not lang == "en":
+    if not lang == caches.noTranslationLang:
         explanation=translate.translateTo(explanation, lang)
     caches.putTextToAiTransaltedCache(lang, translatedId, explanation)
     explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)

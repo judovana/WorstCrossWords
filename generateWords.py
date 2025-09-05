@@ -268,11 +268,15 @@ def reusableHelp():
         print("??[a-z] to fill whole word of given word")
 
 def main():
-    words=caches.readWorlist("cs")
-    random.shuffle(words)
+    print("optional first argument is number of words. Optional second argument may follow, file with all words")
     wcount=10
     if len(sys.argv) > 1:
         wcount=int(sys.argv[1])
+    wordFile="cs"
+    if len(sys.argv) > 2:
+        wordFile=sys.argv[2]
+    words=caches.readWorlist(wordFile)
+    random.shuffle(words)
     desk=generate(words, wcount)
     cheat(desk)
     desk.prettyPrint()

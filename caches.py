@@ -2,6 +2,7 @@ import pathlib
 import base64
 from PIL import Image
 
+noTranslationLang="en"
 cacheDir="cache"
 transCache = {}
 doLog = True
@@ -150,3 +151,13 @@ def putImageToAiCacheImpl(dir, word, img):
     _log("cached image for " + word + " in " + file)
     return file
     
+def main():
+    if len(sys.argv) < 4:
+        print("first argument - language (eg cs, en or de)")
+        print("second argument - number of iterations. How many explanations and images you want for each word")
+        print("third argument - input file - for each line in this file an image(s) and explanation(s) and transaltions (if non en)")
+        sys.exit(1)
+    sys.exit(1)
+    
+if __name__ == "__main__":
+    main()
