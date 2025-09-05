@@ -41,7 +41,7 @@ for file in explanationImages:
     print(file)
     show_image.display_image(file)
 
-qhelp="help exit ? ?n ?? (? ?n ?? I In II T Tn TT newI newT delIn delTn)[a-z]"
+qhelp="help exit ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z]"
 history=[];
 comandsUsage = {}
 print(qhelp)
@@ -58,8 +58,10 @@ for line in sys.stdin:
         print("T[a-z] to show next hint (from all) for given word")
         print("Inumber[a-z] to show Nth image (from all) for given word")
         print("Tnumber[a-z] to show Nth hint (from all) for given word")
+        print("Gnumber[a-z] to show Nth hint (from all) for given word in external window")
         print("II[a-z] to show all images for given word")
         print("TT[a-z] to show all texts for given word")
+        print("GG[a-z] to show all texts for given word in external window")
         generateWords.reusableHelp()
         print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all")
         print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all")
