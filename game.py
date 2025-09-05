@@ -8,18 +8,20 @@ import generateWords
 from PIL import Image
 import pathlib
 import sys
+import re
 
 wordsFile="cs"
 #wordsFile="de"
+lang= re.sub('[^a-z]+', '', wordsFile)
 
-caches.loadCache(wordsFile)
+caches.loadCache(lang)
 words=caches.readWorlist(wordsFile)
 random.shuffle(words)
 word=words[0]
 word="čert"
 #word="sem"
 print("eg " + word)
-if wordsFile == "en":
+if lang == "en":
     translatedId=word
     print(" -> " +  word + " (skipped)")
 else:
@@ -31,15 +33,15 @@ else:
     else:
         translatedId=translate.translateToEn(word)
         print(" -> " +  translatedId + " (translated)")
-        caches.addToCache(word, translatedId, wordsFile)
+        caches.addToCache(word, translatedId, lang)
 
-explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(wordsFile, translatedId)
+explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
 if not explanationFilesTransalted:
     explanation=explain.generate(translatedId)
-    if not wordsFile == "en":
-        explanation=translate.translateTo(explanation, wordsFile)
-    caches.putTextToAiTransaltedCache(wordsFile, translatedId, explanation)
-    explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(wordsFile, translatedId)
+    if not lang == "en":
+        explanation=translate.translateTo(explanation, lang)
+    caches.putTextToAiTransaltedCache(lang, translatedId, explanation)
+    explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
 for file in explanationFilesTransalted:
     print(file)
     print(pathlib.Path(file).read_text())
