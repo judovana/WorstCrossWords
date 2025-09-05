@@ -9,7 +9,7 @@
    * exemplar `cs`, `de` and `en` packs are included
  * the crossword is generated in your language, and hints for individual words are provided by AI as
    * image
-  * text
+   * text
  * **Note, that it is like playing it with friendly alien, who really wants to help, but have really weird opinions about each word**
  * The communication with AI is exclusively in English
    * trying to pass to it queries in different language leads to absolute nonsenses
