@@ -57,6 +57,7 @@ for line in sys.stdin:
         print("Type `exit` to gave up (solution and statistics will be printed)");
         print("I[a-z] to show next image (from all) for given word")
         print("T[a-z] to show next hint (from all) for given word")
+        print("G[a-z] to show next hint (from all) for given word in external window")
         print("Inumber[a-z] to show Nth image (from all) for given word")
         print("Tnumber[a-z] to show Nth hint (from all) for given word")
         print("Gnumber[a-z] to show Nth hint (from all) for given word in external window")
