@@ -28,12 +28,14 @@ def main():
     lang= re.sub('[^a-z]+', '', wordsFile)
     print("lang is "+lang)
     caches.loadCache(lang)
+    caches.doLog=False
     words=generateWords.readWorlist(wordsFile)
     random.shuffle(words)
     desk=generateWords.generate(words, wcount)
     for index, wwp in enumerate(desk.wordsWithPlacement):
         word=wwp.word
-        print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing " + word)
+        #print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing " + word)
+        print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing ")
         translatedId=caches.getTranslated(lang, word)
         explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
         if not explanationFilesTransalted:
