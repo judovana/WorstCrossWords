@@ -31,8 +31,9 @@ def main():
     words=generateWords.readWorlist(wordsFile)
     random.shuffle(words)
     desk=generateWords.generate(words, wcount)
-    for wwp in desk.wordsWithPlacement:
+    for index, wwp in enumerate(desk.wordsWithPlacement):
         word=wwp.word
+        print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing " + word)
         translatedId=caches.getTranslated(lang, word)
         explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
         if not explanationFilesTransalted:
@@ -43,7 +44,7 @@ def main():
             print(pathlib.Path(file).read_text())
         explanationImages=caches.getFilesFromAiImageCache(translatedId)
         if not explanationImages:
-            caches.imageToCache(lang, translatedId)
+            caches.imageToCache(translatedId)
             explanationImages=caches.getFilesFromAiImageCache(translatedId)
         for file in explanationImages:
             print(file)
