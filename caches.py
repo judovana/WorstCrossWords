@@ -1,6 +1,7 @@
 import translate
 import generateImage
 import explain
+import generateWords
 
 import pathlib
 import base64
@@ -19,15 +20,6 @@ doLog = True
 def _log(s):
     if doLog:
         print(s)
-
-def readWorlist(file):
-    print("reding all interesting words in " + file)
-    words = [];
-    with open(file, 'r') as file:
-        for line in file:
-            words.append(line.strip().lower())
-    print("Loaded " + str(len(words) )+ " words")
-    return words
 
 def checkAndCreateDir(file):
     if pathlib.Path(file).exists():
@@ -226,7 +218,7 @@ def main():
     iterations=int(sys.argv[2])
     words=sys.argv[3:]
     if pathlib.Path(sys.argv[3]).exists():
-        words=readWorlist(sys.argv[3])
+        words=generateWords.readWorlist(sys.argv[3])
     loadCache(lang)
     results=[]
     totalCount=iterations*len(words)

@@ -1,6 +1,6 @@
 import sys
 import random
-import caches
+import generateWords
 from datetime import datetime
 
 def main():
@@ -9,7 +9,7 @@ def main():
         print("second argument - number of words to select")
         print("this progam will read input file, and generate new file, with N randomly selected words (which you can later cache explanations/images) for")
         sys.exit(1)
-    words=caches.readWorlist(sys.argv[1])
+    words=generateWords.readWorlist(sys.argv[1])
     random.shuffle(words)
     stamp=datetime.today().strftime('%Y-%m-%d_%H:%M:%S')
     fname=sys.argv[1]+"-"+sys.argv[2]+"-"+stamp

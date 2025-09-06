@@ -1,6 +1,18 @@
-import caches
 import random
 import sys
+import re
+import os
+
+SIZE_VAR="SIZE"
+
+def readWorlist(file):
+    print("reding all interesting words in " + file)
+    words = [];
+    with open(file, 'r') as file:
+        for line in file:
+            words.append(line.strip().lower())
+    print("Loaded " + str(len(words) )+ " words")
+    return words
 
 class DeskWithWords:
     def __init__(self, wordsWithPlacement, desk):
@@ -20,6 +32,11 @@ class DeskWithWords:
     def prettyPrint(self):
         for y in self.desk:
             print(" ".join(y))
+
+    def length(self, intId):
+        if len(self.wordsWithPlacement)<=intId:
+            return "There is just " + str(len(self.wordsWithPlacement)) + " words: " +  idToLetter(0) + "-"+idToLetter(len(self.wordsWithPlacement)-1)
+        return "Length of "+idToLetter(intId) + " is " + str(len(self.wordsWithPlacement[intId].word))
 
     def solve(self, word):
         hit=False
@@ -55,15 +72,18 @@ class DeskWithWords:
                     indexes.append(i)
             if len(indexes) > 0:
                 random.shuffle(indexes)
-                ch=wwp.word[indexes[0]]
-                if wwp.direction==">":
-                    y=wwp.y; x=wwp.x+indexes[0]
-                if wwp.direction=="ˇ":
-                    y=wwp.y+indexes[0]; x=wwp.x
-                self.desk[y][x]=ch
-                wwp.found[indexes[0]] = True;
-                return wwp.word[indexes[0]]+" at "+str(x)+","+str(y);
+                return self.fillLetterInWord(wwp, indexes[0])
         return "Puzzle solved!"
+
+    def fillLetterInWord(self, wwp, index):
+        ch=wwp.word[index]
+        if wwp.direction==">":
+            y=wwp.y; x=wwp.x+index
+        if wwp.direction=="ˇ":
+            y=wwp.y+index; x=wwp.x
+        self.desk[y][x]=ch
+        wwp.found[index] = True;
+        return wwp.word[index]+" at "+str(x)+","+str(y);
 
     def showWord(self, wwp):
         wwp.showAll();
@@ -89,7 +109,53 @@ class DeskWithWords:
         wwp = self.wordsWithPlacement[index]
         self.showWord(wwp)
         return wwp.word+" at "+str(wwp.x)+","+str(wwp.y);
+
+    def helpExactLetter(self, numLet):
+        print(numLet)
+        firstLetter=numLet[0]
+        lastLetter=numLet[-1]
+        #?number to fill random Nth letter")        
+        if firstLetter.isnumeric() and lastLetter.isnumeric():
+            return self.helpExactLetterInRandomWord(int(numLet))
+        #?[a-z] to fill random letter of selected word")
+        if (not firstLetter.isnumeric()) and (not lastLetter.isnumeric()):
+            return self.helpRandomLetterInExactWord(letterToId(firstLetter))
+        #?number[a-z] to fill Nth letter of selected word")
+        if firstLetter.isnumeric() and (not lastLetter.isnumeric()):
+            return self.helpExactLeterInExactWord(int(re.sub('[^0-9]+', '', numLet)), letterToId(re.sub('[0-9]+', '', numLet)[0]))
+        if lastLetter.isnumeric() and (not firstLetter.isnumeric()):
+            return self.helpExactLeterInExactWord(int(re.sub('[^0-9]+', '', numLet)), letterToId(re.sub('[0-9]+', '', numLet)[0]))
+        return "expected ?[A-Z] or ?[0-9]+ or ?[0-9][A-Z]"
         
+    def helpExactLetterInRandomWord(self, letterIdInt):
+        letterIdInt=letterIdInt-1
+        wwpCopy=list(self.wordsWithPlacement)
+        random.shuffle(wwpCopy)
+        for index, wwp in enumerate(wwpCopy):
+            if letterIdInt<len(wwp.found) and wwp.found[letterIdInt] == False:
+                return self.fillLetterInWord(wwp, letterIdInt)
+        return "Puzzle solved?"
+
+    def helpRandomLetterInExactWord(self, wordIdInt):
+        if (wordIdInt>=len(self.wordsWithPlacement)):
+            return "there is only "+str(len(self.wordsWithPlacement)-1)+" words"
+        wwp=self.wordsWithPlacement[wordIdInt]
+        indexes=[]
+        for i, boool in enumerate(wwp.found):
+            if not boool:
+                indexes.append(i)
+        if len(indexes) > 0:
+            random.shuffle(indexes)
+            return self.fillLetterInWord(wwp, indexes[0])
+        return "Word filled?"
+
+    def helpExactLeterInExactWord(self, letterIdInt, wordIdInt):
+        if (wordIdInt>=len(self.wordsWithPlacement)):
+            return "there is only "+str(len(self.wordsWithPlacement)-1)+" words"
+        word=self.wordsWithPlacement[wordIdInt]
+        if (letterIdInt>len(word.word)):
+            return "word "+idToLetter(wordIdInt)+"  have "+str(len(word.word))+" chars"
+        return self.fillLetterInWord(word, letterIdInt-1)
 
 class WordWithPlacement:
     def __init__(self, x, y, word, direction):
@@ -139,12 +205,26 @@ def init(width, height):
     return desk
 
 def generate(words, maxWords):
-    desk=init(15, 24)
+    userWidth=15
+    userHeight=24
+    if os.environ.get(SIZE_VAR):
+        userWidth=int(re.sub("x.*", "", os.environ.get(SIZE_VAR)))
+        userHeight=int(re.sub(".*x", "", os.environ.get(SIZE_VAR)))
+    desk=init(userWidth, userHeight)
     wordsWithPlacement = []
     word=words.pop();
     # to place first randmly w/h is changing the order in theb elow loop...
-    initx=int(random.randint(0, len(desk[0])-len(word)-2)/2)*2
-    inity=int(random.randint(0, len(desk)-2)/2)*2
+    while True:
+        LX=len(desk[0])-len(word)-2
+        if (LX<0):
+            word=words.pop();
+            continue
+        initx=int(random.randint(0, LX)/2*2)
+        break
+    LY=len(desk)-2
+    if LY<0:
+       LY=0
+    inity=int(random.randint(0, LY)/2*2)
     placeHor(desk, initx, inity, word);
     wordsWithPlacement.append(WordWithPlacement(initx,inity,word, ">"))
     while maxWords > 0 and len(words) > 1: #two pops in below
@@ -221,7 +301,7 @@ def isFree(desk, x, y, invasiveChar):
         return 1
     return -1;
 
-Amark=65
+Amark=ord("A") #65
 def idToLetter(i):
     return chr(i+Amark)    
 
@@ -246,8 +326,21 @@ def reusableRepl(cmd, desk) :
         print(ret)
         desk.prettyPrint()
         return True
+    if (cmd.startswith('l') or cmd.startswith('L')) and len(cmd)==2:
+        print(desk.length(letterToId(cmd[1:].upper())))
+        desk.prettyPrint()
+        return True
     if cmd.startswith('??'):
-        ret=desk.helpWord(letterToId(cmd[2:].upper()));
+        try:
+            ret=desk.helpWord(letterToId(cmd[2:].upper()));
+            print(ret)
+        except:
+            print("??[A-Z] expected")
+        desk.prettyPrint()
+        return True
+    if cmd.startswith('?'):
+        strip=cmd[1:].upper()
+        ret=desk.helpExactLetter(strip);
         print(ret)
         desk.prettyPrint()
         return True
@@ -266,16 +359,18 @@ def reusableHelp():
         print("?number[a-z] to fill Nth letter of selected word")
         print("?? to random whole word")
         print("??[a-z] to fill whole word of given word")
+        print("L[a-z] length of given word")
 
 def main():
-    print("optional first argument is number of words. Optional second argument may follow, file with all words")
-    wcount=10
-    if len(sys.argv) > 1:
-        wcount=int(sys.argv[1])
+    print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
+    print("environment variable "+SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
     wordFile="cs"
+    if len(sys.argv) > 1:
+        wordFile=sys.argv[1]
+    wcount=10
     if len(sys.argv) > 2:
-        wordFile=sys.argv[2]
-    words=caches.readWorlist(wordFile)
+        wcount=int(sys.argv[2])
+    words=readWorlist(wordFile)
     random.shuffle(words)
     desk=generate(words, wcount)
     cheat(desk)
@@ -283,7 +378,10 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
+    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] help exit"
+    print(qhelp)
     for line in sys.stdin:
+        print(qhelp)
         cmd=line.strip()
         if 'exit' == cmd:
             desk.gaveUp()

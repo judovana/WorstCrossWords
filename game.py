@@ -14,10 +14,11 @@ import re
 wordsFile="cs-20-2025-09-05_14:36:15"
 #wordsFile="cs"
 #wordsFile="de"
+#wordsFile="en"
 lang= re.sub('[^a-z]+', '', wordsFile)
 print("lang is "+lang)
 caches.loadCache(lang)
-words=caches.readWorlist(wordsFile)
+words=generateWords.readWorlist(wordsFile)
 random.shuffle(words)
 word=words[0]
 word="čert"
@@ -41,7 +42,7 @@ for file in explanationImages:
     print(file)
     show_image.display_image(file)
 
-qhelp="help exit ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z]"
+qhelp="help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z]"
 history=[];
 comandsUsage = {}
 print(qhelp)

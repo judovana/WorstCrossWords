@@ -140,7 +140,7 @@ _the bird has to tell us of_.
 </details>
  <hr>
 
- * `python generateWords.py  20`
+ * `python generateWords.py  cs 20`
 <details>
  
 ```
@@ -210,6 +210,14 @@ ok!
 . . . . . . . . . . . . . . L L L L L L L L L .
 ```
 </details>
+
+ * `generateWords.py` can be played as separate game:
+   * first argument is language file
+   * second optional argument is number of words
+   * it can read `$SIZE` variable rg `SIZE=5x6` to set up isze of desl
+     * be carefull withboth size and number of words!
+   * in runtime, the board takes several commands to help you to solve
+     * see `help` in game
 <hr>
 
  * ` python shuffle.py  cs 20`
