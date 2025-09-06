@@ -277,7 +277,66 @@ note the times...
 <details>
 
 ```
+$ python caches.py  cs 5 cs-20-2025-09-05_14\:36\:15 
+reding all interesting words in cs-20-2025-09-05_14:36:15
+Loaded 20 words
+reding cache/transaltions/cs2en cache
+Loaded 12 cache items
+1/100 dálkařka(1)
+  Translating!
+The tokenizer class you load from this checkpoint is not the same type as the class this function is called from. It may result in unexpected tokenization. 
+The tokenizer class you load from this checkpoint is 'M2M100Tokenizer'. 
+The class this function is called from is 'SMALL100Tokenizer'.
+ -> distance (translated)
+saved 13 items to cache
+  Explaining!
 ...
+done: 2025-09-05_18:21:50 - 2025-09-06_06:29:16
+dálkařka->distance
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsZGlzdGFuY2Uxshkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsZGlzdGFuY2Uxshkhilkdfseyula.jpg
+konkurs->competition
+...
+barbiturát->barbiturate
+cache/explanations/cs/c2RmdWlrbG9naGRmZmtsYmFyYml0dXJhdGU1shkhilkdfseyula.txt
+cache/images/c2RmdWlrbG9naGRmZmtsYmFyYml0dXJhdGU1shkhilkdfseyula.jpg
+```
+</details>
+
+   * you can verify by `python caches.py  cs read`
+<details>
+
+```
+Translation cache content for cs
+reding cache/transaltions/cs2en cache
+Loaded 32 cache items
+32 items
+  'neutrál' to en is : neutral
+  'čert' to en is : devil
+...
+  'afganistan' to en is : afghanistan
+  'barbiturát' to en is : barbiturate
+Explanations cache for cs is cache/explanations/cs
+116 items
+  'primaballerine3'(537b) saved as: c2RmdWlrbG9naGRmZmtscHJpbWFiYWxsZXJpbmUzshkhilkdfseyula.txt
+  'cucumber5'(714b) saved as: c2RmdWlrbG9naGRmZmtsY3VjdW1iZXI1shkhilkdfseyula.txt
+  'afghanistan2'(794b) saved as: c2RmdWlrbG9naGRmZmtsYWZnaGFuaXN0YW4yshkhilkdfseyula.txt
+  'explanation3'(731b) saved as: c2RmdWlrbG9naGRmZmtsZXhwbGFuYXRpb24zshkhilkdfseyula.txt
+..
+  'cucumber2'(632b) saved as: c2RmdWlrbG9naGRmZmtsY3VjdW1iZXIyshkhilkdfseyula.txt
+  'competition2'(825b) saved as: c2RmdWlrbG9naGRmZmtsY29tcGV0aXRpb24yshkhilkdfseyula.txt
+  'translation5'(942b) saved as: c2RmdWlrbG9naGRmZmtsdHJhbnNsYXRpb241shkhilkdfseyula.txt
+Image cache (shared for al languages)  is cache/images
+116 items
+  'neutral1'(27245b) saved as: c2RmdWlrbG9naGRmZmtsbmV1dHJhbDE=shkhilkdfseyula.jpg
+  'cucumber2'(52111b) saved as: c2RmdWlrbG9naGRmZmtsY3VjdW1iZXIyshkhilkdfseyula.jpg
+  'cottage1'(71941b) saved as: c2RmdWlrbG9naGRmZmtsY290dGFnZTE=shkhilkdfseyula.jpg
+  'competition2'(60793b) saved as: c2RmdWlrbG9naGRmZmtsY29tcGV0aXRpb24yshkhilkdfseyula.jpg
+ ...
+  'prefeeding5'(39411b) saved as: c2RmdWlrbG9naGRmZmtscHJlZmVlZGluZzU=shkhilkdfseyula.jpg
+  'conclusion2'(45016b) saved as: c2RmdWlrbG9naGRmZmtsY29uY2x1c2lvbjI=shkhilkdfseyula.jpg
+  'afghanistan1'(65626b) saved as: c2RmdWlrbG9naGRmZmtsYWZnaGFuaXN0YW4xshkhilkdfseyula.jpg
+
 ```
 </details>
 
