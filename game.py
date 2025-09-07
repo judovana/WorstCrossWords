@@ -191,7 +191,7 @@ def main():
             print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all")
             print("delInumber[a-z] to remove Nth image. Check by In before")
             print("delTnumber[a-z] to remove Nth text. Check by Tn before")
-            print("everything else is considered as guess")
+            print("everything else is considered as guess (and dont forget sub!)")
             continue
         if cmd.startswith('II') or cmd.startswith('TT') or cmd.startswith('GG'):
             # FIXME show all dialogs in paralel (needs global master window)
