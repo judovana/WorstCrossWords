@@ -31,11 +31,11 @@ class ImgOrNote(Toplevel):
 
     def display_gui(self): 
         try:
-            image = Image.open(file)
+            image = Image.open(self.file)
             tk_image = ImageTk.PhotoImage(image)
             label = Label(self, image = tk_image)
         except Exception:
-            content = open(file, 'r').read()
+            content = open(self.file, 'r').read()
             if wrap>0:
                 content = wrapTextTo(content, wrap);
             text_var = tk.StringVar()
