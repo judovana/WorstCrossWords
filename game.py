@@ -32,6 +32,39 @@ def createOrPlusPlus(dictItself, dictKey):
         dictItself[dictKey]=0
         return 0
 
+def processInTnGnaz(cmd, desk, lang):
+    intNth=re.sub('[^0-9]+', '', cmd)
+    index=int(intNth)-1
+    cmd=re.sub('[0-9]+', '', cmd)
+    cchar=cmd[1:][0].upper()
+    idInt=generateWords.letterToId(cchar)
+    ccmd=cmd[:1].upper()
+    word=desk.wordsWithPlacement[idInt].word
+    acro=''.join([cchar*len(word)])
+    title=acro + " (" + str(len(word)) + ")";
+    if ccmd == "T":
+        allFiles=getAllExplanationsFilesFor(word, lang)
+        if index >= len(allFiles) or index < 0:
+            print(cchar + " have only 1-" + str(len(allFiles))+" items")
+        else:
+            print(title +" " + str(index+1)+"/"+str(len(allFiles)))
+            print(pathlib.Path(allFiles[index]).read_text())
+        return True
+    if ccmd == "G":
+        allFiles=getAllExplanationsFilesFor(word, lang)
+        if index >= len(allFiles) or index < 0:
+            print(cchar + " have only 1-" + str(len(allFiles))+" items")
+        else:
+            show_image.display_text(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)), 80)
+        return True
+    if ccmd == "I":
+        allFiles=getAllImageFilesFor(word, lang)
+        if index >= len(allFiles) or index < 0:
+            print(cchar + " have only 1-" + str(len(allFiles))+" items")
+        else:
+            show_image.display_image(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
+        return True
+
 def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
     cchar=cmd[1:][0].upper()
     idInt=generateWords.letterToId(cchar)
@@ -169,11 +202,17 @@ def main():
                 print("XX[A-Z] expected")
                 continue
         if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
-            try:
-                if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
+            if re.match(".*[0-9].*", cmd)  == None:
+                try:
+                    if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
+                        continue
+                except:
+                    print("X[A-Z] expected")
                     continue
-            except:
-                print("X[A-Z] expected")
+            else:
+                if processInTnGnaz(cmd, desk, lang):
+                    continue
+                print("Xn[A-Z] expected")
                 continue
         if generateWords.reusableRepl(cmd, desk):
             continue
