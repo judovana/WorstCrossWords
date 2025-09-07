@@ -16,6 +16,7 @@ noTranslationLang="en"
 cacheDir="cache"
 transCache = {}
 doLog = True
+NOTRANS_VAR="NOTRANS"
 
 def _log(s):
     if doLog:
@@ -78,7 +79,7 @@ def addToCache(key, value, lang):
     _log("saved " + str(len(transCache))+ " items to cache")
 
 def getTranslated(lang, word):
-    if lang == noTranslationLang:
+    if lang == noTranslationLang or os.environ.get(NOTRANS_VAR) == "True":
         _log(" -> " +  word + " (skipped)")
         return word
     else:
@@ -211,7 +212,8 @@ def main():
         print("third argument - input file - for each line in this file an image(s) and explanation(s) and transaltions (if non en)")
         print("xor, third (and any following argument) are simply input words to cache")
         print("Warning. Items are added to caches. No old items are discarded, nor replaced. If you had one `eye` there, and you add `eye` with two iterations in same lanf, there  will be three")
-        print("Warning. Thetranslation cache however is reused, and onl new words are added")
+        print("Warning. The translation cache however is reused, and onl new words are added")
+        print("Warning. environment vat "+NOTRANS_VAR+"set to True, will skipp transaltion step.Note it may corrupt the caches, backup them before")
         print("you can use also `lang` `print` magical command to print caches")
         sys.exit(1)
     lang=sys.argv[1]

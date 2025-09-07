@@ -17,7 +17,8 @@ def generateImpl(word, rephrase):
     if (not initialized):
         initialize()
     if rephrase:
-        question = "explain "+word+" in english without using word "+word
+        if not os.environ.get("NOTRANS") == "True":
+            question = "explain "+word+" in english without using word "+word
     else:
         question = word
     result = qa_pipeline(question, min_length=10, max_length=100)[0]['generated_text'].lower()

@@ -313,6 +313,9 @@ def cheat(desk):
         print(idToLetter(index)+": "+wwp.toStr())
 
 def reusableRepl(cmd, desk) :
+    if '' == cmd:
+        desk.prettyPrint()
+        return True    
     if 'cheat' == cmd:
         cheat(desk)
         return True
