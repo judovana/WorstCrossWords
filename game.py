@@ -169,10 +169,10 @@ def main():
                 print("XX[A-Z] expected")
                 continue
         if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
-            if True:
+            try:
                 if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
                     continue
-            else:
+            except:
                 print("X[A-Z] expected")
                 continue
         if generateWords.reusableRepl(cmd, desk):
