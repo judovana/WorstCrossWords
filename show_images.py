@@ -9,7 +9,9 @@ root=None
 
 def wrapTextTo(text, wrap):
     return "\n".join([text[i:i+wrap] for i in range(0, len(text), wrap)])
-    
+
+#python gc is debil, and is eating used images...       
+images=[] 
 
 class ImgOrNote(Toplevel):
     def __init__(self, master, nid, file, title, wrap):
@@ -33,6 +35,7 @@ class ImgOrNote(Toplevel):
         try:
             image = Image.open(self.file)
             tk_image = ImageTk.PhotoImage(image)
+            images.append(tk_image)
             label = Label(self, image = tk_image)
         except Exception:
             content = open(self.file, 'r').read()
