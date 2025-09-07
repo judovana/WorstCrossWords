@@ -162,6 +162,7 @@ def getFilesFromAiCache(dir, word, suffix):
         if pathlib.Path(file).exists():
             usedFiles.append(file);
     _log("Found " + str(len(usedFiles))+ " cached items for " + word + " in " + dir)
+    usedFiles.sort()
     return usedFiles
 
 def getFreeFileForAiCache(dir, word, suffix):
