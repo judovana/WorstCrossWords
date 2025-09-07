@@ -14,6 +14,9 @@ def readWorlist(file):
     print("Loaded " + str(len(words) )+ " words")
     return words
 
+def substringIndexes(pattern, text):
+    return [m.start() for m in re.finditer(pattern, text)]
+
 class DeskWithWords:
     def __init__(self, wordsWithPlacement, desk):
         self.wordsWithPlacement = wordsWithPlacement
@@ -37,6 +40,23 @@ class DeskWithWords:
         if len(self.wordsWithPlacement)<=intId:
             return "There is just " + str(len(self.wordsWithPlacement)) + " words: " +  idToLetter(0) + "-"+idToLetter(len(self.wordsWithPlacement)-1)
         return "Length of "+idToLetter(intId) + " is " + str(len(self.wordsWithPlacement[intId].word))
+
+    def guesSubstringEverywhere(self, substring):
+        counter = 0
+        for word in self.wordsWithPlacement:
+            if word.revealPattern(substring):
+                counter+=1
+            self.fixWord(word)
+        return "injected: " + str(counter)+"x"
+
+    def guesSubstringIn(self, intId, substring):
+        if len(self.wordsWithPlacement)<=intId:
+            return "There is just " + str(len(self.wordsWithPlacement)) + " words: " +  idToLetter(0) + "-"+idToLetter(len(self.wordsWithPlacement)-1)
+        if self.wordsWithPlacement[intId].revealPattern(substring):
+            self.fixWord(self.wordsWithPlacement[intId])
+            return "success!"
+        else:
+            return "nope"
 
     def solve(self, word):
         hit=False
@@ -87,12 +107,18 @@ class DeskWithWords:
 
     def showWord(self, wwp):
         wwp.showAll();
+        self.fixWord(wwp)
+
+    #todo reuse on more places
+    def fixWord(self, wwp):
         if wwp.direction==">":
             for i, character in enumerate(wwp.word):
-                self.desk[wwp.y][wwp.x+i]=character
+                if wwp.found[i]:
+                    self.desk[wwp.y][wwp.x+i]=character
         if wwp.direction=="ˇ":
             for i, character in enumerate(wwp.word):
-                self.desk[wwp.y+i][wwp.x]=character
+                if wwp.found[i]:
+                    self.desk[wwp.y+i][wwp.x]=character
 
     def helpRandomWord(self):
         wwpCopy=list(self.wordsWithPlacement)
@@ -186,6 +212,15 @@ class WordWithPlacement:
     def isFullyHidden(self):
         sset = {e for e in self.found}
         return len(sset)==1 and sset.pop() == False
+
+    def revealPattern(self, pattern):
+        indexes = substringIndexes(pattern, self.word)
+        if (len(indexes) <=0):
+            return False
+        for index in indexes:
+            for x in range(index, index+len(pattern)):
+                self.found[x]=True
+        return True
 
     def isFullyShown(self):
         sset = {e for e in self.found}
@@ -331,6 +366,15 @@ def reusableRepl(cmd, desk) :
         return True
     if (cmd.startswith('l') or cmd.startswith('L')) and len(cmd)==2:
         print(desk.length(letterToId(cmd[1:].upper())))
+        desk.prettyPrint()
+        return True
+    if cmd.startswith('sub'):
+        cmd=re.sub("sub *", "", cmd)
+        ops=re.split(" +", cmd)
+        if len(ops)==1:
+            print(desk.guesSubstringEverywhere(ops[0]))
+        if len(ops)>1:
+            print(desk.guesSubstringIn(letterToId(ops[0][0].upper()), ops[1]))
         desk.prettyPrint()
         return True
     if cmd.startswith('??'):
