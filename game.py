@@ -177,6 +177,7 @@ def main():
         if 'help' == cmd:
             # each cmd with [a-z] should write length of that word
             print("Type `exit` to gave up (solution and statistics will be printed)");
+            print("---- suggestions ----")
             print("I[a-z] to show next image (from all) for given word")
             print("T[a-z] to show next hint (from all) for given word")
             print("G[a-z] to show next hint (from all) for given word in external window")
@@ -186,7 +187,9 @@ def main():
             print("II[a-z] to show all images for given word")
             print("TT[a-z] to show all texts for given word")
             print("GG[a-z] to show all texts for given word in external window")
+            print("---- operations and actions ----")
             generateWords.reusableHelp()
+            print("---- calls to AI models ----")
             print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all")
             print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all")
             print("delInumber[a-z] to remove Nth image. Check by In before")
