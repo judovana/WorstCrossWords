@@ -363,6 +363,8 @@ def reusableHelp():
         print("?? to random whole word")
         print("??[a-z] to fill whole word of given word")
         print("L[a-z] length of given word")
+        print("`sub[A-Z] guess` try to fill matching guess to selected word")
+        #print("`sub guess` try to fill matching guess to all words (") - works, but undoccument:?
 
 def main():
     print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
@@ -381,7 +383,7 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] help exit"
+    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] `sub[A-Z] guess`help exit"
     print(qhelp)
     for line in sys.stdin:
         print(qhelp)

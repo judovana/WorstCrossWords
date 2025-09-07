@@ -17,7 +17,7 @@ def getAllExplanationsFilesFor(word, lang):
     explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
     return explanationFilesTransalted
 
-def getAllImageFilesFor(word, lang):
+def getAllImageFilesFor(word, lang, ):
     translatedId=caches.getTranslated(lang, word)
     explanationImages=caches.getFilesFromAiImageCache(translatedId)
     return explanationImages
@@ -31,6 +31,60 @@ def createOrPlusPlus(dictItself, dictKey):
     else:
         dictItself[dictKey]=0
         return 0
+
+def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
+    cchar=cmd[1:][0].upper()
+    idInt=generateWords.letterToId(cchar)
+    ccmd=cmd[:1].upper()
+    word=desk.wordsWithPlacement[idInt].word
+    acro=''.join([cchar*len(word)])
+    title=acro + " (" + str(len(word)) + ")";
+    if ccmd == "T":
+        index=createOrPlusPlus(textIndexes, cchar)
+        allFiles=getAllExplanationsFilesFor(word, lang)
+        if index >= len(allFiles):
+            index=0
+            textIndexes[cchar]=0
+        print(title +" " + str(index+1)+"/"+str(len(allFiles)))
+        print(pathlib.Path(allFiles[index]).read_text())
+        return True
+    if ccmd == "G":
+        index=createOrPlusPlus(textIndexes, cchar)
+        allFiles=getAllExplanationsFilesFor(word, lang)
+        if index >= len(allFiles):
+            index=0
+            textIndexes[cchar]=0
+        show_image.display_text(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)), 80)
+        return True
+    if ccmd == "I":
+        index=createOrPlusPlus(imagesIndexes, cchar)
+        allFiles=getAllImageFilesFor(word, lang)
+        if index >= len(allFiles):
+            index=0
+            textIndexes[cchar]=0
+        show_image.display_image(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
+        return True
+
+def processIITTGGaz(cmd, desk,lang):
+    cchar=cmd[2:][0].upper()
+    idInt=generateWords.letterToId(cchar)
+    ccmd=cmd[:2].upper()
+    word=desk.wordsWithPlacement[idInt].word
+    acro=''.join([cchar*len(word)])
+    title=acro + " (" + str(len(word)) + ")";
+    if ccmd == "TT":
+        for file in getAllExplanationsFilesFor(word, lang):
+            print(title)
+            print(pathlib.Path(file).read_text())
+        return True
+    if ccmd == "GG":
+        for file in getAllExplanationsFilesFor(word, lang):
+            show_image.display_text(file, title, 80)
+        return True
+    if ccmd == "II":
+        for file in getAllImageFilesFor(word, lang):
+            show_image.display_image(file, title)
+        return True
    
 def main():
     print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
@@ -72,7 +126,7 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z]"
+    qhelp="help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
     history=[];
     comandsUsage = {}
     imagesIndexes={}
@@ -106,66 +160,20 @@ def main():
             print("delTnumber[a-z] to remove Nth text. Check by Tn before")
             print("everything else is considered as guess")
             continue
-        if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
-            try:
-                cchar=cmd[1:][0].upper()
-                idInt=generateWords.letterToId(cchar)
-                ccmd=cmd[:1].upper()
-                word=desk.wordsWithPlacement[idInt].word
-                acro=''.join([cchar*len(word)])
-                title=acro + " (" + str(len(word)) + ")";
-                if ccmd == "T":
-                    index=createOrPlusPlus(textIndexes, cchar)
-                    allFiles=getAllExplanationsFilesFor(word, lang)
-                    if index >= len(allFiles):
-                        index=0
-                        textIndexes[cchar]=0
-                    print(title +" " + str(index+1)+"/"+str(len(allFiles)))
-                    print(pathlib.Path(allFiles[index]).read_text())
-                    continue
-                if ccmd == "G":
-                    index=createOrPlusPlus(textIndexes, cchar)
-                    allFiles=getAllExplanationsFilesFor(word, lang)
-                    if index >= len(allFiles):
-                        index=0
-                        textIndexes[cchar]=0
-                    show_image.display_text(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)), 80)
-                    continue
-                if ccmd == "I":
-                    index=createOrPlusPlus(imagesIndexes, cchar)
-                    allFiles=getAllImageFilesFor(word, lang)
-                    if index >= len(allFiles):
-                        index=0
-                        textIndexes[cchar]=0
-                    show_image.display_image(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
-                    continue
-            except:
-                print("X[A-Z] expected")
-                continue
         if cmd.startswith('II') or cmd.startswith('TT') or cmd.startswith('GG'):
             # FIXME show all dialogs in paralel (needs global master window)
             try:
-                cchar=cmd[2:][0].upper()
-                idInt=generateWords.letterToId(cchar)
-                ccmd=cmd[:2].upper()
-                word=desk.wordsWithPlacement[idInt].word
-                acro=''.join([cchar*len(word)])
-                title=acro + " (" + str(len(word)) + ")";
-                if ccmd == "TT":
-                    for file in getAllExplanationsFilesFor(word, lang):
-                        print(title)
-                        print(pathlib.Path(file).read_text())
-                    continue
-                if ccmd == "GG":
-                    for file in getAllExplanationsFilesFor(word, lang):
-                        show_image.display_text(file, title, 80)
-                    continue
-                if ccmd == "II":
-                    for file in getAllImageFilesFor(word, lang):
-                        show_image.display_image(file, title)
+                if processIITTGGaz(cmd, desk, lang):
                     continue
             except:
                 print("XX[A-Z] expected")
+                continue
+        if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
+            if True:
+                if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
+                    continue
+            else:
+                print("X[A-Z] expected")
                 continue
         if generateWords.reusableRepl(cmd, desk):
             continue
