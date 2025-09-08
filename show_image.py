@@ -29,9 +29,9 @@ def display_text(filename,title="text", wrap=0):
 
 def textOrImage(filename, title="future", wrap=0):
     try:
-        display_image(filename, filename)
+        display_image(filename, title)
     except Exception:
-        display_text(filename, filename, wrap)
+        display_text(filename, title, wrap)
 
 
 if __name__ == "__main__":

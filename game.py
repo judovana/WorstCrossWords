@@ -10,6 +10,19 @@ from PIL import Image
 import pathlib
 import sys
 import re
+import os
+import tkinter as tk
+from tkinter import *
+
+WRAP_ENV="WRAP"
+WRAP=80
+if os.environ.get(WRAP_ENV):
+    wrap=int(os.environ.get(WRAP_ENV))
+ASYNC_ENV="ASYNC"
+ASYNC=True
+if os.environ.get(ASYNC_ENV) == "False":
+    ASYNC=False
+
 
 def getAllExplanationsFilesFor(word, lang):
     translatedId=caches.getTranslated(lang, word)
@@ -31,6 +44,12 @@ def createOrPlusPlus(dictItself, dictKey):
         dictItself[dictKey]=0
         return 0
 
+def syncOrAsync(file, title):
+        if ASYNC:
+            asyncParent.queue.append(file + " " + title);
+        else:
+            show_image.textOrImage(file, title, WRAP)
+
 def processInTnGnaz(cmd, desk, lang):
     intNth=re.sub('[^0-9]+', '', cmd)
     index=int(intNth)-1
@@ -38,6 +57,9 @@ def processInTnGnaz(cmd, desk, lang):
     cchar=cmd[1:][0].upper()
     idInt=generateWords.letterToId(cchar)
     ccmd=cmd[:1].upper()
+    if idInt >= len(desk.wordsWithPlacement):
+        print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
+        return True
     word=desk.wordsWithPlacement[idInt].word
     acro=''.join([cchar*len(word)])
     title=acro + " (" + str(len(word)) + ")";
@@ -54,20 +76,23 @@ def processInTnGnaz(cmd, desk, lang):
         if index >= len(allFiles) or index < 0:
             print(cchar + " have only 1-" + str(len(allFiles))+" items")
         else:
-            show_image.display_text(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)), 80)
+            syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
     if ccmd == "I":
         allFiles=getAllImageFilesFor(word, lang)
         if index >= len(allFiles) or index < 0:
             print(cchar + " have only 1-" + str(len(allFiles))+" items")
         else:
-            show_image.display_image(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
+            syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
 
 def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
     cchar=cmd[1:][0].upper()
     idInt=generateWords.letterToId(cchar)
     ccmd=cmd[:1].upper()
+    if idInt >= len(desk.wordsWithPlacement):
+        print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
+        return True
     word=desk.wordsWithPlacement[idInt].word
     acro=''.join([cchar*len(word)])
     title=acro + " (" + str(len(word)) + ")";
@@ -86,7 +111,7 @@ def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
         if index >= len(allFiles):
             index=0
             textIndexes[cchar]=0
-        show_image.display_text(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)), 80)
+        syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
     if ccmd == "I":
         index=createOrPlusPlus(imagesIndexes, cchar)
@@ -94,7 +119,7 @@ def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
         if index >= len(allFiles):
             index=0
             textIndexes[cchar]=0
-        show_image.display_image(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
+        syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
 
 def processIITTGGaz(cmd, desk,lang):
@@ -111,19 +136,58 @@ def processIITTGGaz(cmd, desk,lang):
         return True
     if ccmd == "GG":
         for file in getAllExplanationsFilesFor(word, lang):
-            show_image.display_text(file, title, 80)
+            syncOrAsync(file, title)
         return True
     if ccmd == "II":
         for file in getAllImageFilesFor(word, lang):
-            show_image.display_image(file, title)
+            syncOrAsync(file, title)
         return True
-   
+
+def task():
+    #print("hello")
+    asyncParent.readQueue()
+    asyncParent.root.after(100, task)
+
+class AsyncParent():
+
+    def createAndStart(self):
+        self.queue = []
+        self.live=True
+        self.root = Tk()
+        self.root.withdraw()
+        self.root.after(100, task)
+        self.root.mainloop()
+
+    def readQueue(self):
+        if self.live:
+            while len(self.queue)>0:
+                item=self.queue.pop()
+                if item == "destroy":
+                    self.live=False
+                    self.root.destroy()
+                    break
+                else:
+                    fileTitle=item.split(" ")
+                    img=show_images.ImgOrNote(self.root, 0, fileTitle[0], fileTitle[0], WRAP, False)
+                    img.display_gui()
+                    
+        
+
+    def close(self):
+        self.queue.append("destroy");
+
 def main():
+    if ASYNC:
+        global asyncParent
+        asyncParent = AsyncParent()
+        threading.Thread(target=asyncParent.createAndStart).start() 
     print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
     print("WARNING If no first first argument is given, weird `cs` lang is loaded") 
     print("WARNING the language is detected from file name. Be sure the only letters in the filename are identifying the lang as `cs` `en` or `de`") 
     print("Warning. environment vat "+caches.NOTRANS_VAR+"set to True, will skipp transaltion step.Note it may corrupt the caches, backup them before. Noe the AI being asked for different, then english words is weird")
     print("environment variable "+generateWords.SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
+    print("environment variable "+ASYNC_ENV+"=False removes ability to show more images in parallel )may be better playgame actually)") 
+    print("environment variable "+WRAP_ENV+"=number is setting the forced wrap for text windows") 
     wordsFile="cs-20-2025-09-05_14:36:15"
     #wordsFile="cs"
     #wordsFile="de"
@@ -170,6 +234,8 @@ def main():
         history.append(cmd);
         createOrPlusPlus(comandsUsage, cmd)
         if 'exit' == cmd:
+            if ASYNC:
+                asyncParent.close()
             desk.gaveUp()
             desk.prettyPrint()
             break

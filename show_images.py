@@ -40,8 +40,8 @@ class ImgOrNote(Toplevel):
             label = Label(self, image = tk_image)
         except Exception:
             content = open(self.file, 'r').read()
-            if wrap>0:
-                content = wrapTextTo(content, wrap);
+            if self.wrap>0:
+                content = wrapTextTo(content, self.wrap);
             text_var = tk.StringVar()
             text_var.set(content)
             label = Label(self, textvariable=text_var)
