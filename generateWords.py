@@ -411,9 +411,12 @@ def reusableHelp():
         print("`sub guess` try to fill matching guess SUBSTRING to ALL words (")
 
 def main():
-    print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
+    print("mandatory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
     print("environment variable "+SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
-    wordFile="cs"
+    wordFile=None
+    if len(sys.argv) <= 1:
+        print("You must specify file to read words from")
+        sys.exit(2)
     if len(sys.argv) > 1:
         wordFile=sys.argv[1]
     wcount=10

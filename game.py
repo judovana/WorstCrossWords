@@ -170,34 +170,32 @@ class AsyncParent():
                     fileTitle=item.split(" ")
                     img=show_images.ImgOrNote(self.root, 0, fileTitle[0], fileTitle[0], WRAP, False)
                     img.display_gui()
-                    
-        
 
     def close(self):
         self.queue.append("destroy");
 
 def main():
-    if ASYNC:
-        global asyncParent
-        asyncParent = AsyncParent()
-        threading.Thread(target=asyncParent.createAndStart).start() 
-    print("optional first argument is  argument file with all words. Optional second argument may follow - number of words.") 
-    print("WARNING If no first first argument is given, weird `cs` lang is loaded") 
+    print("mandadory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
+    print("WARNING the language is deducted from filename - eg cs-123 will be interpreted as cs. 09de-bad will be interpreted as de and so on") 
     print("WARNING the language is detected from file name. Be sure the only letters in the filename are identifying the lang as `cs` `en` or `de`") 
     print("Warning. environment vat "+caches.NOTRANS_VAR+"set to True, will skipp transaltion step.Note it may corrupt the caches, backup them before. Noe the AI being asked for different, then english words is weird")
     print("environment variable "+generateWords.SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
     print("environment variable "+ASYNC_ENV+"=False removes ability to show more images in parallel )may be better playgame actually)") 
     print("environment variable "+WRAP_ENV+"=number is setting the forced wrap for text windows") 
-    wordsFile="cs-20-2025-09-05_14:36:15"
-    #wordsFile="cs"
-    #wordsFile="de"
-    #wordsFile="en"
+    wordsFile="cs"
+    if len(sys.argv) <= 1:
+        print("You must specify file to read words from")
+        sys.exit(2)
+    if ASYNC:
+        global asyncParent
+        asyncParent = AsyncParent()
+        threading.Thread(target=asyncParent.createAndStart).start() 
     if len(sys.argv) > 1:
         wordsFile=sys.argv[1]
     wcount=5
     if len(sys.argv) > 2:
         wcount=int(sys.argv[2])
-    lang= re.sub('[^a-z]+', '', wordsFile)
+    lang=re.sub('[^a-z]+', '', wordsFile)[:2]
     print("lang is "+lang)
     caches.loadCache(lang)
     caches.doLog=False
@@ -255,8 +253,10 @@ def main():
             print("---- operations and actions ----")
             generateWords.reusableHelp()
             print("---- calls to AI models ----")
-            print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all")
-            print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all")
+            print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync"")
+            print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync"")
+            print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
+            print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
             print("delInumber[a-z] to remove Nth image. Check by In before")
             print("delTnumber[a-z] to remove Nth text. Check by Tn before")
             print("everything else is considered as guess (and dont forget sub!)")
