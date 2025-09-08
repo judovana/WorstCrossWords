@@ -253,8 +253,8 @@ def main():
             print("---- operations and actions ----")
             generateWords.reusableHelp()
             print("---- calls to AI models ----")
-            print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync"")
-            print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync"")
+            print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync")
+            print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync")
             print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
             print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
             print("delInumber[a-z] to remove Nth image. Check by In before")
@@ -284,6 +284,15 @@ def main():
                     continue
                 print("Xn[A-Z] expected")
                 continue
+        if cmd.startswith('newsI') or cmd.startswith('newsT'):
+            print("new synced image not yet implemented")
+            continue
+        if cmd.startswith('newI') or cmd.startswith('newT'):
+            print("new async image not yet implemented")
+            continue
+        if cmd.startswith('delI') or cmd.startswith('delT'):
+            print("removal of exact explanation or image is not yet implemented")
+            continue
         if generateWords.reusableRepl(cmd, desk):
             continue
 
