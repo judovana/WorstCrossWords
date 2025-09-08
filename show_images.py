@@ -11,16 +11,17 @@ def wrapTextTo(text, wrap):
     return "\n".join([text[i:i+wrap] for i in range(0, len(text), wrap)])
 
 #python gc is debil, and is eating used images...       
-images=[] 
+images={}
 
 class ImgOrNote(Toplevel):
-    def __init__(self, master, nid, file, title, wrap):
+    def __init__(self, master, nid, file, title, wrap, onClose=True):
         Toplevel.__init__(self,master)
         self.nid = nid 
         self.wrap = wrap
         self.title(title) #since toplevel widgets define a method called title you can't store it as an attribute
         self.file = file
-        self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        if onClose:
+            self.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def on_closing(self):
         self.destroy()
@@ -35,7 +36,7 @@ class ImgOrNote(Toplevel):
         try:
             image = Image.open(self.file)
             tk_image = ImageTk.PhotoImage(image)
-            images.append(tk_image)
+            images[self.file]=tk_image
             label = Label(self, image = tk_image)
         except Exception:
             content = open(self.file, 'r').read()
