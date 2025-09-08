@@ -534,7 +534,7 @@ GG[a-z] to show all texts for given word in external window
    * TTb  wil show all texts for word BBBBB
    * GGb  wil show all texts for word GGGG in standalone window
 
-# Generating hints during runtime. 
+# Generating hints during runtime
 During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
 You can generate them also from game itself but it have  issues - frozen gameplay or output to command prompt
 ```
