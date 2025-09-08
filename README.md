@@ -504,10 +504,10 @@ L[a-z] length of given word
 `sub guess` try to fill matching guess SUBSTRING to ALL words (
 ```
  * eg
-   * ?1 will fill fandom first letter
-   * ?D will fill random letter  DDDDDDD
-   * ?B1 will fill first letter of word BBBB
-   * ??F will fill give up word FFFF
+   * `?1` will fill fandom first letter
+   * `?D` will fill random letter  DDDDDDD
+   * `?B1` will fill first letter of word BBBB
+   * `??F` will fill give up word FFFF
 
  
 # Getting hints
@@ -524,14 +524,14 @@ TT[a-z] to show all texts for given word
 GG[a-z] to show all texts for given word in external window
 ```
  * eg
-   * Ia  wil show next image for word AAAA
-   * Tb  wil show next text for word BBBBB
-   * Gb  wil show next text for word GGGG in standalone window
-   * I3c  wil show 3rd image for word CCC
-   * T1d  wil show 1st text for word DDDDDDDD
-   * G2e  wil show 2nd text for word EEEE in standalone window
-   * IIa  wil show all images for word AAAA
-   * TTb  wil show all texts for word BBBBB
+   * `Ia`  wil show next image for word AAAA
+   * `Tb`  wil show next text for word BBBBB
+   * `Gb`  wil show next text for word GGGG in standalone window
+   * `I3c`  wil show 3rd image for word CCC
+   * `T1d`  wil show 1st text for word DDDDDDDD
+   * `G2e`  wil show 2nd text for word EEEE in standalone window
+   * `IIa`  wil show all images for word AAAA
+   * `TTb`  wil show all texts for word BBBBB
    * GGb  wil show all texts for word GGGG in standalone window
 
 # Generating hints during runtime
