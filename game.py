@@ -1,10 +1,9 @@
-import translate
-import generateImage
-import explain
 import show_image
+import show_images
 import caches
 import generateWords
 
+import traceback
 import threading
 import random
 from PIL import Image
@@ -202,6 +201,7 @@ def main():
                 if processIITTGGaz(cmd, desk, lang):
                     continue
             except:
+                traceback.print_exc()
                 print("XX[A-Z] expected")
                 continue
         if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
@@ -210,6 +210,7 @@ def main():
                     if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
                         continue
                 except:
+                    traceback.print_exc()
                     print("X[A-Z] expected")
                     continue
             else:

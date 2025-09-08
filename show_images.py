@@ -64,7 +64,7 @@ def create(file, wrap):
         return  ImgOrNote(root, windowCounter, file, file, wrap)
 
 def openFiles(files, wrap):
-    for file in (sys.argv[sliceStart:]):
+    for file in (files):
         win=create(file, wrap)
         win.display_gui()
     root.mainloop() #still call mainloop on the root

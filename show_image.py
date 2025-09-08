@@ -1,7 +1,6 @@
 import sys
 import tkinter as tk
 from tkinter import *
-import PIL
 from PIL import ImageTk, Image
 
 def wrapTextTo(text, wrap):
