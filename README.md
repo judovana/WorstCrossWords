@@ -491,7 +491,7 @@ injected: 1x
 </details>
 
   * You can see sub can inject substrings. With AI hints, you are very often sure with some part - like here - but not with whole
-   * sub can be directed to exact word. so `subC dálkař` would do. `subA dálkař` would not:
+  * sub can be directed to exact word. so `subC dálkař` would do. `subA dálkař` would not:
 ```
 ? to fill random letter
 ?number to fill random Nth letter
@@ -532,7 +532,7 @@ GG[a-z] to show all texts for given word in external window
    * `G2e`  wil show 2nd text for word EEEE in standalone window
    * `IIa`  wil show all images for word AAAA
    * `TTb`  wil show all texts for word BBBBB
-   * `GGb`  wil show all texts for word GGGG in standalone window
+   * `GGg`  wil show all texts for word GGGG in standalone window
 
 # Generating hints during runtime
 During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
