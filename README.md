@@ -2,6 +2,7 @@
  * This is AI powered, multi-language, *terminal*,  worst crossword game ever created
  * it is powered by awesome `transformers` and `diffusers` by https://huggingface.co
  * I'm no python master non python enthusiastic, so I apologies for bad practices
+ * [I do not need to read anymore, show me how to play](#play)
 
 ## How it works
  * This is dummy crossword game, where the hints are provided by AI
@@ -382,4 +383,165 @@ word1w
 where word1w (note the intersection, connected intentionally) and word2 are words
 Especially the `word1word2` case with intersection is very confusing, sorry. (as it writes as AAAAABBBBB (where correct is something like AAAAA(AB)BBBB)
 
+# Play
+ * `python game.py <file_with_words>`  where file_with_words is  `cs` or some previously cached subset like `python game.py python game.py cs-20-2025-09-05_14\:36\:15`
+ * It will generate crosswords puzzle with as much words as you set up  - or default is aprox 5 - to small grid which shoudl fit terminal unless you changed it by  `SIZE` variable
+ * you can see that instead of words are theirs IDs. Eg `AAAAA` is first word of length of 5. eg:
 
+<details>
+
+  ```
+python game.py  cs-20-2025-09-05_14\:36\:15  3
+...
+
+. . . . . . . . C C C C C C C C . . . . . . . .
+. . . . . . . . . . . . B . . . . . . . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B . . . . . D . . . . .
+. . . . . . . . . . . . B A E A A A D . . . . .
+. . . . . . . . . . . . . . E . . . D . . . . .
+. . . . . . . . . . . . . . E . . . D . . . . .
+. . . . . . . . . . . . . . E . . . D . . . . .
+. . . . . . . . . . . . . . E . . . D . . . . .
+. . . . . . . . . . . . . . E . . . D . . . . .
+. . . . . . . . . . . . . . . . . . D . . . . .
+help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`
+```
+</details>
+
+ * if some of words are missing at least 1 explanation and 1 image, that will be generated.
+   *  that is slow. Use `caches.py` to pregenerate hints before playing
+ * then you guess words!
+   * if you jsut type word, it will apear on place - if correct. eg here `podbíječka` was jsut filled in but `dálkař` was not
+  
+<details>
+
+  ```
+python game.py  cs-20-2025-09-05_14\:36\:15  3
+...
+podbíječka
+help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`
+ok!
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . p o d b í j e č k a . . . . . . . .
+. . . . . . . . . . . . . . B . . . . . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . A A B A A A C A . . . .
+. . . . . . . . . . . . . . D D D D D D . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+dálkař    
+help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`
+nope:(
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . p o d b í j e č k a . . . . . . . .
+. . . . . . . . . . . . . . B . . . . . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . . . B . . . C . . . . .
+. . . . . . . . . . . . A A B A A A C A . . . .
+. . . . . . . . . . . . . . D D D D D D . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+
+```
+</details>
+
+  * you have variety of commands to help you solve the puzzle. From those most mighty is `sub`:
+
+  <details>
+
+  ```
+sub dálkař
+help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`
+injected: 1x
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+. . . . . . p o d b í j e č k a . . . . . . . .
+. . . . . . . . . . . . . . B . . . . . . . . .
+. . . . . . . . . . . . . . B . . . d . . . . .
+. . . . . . . . . . . . . . B . . . á . . . . .
+. . . . . . . . . . . . . . B . . . l . . . . .
+. . . . . . . . . . . . A A B A A A k A . . . .
+. . . . . . . . . . . . . . D D D D a D . . . .
+. . . . . . . . . . . . . . . . . . ř . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . C . . . . .
+. . . . . . . . . . . . . . . . . . . . . . . .
+
+```
+</details>
+
+  * You can see sub can inject substrings. With AI hints, you are very often sure with some part - like here - but not with whole
+   * sub can be directed to exact word. so `subC dálkař` would do. `subA dálkař` would not:
+```
+? to fill random letter
+?number to fill random Nth letter
+?[a-z] to fill random letter of selected word
+?number[a-z] to fill Nth letter of selected word
+?? to random whole word
+??[a-z] to fill whole word of given word
+L[a-z] length of given word
+`sub[A-Z] guess` try to fill matching guess SUBSTRING to selected word
+`sub guess` try to fill matching guess SUBSTRING to ALL words (
+```
+ * eg
+   * ?1 will fill fandom first letter
+   * ?D will fill random letter  DDDDDDD
+   * ?B1 will fill first letter of word BBBB
+   * ??F will fill give up word FFFF
+
+ 
+# Getting hints
+Each word can be described to you by image or explanmation:
+```
+I[a-z] to show next image (from all) for given word
+T[a-z] to show next hint (from all) for given word
+G[a-z] to show next hint (from all) for given word in external window
+Inumber[a-z] to show Nth image (from all) for given word
+Tnumber[a-z] to show Nth hint (from all) for given word
+Gnumber[a-z] to show Nth hint (from all) for given word in external window
+II[a-z] to show all images for given word
+TT[a-z] to show all texts for given word
+GG[a-z] to show all texts for given word in external window
+```
+ * eg
+   * Ia  wil show next image for word AAAA
+   * Tb  wil show next text for word BBBBB
+   * Gb  wil show next text for word GGGG in standalone window
+   * I3c  wil show 3rd image for word CCC
+   * T1d  wil show 1st text for word DDDDDDDD
+   * G2e  wil show 2nd text for word EEEE in standalone window
+   * IIa  wil show all images for word AAAA
+   * TTb  wil show all texts for word BBBBB
+   * GGb  wil show all texts for word GGGG in standalone window
+
+# Generating hints during runtime. 
+During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
+You can generate them also from game itself but it have  issues - frozen gameplay or output to command prompt
+```
+newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync
+newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync
+newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async
+newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async
+delInumber[a-z] to remove Nth image. Check by In before
+delTnumber[a-z] to remove Nth text. Check by Tn before
+```
