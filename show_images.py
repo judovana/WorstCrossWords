@@ -63,6 +63,12 @@ def create(file, wrap):
         windowCounter+=1   
         return  ImgOrNote(root, windowCounter, file, file, wrap)
 
+def openFiles(files, wrap):
+    for file in (sys.argv[sliceStart:]):
+        win=create(file, wrap)
+        win.display_gui()
+    root.mainloop() #still call mainloop on the root
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("one parameter expected - path to file")
@@ -76,8 +82,4 @@ if __name__ == "__main__":
         sliceStart=2
     except Exception:
         pass
-    for file in (sys.argv[sliceStart:]):
-        win=create(file, wrap)
-        win.display_gui()
-    root.mainloop() #still call mainloop on the root
-    sys.exit(0)
+    openFiles(sys.argv[sliceStart:], wrap)
