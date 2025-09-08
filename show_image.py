@@ -6,9 +6,6 @@ from PIL import ImageTk, Image
 def wrapTextTo(text, wrap):
     return "\n".join([text[i:i+wrap] for i in range(0, len(text), wrap)])
     
-    
-
-#the title must be id of searched word AAAAAAA or simialrly
 def display_image(filename, title="image"):
     image = Image.open(filename)
     root = tk.Tk()
@@ -18,7 +15,6 @@ def display_image(filename, title="image"):
     label.pack()
     root.mainloop()
 
-#the title must be id of searched word AAAAAAA or simialrly
 def display_text(filename,title="text", wrap=0):
     content = open(filename, 'r').read()
     if wrap>0:
@@ -31,16 +27,19 @@ def display_text(filename,title="text", wrap=0):
     label.pack()
     root.mainloop()
 
+def textOrImage(filename, title="future", wrap=0):
+    try:
+        display_image(filename, filename)
+    except Exception:
+        display_text(filename, filename, wrap)
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("one parameter expected - path to file")
         print("second optional is text wrap for non images")
         sys.exit(1)
-    try:
-        wrap=0
-        if len(sys.argv) > 2:
-            wrap=int(sys.argv[2])
-        display_image(sys.argv[1], sys.argv[1])
-    except Exception:
-        display_text(sys.argv[1], sys.argv[1], wrap=wrap)
+    wrap=0
+    if len(sys.argv) > 2:
+        wrap=int(sys.argv[2])
+    textOrImage(sys.argv[1], sys.argv[1], wrap=wrap)
