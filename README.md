@@ -532,7 +532,7 @@ GG[a-z] to show all texts for given word in external window
    * `G2e`  wil show 2nd text for word EEEE in standalone window
    * `IIa`  wil show all images for word AAAA
    * `TTb`  wil show all texts for word BBBBB
-   * GGb  wil show all texts for word GGGG in standalone window
+   * `GGb`  wil show all texts for word GGGG in standalone window
 
 # Generating hints during runtime
 During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
