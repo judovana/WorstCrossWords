@@ -63,6 +63,16 @@ def newITnewsIT(ccmd, idL, lang, desk):
         print(idL+" now have " + str(len(explanationImagesOld))+" images. Please wait for next")
         syncAddImgToCache(idL, lang,translatedId)
         return True
+    if ccmd == "newT":
+        explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
+        print(idL+" now have " + str(len(explanationFilesTransaltedOld))+" expanations. Generation of new one will run on background. You can continue playing.. somehow")
+        threading.Thread(target=syncAddExplToCache, args=(idL, lang,translatedId)).start()
+        return True
+    if ccmd == "newI":
+        explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
+        print(idL+" now have " + str(len(explanationImagesOld))+" images. Generation of new one will run on background. You can continue playing.. somehow")
+        threading.Thread(target=syncAddImgToCache, args=(idL, lang,translatedId)).start()
+        return True
     return True
 
 
@@ -355,20 +365,21 @@ def main():
                     continue
                 print("Xn[A-Z] expected")
                 continue
-        if cmd.startswith('newsI') or cmd.startswith('newsT'):
+        if cmd.startswith('newsI') or cmd.startswith('newsT') or cmd.startswith('newI') or cmd.startswith('newT'):
+            if cmd.startswith('news'):
+                lnarg=6
+            else:
+                lnarg=5
             try:
-                if len(cmd)<6:
+                if len(cmd)<lnarg:
                     print("missing ID of word")
                     continue
-                ccmd=cmd[:5]
-                idL=cmd[5:][0].upper()
+                ccmd=cmd[:lnarg-1]
+                idL=cmd[lnarg-1:][0].upper()
                 if newITnewsIT(ccmd, idL, lang, desk):
                     continue
             except:
                 traceback.print_exc()
-            continue
-        if cmd.startswith('newI') or cmd.startswith('newT'):
-            print("new async image not yet implemented - run `caches.py` for now")
             continue
         if cmd.startswith('delI') or cmd.startswith('delT'):
             delete(cmd, desk, lang)
