@@ -510,7 +510,7 @@ L[a-z] length of given word
    * `??F` will fill give up word FFFF
 
  
-# Getting hints
+## Getting hints
 Each word can be described to you by image or explanmation:
 ```
 I[a-z] to show next image (from all) for given word
@@ -534,7 +534,7 @@ GG[a-z] to show all texts for given word in external window
    * `TTb`  wil show all texts for word BBBBB
    * `GGg`  wil show all texts for word GGGG in standalone window
 
-# Generating hints during runtime
+## Generating hints during runtime
 During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
 You can generate them also from game itself but it have  issues - frozen gameplay or output to command prompt
 ```
@@ -545,3 +545,7 @@ newT[a-z] to generate and add new text for given word. Use all instead of a-z to
 delInumber[a-z] to remove Nth image. Check by In before
 delTnumber[a-z] to remove Nth text. Check by Tn before
 ```
+## Playing in headless mode
+The game works fine in headlees (no gui, terminal only) mode. Surprisngly better experience is in defaut `ASYNC=True` mode, which consumes more exceptions.
+Of course you can not show images, and I'm, not going to reimplemen https://github.com/judovana/ConsoleImageViewer. The images are terrible enough.
+Hiowever playing only with text hints, is extreamly difficult, nearly impossible
