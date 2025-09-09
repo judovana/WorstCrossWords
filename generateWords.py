@@ -37,7 +37,7 @@ class DeskWithWords:
             print(" ".join(y))
 
     def length(self, intId):
-        if len(self.wordsWithPlacement)<=intId:
+        if len(self.wordsWithPlacement)<=intId or intId <0 :
             return "There is just " + str(len(self.wordsWithPlacement)) + " words: " +  idToLetter(0) + "-"+idToLetter(len(self.wordsWithPlacement)-1)
         return "Length of "+idToLetter(intId) + " is " + str(len(self.wordsWithPlacement[intId].word))
 
@@ -50,7 +50,7 @@ class DeskWithWords:
         return "injected: " + str(counter)+"x"
 
     def guesSubstringIn(self, intId, substring):
-        if len(self.wordsWithPlacement)<=intId:
+        if len(self.wordsWithPlacement)<=intId or intId < 0:
             return "There is just " + str(len(self.wordsWithPlacement)) + " words: " +  idToLetter(0) + "-"+idToLetter(len(self.wordsWithPlacement)-1)
         if self.wordsWithPlacement[intId].revealPattern(substring):
             self.fixWord(self.wordsWithPlacement[intId])
@@ -163,7 +163,7 @@ class DeskWithWords:
         return "Puzzle solved?"
 
     def helpRandomLetterInExactWord(self, wordIdInt):
-        if (wordIdInt>=len(self.wordsWithPlacement)):
+        if (wordIdInt>=len(self.wordsWithPlacement) or wordIdInt <0):
             return "there is only "+str(len(self.wordsWithPlacement)-1)+" words"
         wwp=self.wordsWithPlacement[wordIdInt]
         indexes=[]
@@ -176,7 +176,7 @@ class DeskWithWords:
         return "Word filled?"
 
     def helpExactLeterInExactWord(self, letterIdInt, wordIdInt):
-        if (wordIdInt>=len(self.wordsWithPlacement)):
+        if (wordIdInt>=len(self.wordsWithPlacement) or wordIdInt <0):
             return "there is only "+str(len(self.wordsWithPlacement)-1)+" words"
         word=self.wordsWithPlacement[wordIdInt]
         if (letterIdInt>len(word.word)):
