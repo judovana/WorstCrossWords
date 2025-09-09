@@ -353,6 +353,7 @@ Image cache (shared for al languages)  is cache/images
    * You can verify content of caches by ` python  caches.py  lang print`. eg ` python  caches.py  cs print` (as all except images are transalted somwhere in process)
 
 ## crosswords generation issue:
+Soetimes jsut single or two words puzzle is generated. The generation is random, and bad things happen. But there is worse issue:
 Note, the generation is not perfect, and never was intended to be, so it can create things like:
 ```
 word1word2
