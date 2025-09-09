@@ -24,6 +24,77 @@ if os.environ.get(ASYNC_ENV) == "False":
     ASYNC=False
 
 
+def syncAddExplToCache(idL, lang,translatedId):
+    file=caches.explainToCache(lang, translatedId)
+    explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
+    print(idL+" finally have " + str(len(explanationFilesTransaltedOld))+" explanations")
+    print(pathlib.Path(file).read_text())
+    title=file
+    for nwIndex, item in enumerate(explanationFilesTransaltedOld):
+        if item == file:
+            title= idL+idL+idL+ " "+str(nwIndex)+"/"+str(len(explanationFilesTransaltedOld))
+    syncOrAsync(file, title)
+
+def syncAddImgToCache(idL, lang,translatedId):
+    file=caches.imageToCache(translatedId)
+    explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
+    print(idL+" finally have " + str(len(explanationImagesOld))+" images")
+    title=file
+    for nwIndex, item in enumerate(explanationImagesOld):
+        if item == file:
+            title= idL+idL+idL+ " "+str(nwIndex)+"/"+str(len(explanationImagesOld))
+    syncOrAsync(file, title)
+    pass
+
+def newITnewsIT(ccmd, idL, lang, desk):
+    idInt=generateWords.letterToId(idL)
+    if idInt >= len(desk.wordsWithPlacement):
+        print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
+        return True
+    word=desk.wordsWithPlacement[idInt].word
+    translatedId=caches.getTranslated(lang, word)
+    if ccmd == "newsT":
+        explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
+        print(idL+" now have " + str(len(explanationFilesTransaltedOld))+" expanations. Please wait for next")
+        syncAddExplToCache(idL, lang,translatedId)
+        return True
+    if ccmd == "newsI":
+        explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
+        print(idL+" now have " + str(len(explanationImagesOld))+" images. Please wait for next")
+        syncAddImgToCache(idL, lang,translatedId)
+        return True
+    return True
+
+
+def delete(cmd, desk, lang):
+    intNth=re.sub('[^0-9]+', '', cmd)
+    index=int(intNth)-1
+    cmd=re.sub('[0-9]+', '', cmd)
+    if len(cmd)<5:
+        print("missing ID of word")
+        return True
+    idL=cmd[4:][0].upper()
+    idInt=generateWords.letterToId(idL)
+    ccmd=cmd[:4]
+    print(ccmd)
+    if idInt >= len(desk.wordsWithPlacement):
+        print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
+        return True
+    word=desk.wordsWithPlacement[idInt].word
+    translatedId=caches.getTranslated(lang, word)
+    if ccmd == "delI":
+        print("will delete image " +  str(index+1) + " of " + idL)
+        files = explanationFilesTransaltedOld=caches.getFilesFromAiImageCache(translatedId)
+    if ccmd == "delT":
+        print("will delete explanation " +  str(index+1) + " of " + idL + " in " + lang)
+        files = explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
+    if len(files) <= index:
+        print("in cache is only " + str(len(files)) + "items")
+        return True
+    file=files[index]
+    print("would delete " + file)
+    return True
+
 def getAllExplanationsFilesFor(word, lang):
     translatedId=caches.getTranslated(lang, word)
     explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
@@ -285,77 +356,27 @@ def main():
                 print("Xn[A-Z] expected")
                 continue
         if cmd.startswith('newsI') or cmd.startswith('newsT'):
-            if len(cmd)<6:
-                print("missing ID of word")
-                continue
-            ccmd=cmd[:5]
-            idL=cmd[5:][0].upper()
-            idInt=generateWords.letterToId(idL)
-            if idInt >= len(desk.wordsWithPlacement):
-                print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
-                continue
-            word=desk.wordsWithPlacement[idInt].word
-            translatedId=caches.getTranslated(lang, word)
-            if ccmd == "newsT":
-                explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
-                print(idL+" now have " + str(len(explanationFilesTransaltedOld))+" expanations. Please wait for next")
-                file=caches.explainToCache(lang, translatedId)
-                explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
-                print(idL+" finally have " + str(len(explanationFilesTransaltedOld))+" expanations")
-                print(pathlib.Path(file).read_text())
-                title=file
-                for nwIndex, item in enumerate(explanationFilesTransaltedOld):
-                    if item == file:
-                        title= idL+idL+idL+ " "+str(nwIndex)+"/"+str(len(explanationFilesTransaltedOld))
-                syncOrAsync(file, title)
-            if ccmd == "newsI":
-                explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
-                print(idL+" now have " + str(len(explanationImagesOld))+" images. Please wait for next")
-                file=caches.imageToCache(translatedId)
-                explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
-                print(idL+" finally have " + str(len(explanationImagesOld))+" images")
-                title=file
-                for nwIndex, item in enumerate(explanationImagesOld):
-                    if item == file:
-                        title= idL+idL+idL+ " "+str(nwIndex)+"/"+str(len(explanationImagesOld))
-                syncOrAsync(file, title)
+            try:
+                if len(cmd)<6:
+                    print("missing ID of word")
+                    continue
+                ccmd=cmd[:5]
+                idL=cmd[5:][0].upper()
+                if newITnewsIT(ccmd, idL, lang, desk):
+                    continue
+            except:
+                traceback.print_exc()
             continue
         if cmd.startswith('newI') or cmd.startswith('newT'):
             print("new async image not yet implemented - run `caches.py` for now")
             continue
         if cmd.startswith('delI') or cmd.startswith('delT'):
-            intNth=re.sub('[^0-9]+', '', cmd)
-            index=int(intNth)-1
-            cmd=re.sub('[0-9]+', '', cmd)
-            if len(cmd)<5:
-                print("missing ID of word")
-                continue
-            idL=cmd[4:][0].upper()
-            idInt=generateWords.letterToId(idL)
-            ccmd=cmd[:4]
-            print(ccmd)
-            if idInt >= len(desk.wordsWithPlacement):
-                print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
-                continue
-            word=desk.wordsWithPlacement[idInt].word
-            translatedId=caches.getTranslated(lang, word)
-            if ccmd == "delI":
-                print("will delete image " +  str(index+1) + " of " + idL)
-                files = explanationFilesTransaltedOld=caches.getFilesFromAiImageCache(translatedId)
-            if ccmd == "delT":
-                print("will delete explanation " +  str(index+1) + " of " + idL + " in " + lang)
-                files = explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
-            if len(files) <= index:
-                print("in cache is only " + str(len(files)) + "items")
-                continue 
-            file=files[index]
-            print("would delete " + file)
+            delete(cmd, desk, lang)
             continue
         if generateWords.reusableRepl(cmd, desk):
             continue
 
 if __name__ == "__main__":
     main()
-
 
 
