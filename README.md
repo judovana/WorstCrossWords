@@ -28,7 +28,11 @@
  * With GPU it should go much faster but is for now untested
 
 ## dependencies
- * It have many dependencies, run `sh deps` to get them all.
+ * It have many dependencies, run `sh getDeps.sh` to get them all (feel free to read/adapt before running or run some parts manually)
+  * it install some deps as root, some as local use (pip's). That is intentional.
+  * install the non-root deps as the user which will play
+  * AI models are also downloaded in this script
+    * but can be later downloaded for same user local cache manually
  * each model is downloaded on first usage.
    * I recommend to try each model first as standalone (caching however do not (intentionally) work)
  * each model have around 1-2GB and are optimised for local usage on CPU
