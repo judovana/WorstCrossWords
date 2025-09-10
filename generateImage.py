@@ -4,6 +4,7 @@ from diffusers import StableDiffusionPipeline
 import show_image
 from PIL import Image
 import time
+import os
 
 initialized=False
 #do not seem to work - assert len(imgs) == rows*cols
@@ -51,8 +52,9 @@ def main():
         print("expects exactly one argument - description sentence")
         sys.exit(1)
     file=generate(sys.argv[1]);
-    print("eog " + file)
-    show_image.display_image(file)
+    print(file)
+    if not os.environ.get("NO_SHOW") == "True":
+        show_image.display_image(file)
 
 if __name__ == "__main__":
     main()
