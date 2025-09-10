@@ -21,7 +21,7 @@ fi
 # To tun later container with gui:
 # xhost +"local:podman@" #<- normal user !!! mandatory
 # GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t "
-# podman run $GUI_PART --privileged  -e DISPLAY=$DISPLAY  -ti  worstcrosswords  python ...
+# podman run $GUI_PART  -e DISPLAY=$DISPLAY  -ti  worstcrosswords  python ...
 if [ "x$CONTAINER_BUILD" == "xTrue" ] ; then
   set -e
   podman build --tag worstcrosswords .
@@ -32,7 +32,7 @@ fi
 if [ "x$SELF_INIT" == "xTrue" ] ; then
   $SUDO dnf install -y git
   $SUDO useradd game
-  $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout container"
+  $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
 fi
 
 if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
@@ -62,7 +62,7 @@ if [ "x$GEN_MODELS" == "xTrue" -o  "x$GEN_MODELS" == "x" ] ; then
   python translate.py en koza
   python explain.py  lion
   #check gui
-  #python show_image.py  "${BASH_SOURCE[0]}" || echo 'add "--network=host --uts=host --add-host=$HOSTNAME:127.0.0.1" to your  container run'
+  #python show_image.py  "${BASH_SOURCE[0]}" || echo  'run xhost +"local:podman@" and add "-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t -e DISPLAY=$DISPLAY" to your  container run'
   #download the 3/3 models
   NO_SHOW=True python generateImage.py sixtieths
   rm outgen*.jpg
