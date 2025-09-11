@@ -7,6 +7,7 @@ import traceback
 import threading
 import random
 from PIL import Image
+import PIL
 import pathlib
 import sys
 import re
@@ -23,6 +24,10 @@ ASYNC=True
 if os.environ.get(ASYNC_ENV) == "False":
     ASYNC=False
 
+#exCacheRead=True #? not playbale currently it is fs
+exCacheWrite=True
+#imgCacheRead=True #? not playbale currently it is fs
+imgCacheWrite=True
 
 def syncAddExplToCache(idL, lang,translatedId):
     file=caches.explainToCache(lang, translatedId)
@@ -53,22 +58,22 @@ def newITnewsIT(ccmd, idL, lang, desk):
         return True
     word=desk.wordsWithPlacement[idInt].word
     translatedId=caches.getTranslated(lang, word)
-    if ccmd == "newsT":
+    if ccmd == "newsT" and imgCacheWrite:
         explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
         print(idL+" now have " + str(len(explanationFilesTransaltedOld))+" expanations. Please wait for next")
         syncAddExplToCache(idL, lang,translatedId)
         return True
-    if ccmd == "newsI":
+    if ccmd == "newsI" and imgCacheWrite:
         explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
         print(idL+" now have " + str(len(explanationImagesOld))+" images. Please wait for next")
         syncAddImgToCache(idL, lang,translatedId)
         return True
-    if ccmd == "newT":
+    if ccmd == "newT" and exCacheWrite:
         explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
         print(idL+" now have " + str(len(explanationFilesTransaltedOld))+" expanations. Generation of new one will run on background. You can continue playing.. somehow")
         threading.Thread(target=syncAddExplToCache, args=(idL, lang,translatedId)).start()
         return True
-    if ccmd == "newI":
+    if ccmd == "newI" and exCacheWrite:
         explanationImagesOld=caches.getFilesFromAiImageCache(translatedId)
         print(idL+" now have " + str(len(explanationImagesOld))+" images. Generation of new one will run on background. You can continue playing.. somehow")
         threading.Thread(target=syncAddImgToCache, args=(idL, lang,translatedId)).start()
@@ -92,17 +97,19 @@ def delete(cmd, desk, lang):
         return True
     word=desk.wordsWithPlacement[idInt].word
     translatedId=caches.getTranslated(lang, word)
-    if ccmd == "delI":
+    if ccmd == "delI" and imgCacheWrite:
         print("will delete image " +  str(index+1) + " of " + idL)
         files = explanationFilesTransaltedOld=caches.getFilesFromAiImageCache(translatedId)
-    if ccmd == "delT":
+    if ccmd == "delT" and exCacheWrite:
         print("will delete explanation " +  str(index+1) + " of " + idL + " in " + lang)
         files = explanationFilesTransaltedOld=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
     if len(files) <= index:
         print("in cache is only " + str(len(files)) + "items")
         return True
-    file=files[index]
-    print("would delete " + file)
+    if file:
+        file=files[index]
+        print("would delete " + file)
+        print("For now, please remove manually")
     return True
 
 def getAllExplanationsFilesFor(word, lang):
@@ -256,6 +263,8 @@ class AsyncParent():
         self.queue.append("destroy");
 
 def main():
+    global imgCacheWrite
+    global exCacheWrite
     print("mandadory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
     print("WARNING the language is deducted from filename - eg cs-123 will be interpreted as cs. 09de-bad will be interpreted as de and so on") 
     print("WARNING the language is detected from file name. Be sure the only letters in the filename are identifying the lang as `cs` `en` or `de`") 
@@ -279,7 +288,21 @@ def main():
     lang=re.sub('[^a-z]+', '', os.path.basename(wordsFile))[:2]
     print("lang is "+lang)
     caches.loadCache(lang)
-    caches.doLog=False
+    # try to cahce soemthing, and disbale caches if it not writeable
+    try:
+        tmpfEx1 = caches.putTextToAiTransaltedCache(lang, "delte_me_asap", "cache testing")
+        os.remove(tmpfEx1)
+    except:
+        exCacheWrite=False
+        print("explanantion caching disabled")
+    try:
+        image = PIL.Image.new('RGB', (50, 50))
+        tmpfEx1 = caches.putImageToAiCache("delte_me_asap", image)
+        os.remove(tmpfEx1)
+    except:
+        imgCacheWrite=False
+        print("img caching disabled")
+    caches.doLogInternal=False
     words=generateWords.readWorlist(wordsFile)
     random.shuffle(words)
     desk=generateWords.generate(words, wcount)
@@ -339,12 +362,14 @@ def main():
             print("---- operations and actions ----")
             generateWords.reusableHelp()
             print("---- calls to AI models ----")
-            print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync")
-            print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync")
-            print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
-            print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
-            print("delInumber[a-z] to remove Nth image. Check by In before")
-            print("delTnumber[a-z] to remove Nth text. Check by Tn before")
+            if imgCacheWrite:
+                print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync")
+                print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
+                print("delInumber[a-z] to remove Nth image. Check by In before")
+            if exCacheWrite:
+                print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync")
+                print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
+                print("delTnumber[a-z] to remove Nth text. Check by Tn before")
             print("everything else is considered as guess (and dont forget sub!)")
             continue
         if cmd.startswith('II') or cmd.startswith('TT') or cmd.startswith('GG'):

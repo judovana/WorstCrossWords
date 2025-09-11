@@ -13,13 +13,21 @@ from PIL import Image
 from datetime import datetime
 
 noTranslationLang="en"
-cacheDir="cache"
+cacheDir="cachex"
 transCache = {}
-doLog = True
+doLogInternal = True
+doLogExternal = True
 NOTRANS_VAR="NOTRANS"
 
+translationCacheRead=True
+translationCacheWrite=True
+
 def _log(s):
-    if doLog:
+    if doLogInternal:
+        print(s)
+
+def _logExt(s):
+    if doLogExternal:
         print(s)
 
 def checkAndCreateDir(file):
@@ -61,22 +69,32 @@ def getCurrentTransCache():
     return transCache
 
 def loadCache(lang):
+    translationCacheRead=True
     global transCache
     transCache = {}
-    _log("reding "+getTransCacheFile(lang) + " cache")
-    with open(getTransCacheFile(lang), 'r') as file:
-        for line in file:
-            line=line.strip()
-            transCache[line.split(":")[0]] = line.split(":")[1]
-    _log("Loaded " + str(len(transCache))+ " cache items")
+    try:
+        _log("reding "+getTransCacheFile(lang) + " cache")
+        with open(getTransCacheFile(lang), 'r') as file:
+            for line in file:
+                line=line.strip()
+                transCache[line.split(":")[0]] = line.split(":")[1]
+        _log("Loaded " + str(len(transCache))+ " cache items")
+    except:
+        _logExt("Loading of translation cache failed, that is unhappy, and each world must be trasnalted again.")
+        translationCacheRead=False
 
 def addToCache(key, value, lang):
+    translationCacheWrite=True
     global transCache
     transCache[key] = value;
-    with open(getTransCacheFile(lang), "w") as f:
-        for k, v in transCache.items():
-               f.write(k+":"+v+"\n")
-    _log("saved " + str(len(transCache))+ " items to cache")
+    try:
+        with open(getTransCacheFile(lang), "w") as f:
+            for k, v in transCache.items():
+                   f.write(k+":"+v+"\n")
+        _log("saved " + str(len(transCache))+ " items to cache")
+    except:
+        _logExt("Writing of translation cache failed, that is unhappy, but well...")
+        translationCacheWrite=False
 
 def getTranslated(lang, word):
     if lang == noTranslationLang or os.environ.get(NOTRANS_VAR) == "True":
@@ -122,9 +140,6 @@ def getFreeFileForTrasnaltedAiExplainCache(lang, word):
 
 def getFreeFileForAiImageCache(word):
     return getFreeFileForAiCache(getImgCacheDir(), word, ".jpg")
-
-def putTextToAiCache(word, content):
-    return putTextToAiCache(getExCacheFile(), word, content)
 
 def putTextToAiTransaltedCache(lang, word, content):
     return putTextToAiCache(getTransaltedExplanationsCacheDir(lang), word, content)
@@ -227,7 +242,7 @@ def main():
     totalCount=iterations*len(words)
     total=0
     startStamp=datetime.today().strftime('%Y-%m-%d_%H:%M:%S')
-    doLog=True
+    doLogInternal=True
     for iteration in range(0, iterations):
         for word in words:
             total+=1
