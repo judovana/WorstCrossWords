@@ -1,6 +1,8 @@
 *.jpg
 cache
 tokenization_small100.py
+empty
+full
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
