@@ -301,7 +301,7 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="help exit L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
+    qhelp="help exit giveup L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
     history=[];
     comandsUsage = {}
     imagesIndexes={}
@@ -313,6 +313,11 @@ def main():
         history.append(cmd);
         createOrPlusPlus(comandsUsage, cmd)
         if 'exit' == cmd:
+            if ASYNC:
+                asyncParent.close()
+            desk.gaveUp()
+            break
+        if 'giveup' == cmd.lower():
             if ASYNC:
                 asyncParent.close()
             desk.gaveUp()

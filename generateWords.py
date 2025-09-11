@@ -430,12 +430,15 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] `sub[A-Z] guess`help exit"
+    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] `sub[A-Z] guess` help exit giveup"
     print(qhelp)
     for line in sys.stdin:
         print(qhelp)
         cmd=line.strip()
         if 'exit' == cmd:
+            desk.gaveUp()
+            break
+        if 'giveup' == cmd.lower():
             desk.gaveUp()
             desk.prettyPrint()
             break
