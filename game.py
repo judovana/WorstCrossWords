@@ -276,7 +276,7 @@ def main():
     wcount=5
     if len(sys.argv) > 2:
         wcount=int(sys.argv[2])
-    lang=re.sub('[^a-z]+', '', wordsFile)[:2]
+    lang=re.sub('[^a-z]+', '', os.path.basename(wordsFile))[:2]
     print("lang is "+lang)
     caches.loadCache(lang)
     caches.doLog=False
