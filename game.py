@@ -416,6 +416,7 @@ def main():
             continue
         if generateWords.reusableRepl(cmd, desk):
             continue
+    print("Shuting down, that may take a while...")
 
 if __name__ == "__main__":
     main()
