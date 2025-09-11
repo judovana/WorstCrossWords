@@ -13,7 +13,7 @@ from PIL import Image
 from datetime import datetime
 
 noTranslationLang="en"
-cacheDir="cachex"
+cacheDir="cache"
 transCache = {}
 doLogInternal = True
 doLogExternal = True

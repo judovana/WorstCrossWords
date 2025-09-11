@@ -32,7 +32,6 @@ if [ "x$CONTAINER_BUILD" == "xTrue" ] ; then
   echo "eg:"
   echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -v=./cache:/home/game/WorstCrossWords/cache -ti  worstcrosswords_empty python show_image.py getDeps.sh'
   echo "and you should see exempalr gui window. All cmds will do: caches.py explain.py game.py generateImage.py generateWords.py show_image.py show_images.py shuffle.pyt ranslate.py"
-
   echo "primarily 'game.py' of course"
   rm WorstCrossWords*.tar
   set -e
@@ -41,14 +40,15 @@ if [ "x$CONTAINER_BUILD" == "xTrue" ] ; then
 RUN mkdir cache
 " > empty
   podman build --file empty --tag worstcrosswords_empty .
-  podman save -o WorstCrossWords_empty.tar worstcrosswords_empty
+  if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then  podman save -o WorstCrossWords_empty.tar worstcrosswords_empty ; fi
   rm empty
   if [ "$#" -eq 0 ]; then
     echo "No dirs/archives with caches provided, exiting"; 
   else
     echo "buiding image with read-only caches"
-    rm -rf cont_build_caches
-    mkdir cont_build_caches
+   CBUILD_DIR=cont_build_caches
+    rm -rf ${CBUILD_DIR}
+    mkdir ${CBUILD_DIR}
     echo "FROM worstcrosswords_base
 RUN mkdir cache
 " > full
@@ -56,20 +56,27 @@ RUN mkdir cache
     for arg in "$@"; do
       let i=i+1
       if [ -d $arg -a $arg == "cache" ] ; then
-         cp -rv $arg  cont_build_caches/cache$1
+         cp -rv $arg  ${CBUILD_DIR}/cache${i}
       elif [ -d $arg ] ; then
-         cp -rv $arg/cache  cont_build_caches/cache$1
+         cp -rv $arg/cache  ${CBUILD_DIR}/cache${i}
       elif [ -f $arg ] ; then
-         tar -xvf $arg -C cont_build_caches cache
-         mv cache cache$1
+         tar -xvf $arg -C ${CBUILD_DIR} cache
+         mv -v ${CBUILD_DIR}/cache ${CBUILD_DIR}/cache${i}
       fi
-      echo "COPY cont_build_caches/cache$1/* /home/game/WorstCrossWords/cache/" >> full
+      echo "COPY ${CBUILD_DIR}/cache${i}/ /home/game/WorstCrossWords/cache/" >> full
     done
     podman build --file full --tag worstcrosswords_full .
-    podman save -o WorstCrossWords_full.tar worstcrosswords_full
-    rm -rf cont_build_caches
+    if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then podman save -o WorstCrossWords_full.tar worstcrosswords_full ; fi
+    rm -rf ${CBUILD_DIR}
     rm full
-    echo "this container do not need (and can not have), and contain some caches already as simle (35GB..) demo"
+    echo "this container do not need (and can not have th emount (the -v)), and contain some caches already as simle (35GB..) demo"
+    echo "To run this with gui, you must: "
+    echo 'xhost +"local:podman@" #<- normal user !!! mandatory'
+    echo 'GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t"'
+    echo "eg (note the missing -v (mount):"
+    echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -ti  worstcrosswords_empty python show_image.py getDeps.sh'
+    echo "and you should see exempalr gui window. All cmds will do: caches.py explain.py game.py generateImage.py generateWords.py show_image.py show_images.py shuffle.pyt ranslate.py"
+    echo "primarily 'game.py' of course"
   fi
   exit 0
 fi
