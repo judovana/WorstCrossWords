@@ -18,42 +18,45 @@ else
   SUDO=
 fi
 
+if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
+  if [ "x$SELF_INIT" == "xTrue" ] ; then
+    $SUDO dnf install -y git
+    $SUDO useradd game
+    $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
+  fi
+  if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
+    $SUDO dnf install -y python pip
+    $SUDO dnf install -y python-tkinter
+  fi
 
-if [ "x$SELF_INIT" == "xTrue" ] ; then
-  $SUDO dnf install -y git
-  $SUDO useradd game
-  $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
-fi
-
-if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
-  $SUDO dnf install -y python pip
-  $SUDO dnf install -y python-tkinter
-fi
-
-if [ ! -e tokenization_small100.py ] ; then
-  curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
-fi
-
-
-if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
-  pip install diffusers
-  pip install torch
-  pip install accelerate
-  pip install transformers
-  pip install sentencepiece
-  pip install pillow
-fi
-
-if [ "x$GEN_MODELS" == "xTrue" -o  "x$GEN_MODELS" == "x" ] ; then
-  set -e
-  #download the 2/3 models
-  python translate.py en koza
-  python explain.py  lion
-  #check gui
-  #python show_image.py  "${BASH_SOURCE[0]}" || echo  'run xhost +"local:podman@" and add "-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t -e DISPLAY=$DISPLAY" to your  container run'
-  #download the 3/3 models
-  NO_SHOW=True python generateImage.py sixtieths
-  rm outgen*.jpg
+  if [ ! -e tokenization_small100.py ] ; then
+    curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
+  fi
+  if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
+    pip install diffusers
+    pip install torch
+    pip install accelerate
+    pip install transformers
+    pip install sentencepiece
+    pip install pillow
+  fi
+  if [ "x$GEN_MODELS1" == "xTrue" -o  "x$GEN_MODELS1" == "x" ] ; then
+    set -e
+    #download the 1/3 models
+    python translate.py en koza
+  fi
+  if [ "x$GEN_MODELS2" == "xTrue" -o  "x$GEN_MODELS2" == "x" ] ; then
+    set -e
+    #download the 2/3 models
+    python explain.py  lion
+  fi
+  if [ "x$GEN_MODELS3" == "xTrue" -o  "x$GEN_MODELS3" == "x" ] ; then
+    #check gui
+    #python show_image.py  "${BASH_SOURCE[0]}" || echo  'run xhost +"local:podman@" and add "-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t -e DISPLAY=$DISPLAY" to your  container run'
+    #download the 3/3 models
+    NO_SHOW=True python generateImage.py sixtieths
+    rm outgen*.jpg
+  fi
 fi
 
 
