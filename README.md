@@ -3,6 +3,7 @@
  * it is powered by awesome `transformers` and `diffusers` by https://huggingface.co
  * I'm no python master non python enthusiastic, so I apologies for bad practices
  * [I do not need to read anymore, show me how to play](#play)
+ * PRs with new cache items and words to *-cached langs welcomed
 
 ## How it works
  * This is dummy crossword game, where the hints are provided by AI
