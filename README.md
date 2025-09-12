@@ -8,7 +8,8 @@
 ## How it works
  * This is dummy crossword game, where the hints are provided by AI
  * You can play in any language, you only need file with words to be used, which name correspond to its language code, and can be passed to model as source language ID
-   * exemplar `cs`, `de` and `en` packs are included
+   * exemplar **big** `langs/cs`, `langs/de` and `langs/en` packs are included
+   * exemplar `langs/cs-expert`, `langs/cs-easy` and mixture `langs/cs-cached` (for all three `cs`/`de`/`en`) are prepared, including cache so you can play out of the box
  * the crossword is generated in your language, and hints for individual words are provided by AI as
    * image
    * text

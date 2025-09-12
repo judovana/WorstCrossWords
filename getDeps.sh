@@ -18,66 +18,72 @@ else
   SUDO=
 fi
 
-# To run later container with gui:
-# xhost +"local:podman@" #<- normal user !!! mandatory
-# GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t "
-# podman run $GUI_PART  -e DISPLAY=$DISPLAY  -ti  worstcrosswords  python ...
 if [ "x$CONTAINER_BUILD" == "xTrue" ] ; then
   echo "Building containres."
-  echo "1: emptyone, where you ahve to mount local cache, as -v=your_local_dir_with_ai_cahe:/home/game/WorstCrossWords/cache"
-  echo "eg  -v=./cache:/home/game/WorstCrossWords/cache"
-  echo "To run this with gui, you must: "
+  echo "1. full one. This contain some caches already as simle (35GB..) demo. This container do not need (and should not have the mount (the -v))"
+  echo "To run properly this with gui, you must: "
   echo 'xhost +"local:podman@" #<- normal user !!! mandatory'
   echo 'GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t"'
   echo "eg:"
-  echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -v=./cache:/home/game/WorstCrossWords/cache -ti  worstcrosswords_empty python show_image.py getDeps.sh'
+  echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -ti  worstcrosswords_empty python show_image.py getDeps.sh'
   echo "and you should see exempalr gui window. All cmds will do: caches.py explain.py game.py generateImage.py generateWords.py show_image.py show_images.py shuffle.pyt ranslate.py"
   echo "primarily 'game.py' of course"
   rm WorstCrossWords*.tar
   set -e
-  podman build --tag worstcrosswords_base .
+  podman build --tag worstcrosswords_base . # the in tree Containerfile
   echo "FROM worstcrosswords_base
-RUN mkdir cache
-" > empty
-  podman build --file empty --tag worstcrosswords_empty .
-  if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then  podman save -o WorstCrossWords_empty.tar worstcrosswords_empty ; fi
-  rm empty
+RUN pwd
+RUN ls -R
+" > full
   if [ "$#" -eq 0 ]; then
-    echo "No dirs/archives with caches provided, exiting"; 
+    echo "No dirs/archives with caches tobe mixed inside on cmd line, skipping"; 
   else
-    echo "buiding image with read-only caches"
-   CBUILD_DIR=cont_build_caches
+    echo "adding custom caches inside"
+    CBUILD_DIR=cont_build_caches
     rm -rf ${CBUILD_DIR}
     mkdir ${CBUILD_DIR}
-    echo "FROM worstcrosswords_base
-RUN mkdir cache
-" > full
     i=0;
     for arg in "$@"; do
       let i=i+1
       if [ -d $arg -a $arg == "cache" ] ; then
          cp -rv $arg  ${CBUILD_DIR}/cache${i}
+         echo "COPY ${CBUILD_DIR}/cache${i}/ /home/game/WorstCrossWords/cache/" >> full
       elif [ -d $arg ] ; then
          cp -rv $arg/cache  ${CBUILD_DIR}/cache${i}
+         echo "COPY ${CBUILD_DIR}/cache${i}/ /home/game/WorstCrossWords/cache/" >> full
       elif [ -f $arg ] ; then
          tar -xvf $arg -C ${CBUILD_DIR} cache
          mv -v ${CBUILD_DIR}/cache ${CBUILD_DIR}/cache${i}
+         echo "COPY ${CBUILD_DIR}/cache${i}/ /home/game/WorstCrossWords/cache/" >> full
+      else
+        "unknown cache source $arg. use 'cahce' or 'dir/cache' folders, or tar chvies with dir 'cache'"
       fi
-      echo "COPY ${CBUILD_DIR}/cache${i}/ /home/game/WorstCrossWords/cache/" >> full
     done
-    podman build --file full --tag worstcrosswords_full .
-    if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then podman save -o WorstCrossWords_full.tar worstcrosswords_full ; fi
-    rm -rf ${CBUILD_DIR}
-    rm full
-    echo "this container do not need (and can not have th emount (the -v)), and contain some caches already as simle (35GB..) demo"
-    echo "To run this with gui, you must: "
-    echo 'xhost +"local:podman@" #<- normal user !!! mandatory'
-    echo 'GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t"'
-    echo "eg (note the missing -v (mount):"
-    echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -ti  worstcrosswords_empty python show_image.py getDeps.sh'
-    echo "and you should see exempalr gui window. All cmds will do: caches.py explain.py game.py generateImage.py generateWords.py show_image.py show_images.py shuffle.pyt ranslate.py"
-    echo "primarily 'game.py' of course"
   fi
+  podman build --file full --tag worstcrosswords .
+  if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then  podman save -o WorstCrossWords.tar worstcrosswords ; fi
+  rm full
+  echo "FROM worstcrosswords_base
+RUN pwd
+RUN rm -rf cache
+RUN mkdir cache
+RUN ls -R
+" > empty
+  podman build --file empty --tag worstcrosswords_empty .
+  if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then podman save -o WorstCrossWords_full.tar worstcrosswords_full ; fi
+  rm -rf ${CBUILD_DIR}
+  rm empty
+  echo "2: emptyone, where you have to mount local cache, as -v=<your_local_dir_with_ai_cahe>:/home/game/WorstCrossWords/cache"
+  echo "eg  -v=./cache:/home/game/WorstCrossWords/cache"
+  echo " be sure, your <your_custom_cache_dir> have corrrect permissions"
+  echo " yo can always run 'chmod -777' on <your_custom_cache_dir> before (and after if you share the cache with local instance) container run"
+  echo " you can map the uid/gid of game user in container, but it is quite compelx to do properly"
+  echo "To run this with gui, you must: "
+  echo 'xhost +"local:podman@" #<- normal user !!! mandatory'
+  echo 'GUI_PART="-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t"'
+  echo 'podman run $GUI_PART  -e DISPLAY=$DISPLAY  -v=./cache:/home/game/WorstCrossWords/cache -ti  worstcrosswords_empty python show_image.py getDeps.sh'
+  echo "and you should see exempalr gui window. All cmds will do: caches.py explain.py game.py generateImage.py generateWords.py show_image.py show_images.py shuffle.pyt ranslate.py"
+  echo "primarily 'game.py' of course"
   exit 0
 fi
 
