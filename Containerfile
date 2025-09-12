@@ -7,6 +7,6 @@ RUN rm getDeps.sh
 USER game
 WORKDIR /home/game/WorstCrossWords
 RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=True GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=False sh -x getDeps.sh
-RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=True GEN_MODELS2=False GEN_MODELS3=False sh -x getDeps.sh sh -x getDeps.sh
-RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=True GEN_MODELS3=False sh -x getDeps.sh sh -x getDeps.sh
-RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=True sh -x getDeps.sh sh -x getDeps.sh
+RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=True GEN_MODELS2=False GEN_MODELS3=False sh -x getDeps.sh
+RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=True GEN_MODELS3=False sh -x getDeps.sh
+RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=True sh -x getDeps.sh
