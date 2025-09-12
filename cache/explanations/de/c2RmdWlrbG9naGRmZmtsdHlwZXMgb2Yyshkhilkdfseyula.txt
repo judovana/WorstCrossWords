@@ -1,0 +1,1 @@
+erklärt xxxxx in englischer sprache ohne das wort xxxxx in englischer sprache) a: sie können dies verwenden, funktion foo(e) { var x = e[0], y = e[1]; console.log(x + y); } // dies wird einen fehler werfen. foo({a:4}); // wird loggen 4 // dies wird nicht foo(null); // wird undefiniert auch sie sollten über variablen lesen, als objekt nicht array.

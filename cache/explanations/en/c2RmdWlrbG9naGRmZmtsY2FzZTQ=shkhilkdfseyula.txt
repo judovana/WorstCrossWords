@@ -1,0 +1,22 @@
+explain XXXXX in english without using word XXXXX
+
+i've been in the it industry for many years but this is my first foray into web development. i'm trying to create my own tool to automate my web projects in php. i've done quite a few things in php but i've never really worked with word XXXXX before and i've never quite been able to get it to work. 
+so, here's what i'm looking for:
+
+should i use the word XXXXX or should i use the XXXXX_sensitive?
+should i use the "en" or should i just use "en-us"?
+should i set my database to en-us or other language?
+
+can someone point me in the right direction? i've read on wikipedia and stackoverflow, but i don't know enough to know which direction to move in.
+
+a:
+
+i would use the word XXXXX_sensitive.
+
+a:
+
+you should use upper XXXXX in web development.
+
+should i use the word XXXXX or XXXXX_sensitive? should i use the "en" or should i just use "en-us"?
+
+you don't need to use "XXXXX_sensitive" if you aren't going to use the html code.  the word "XXXXX"

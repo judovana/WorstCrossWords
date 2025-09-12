@@ -1,0 +1,25 @@
+explain XXXXX in english without using word XXXXX
+can someone help me with this please, i am stuck, i searched on net for some days but didn't find a solution.
+
+a:
+
+answers with solutions
+your question doesn't mention the part of the sentence where the second half of your sentence is missing:
+"i am not in a XXXXX that has been previously visited."
+to understand why your sentence can be accepted (and not rejected) you really need to understand that words like "new" or "newly" can be used at different XXXXXs within a sentence.
+in english this is often used as a sort of "preposition", but in some other languages it can be used to modify something by pointing to a previous occurrence of the same thing, and not to imply an exact location or time. 
+as such, in this case we are not going to use such words: we are going to use "been" or "been previously visited":
+
+he was travelling in new countries.
+
+"new" is an adverb:
+
+he was travelling in new countries.
+
+"other" is an adjective:
+
+he was travelling in other countries.
+
+and you already know what the meaning of "been" is:
+
+i was

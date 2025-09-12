@@ -1,0 +1,20 @@
+explain XXXXX in english without using word XXXXX-
+  i need to show only 10 words that follow word XXXXX.
+  i try and use XXXXX in a string but it doesn't work.
+
+i tried this
+mystr = input("write a string in english, example = 'abc').\n");
+mystr = to_string(mystr);
+
+print(mystr);
+
+the above code should give the below output
+write a string in english, example = 'abc'
+
+but the above code also gives an output of the string which i don't want(the output should be as shown in the  example).
+
+a:
+
+you need to add leading space in your string:
+mystr = to_string(input("write a string in english, example = 'abc').\n");
+

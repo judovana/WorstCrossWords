@@ -1,0 +1,10 @@
+explain XXXXX in english without using word XXXXX
+
+i recently wrote some java code in a class involving parsing html to find all links with image src attributes containing a url. i would like to automate the process and i wonder, has anyone here encountered problems with XXXXXs in this domain, please share your knowledge. 
+i have found a few links on the web where it seems to be possible to get text from a textarea and use that text in place of the href tag (but only if you write the href in a variable, i have yet to see a solution that works in this case), but i haven't found any info on XXXXXs, and that's why i'm asking here.
+
+a:
+
+the problem with XXXXXs is that it doesn't accept strings.  it only accepts html strings.  so you can't use a link with a url in XXXXX, so you have to use something like the following for XXXXX:
+<a href="http://site.com" target="_blank">link to site</a>
+

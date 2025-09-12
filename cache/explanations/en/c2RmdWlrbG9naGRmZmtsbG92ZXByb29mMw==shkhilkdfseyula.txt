@@ -1,0 +1,9 @@
+explain XXXXX in english without using word XXXXX
+<maco> yes... but then he should write all of it out
+<maco> XXXXX is not a word and not on his vocabulary either
+<lubot> <kc2bez> i have been banned from #ubuntu and from #ubuntu+1 for using /etc/resolv.conf. it's also possible that someone else may have been banned for using a dns. i didn't come across this before. i don't know how easy it is to fix.
+<lubot> <kc2bez> i believe a dns fix will be coming in #ubuntu
+<lubot> <kc2bez> however in the meantime, there are some fixes out on how to recover from dns issues after you get the message "you appear to be using an unsupported and/or outdated software".
+<lubot> <kc2bez> the solution is to disable your network connection.
+<lubot> <kc2bez> i'm not experienced with this, but that is my best guess. thanks for giving me some info ;)
+<lubot> <kc2bez> i will need some information to

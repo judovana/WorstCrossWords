@@ -1,0 +1,29 @@
+explain XXXXX in english without using word XXXXX?
+
+i have a piece of code as below, which reads multiple data files. it does so by first reading line by line, and then reading data rows.
+import openpyxl
+from openpyxl import load_workbook
+
+#create a new workbook
+wb = load_workbook('c:/users/a/documents/desktop/new document.xlsx')
+
+#add a sheet
+wb.add_sheet('new document')
+
+workbook = wb.active
+worksheet = workbook.active
+
+#loop through a file, one line at a time.
+for data in workbook.get_organized_data():
+    print(data.row,data.address)
+    # do stuff with the data
+
+# loop another file, line by line
+for data in workbook.get_organized_data2():
+    print('address:'+ data.address)
+    # do stuff with the data
+
+a:
+
+you could do this with xlrd.
+

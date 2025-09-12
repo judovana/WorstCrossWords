@@ -1,0 +1,24 @@
+explain XXXXX in english without using word XXXXX
+
+i'm using vb.net on visual studio and i'm trying to explain the functionality of a custom XXXXX in english without using word XXXXX. i tried to use this but the code is not working.
+can someone please tell me how to create such code in c# or how to implement such code in vb.net???
+
+a:
+
+you can do this:
+public class customXXXXX
+    public property XXXXXname as string
+    public property icon as string
+    public property text as string
+    public property isenabled as boolean
+    public property size as string
+    public sub new()
+
+       'make the XXXXX icon.
+        dim iconstring as string = formaticon(new dimension(40, 40), "", true)
+
+       'make the XXXXX name.
+        dim XXXXXname as new cultureinfo("eng-", false)
+
+       'make the XXXXX text.
+        dim XXXXXtext as new resourcestring(

@@ -1,0 +1,17 @@
+explain XXXXX in english without using word XXXXX like in this website.
+
+a:
+
+to get the names of the companies:
+XXXXXnames = ['lemonade', 'applebee's', 'starbucks', 'burger king']
+
+to get the XXXXX's names by location:
+for XXXXX in XXXXXnames:
+    print(XXXXX)
+
+a:
+
+you could get all the XXXXX names as
+XXXXXnames = ['lemonade', 'applebee's', 'starbucks', 'burger king']
+print(list(itertools.chain.from_iterable(XXXXXnames)))
+

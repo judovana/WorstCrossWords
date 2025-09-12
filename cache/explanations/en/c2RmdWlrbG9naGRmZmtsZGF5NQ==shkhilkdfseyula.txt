@@ -1,0 +1,9 @@
+explain XXXXX in english without using word XXXXX
+i would like to ask some advice about that. i work in software engineering. i have been studying computer science up to about 3 months. some of my knowledge is in c++, c and c#. i also know my way around most languages because i am a self-learner. i have done my first projects using those languages. it is a college project and i am more interested in the language level rather than in the libraries. 
+i do need advice for a project toXXXXX where i have to develop something. the project for now needs to do simple things like taking input from a keyboard, outputting something and then displaying it. the basic task is to display "hello my name is john" and "wow, i am awesome!" and to do that i think i need to use arrays. i would like any help to help me with the array, the most important part of my project.
+one more thing that i thought would be a problem is that i don't know how to use c++ templates. i have studied the documentation about templates and how it helps to create a more efficient solution to my project. i would be so grateful for any guidance.
+thank you all in advance!
+
+a:
+
+first of all, templates

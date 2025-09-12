@@ -1,0 +1,12 @@
+explain XXXXX in english without using word XXXXX
+
+please explain how to understand this XXXXX?
+the picture shows me that the person has left the light.
+the figure shows me that the person has used his eye, and is ready to return to the light.
+it also showed me that the person is standing close to the light.
+i want to understand this picture by using the above-mentioned words.
+
+a:
+
+if you use the word XXXXX to refer to the part of the eye that is actually on the face, then you're looking at the retina.  but the retina is actually what it looks like.  it is a structure of very, very thin nerve cells that has its own name: the retinal ganglion cell.  when this cell detects light, it sends signals to the brain, activating the photoreceptor cells, which have very small structures that light turns on, which are sensitive to the wavelengths of light that they receive.  these photoreceptors take the information in that light and pass it on to the brain.
+now, in your scenario, you are looking at the brain.  there is no light reaching the photoreceptors.  if you wanted to study the retina in much more detail, you could use

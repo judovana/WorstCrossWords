@@ -1,0 +1,29 @@
+explain XXXXX in english without using word XXXXX). 
+my question is: how can i show a table with two items with same values in two cells in table1 and table 2?
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>test</title>
+<style type="text/css">
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #dddddd;
+    padding: 15px;
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>item1</td>
+        <td>item2</td>
+    </tr>
+    <tr>
+        <td>item3</td>
+        <td>item4</td>
+   

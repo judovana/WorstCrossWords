@@ -1,0 +1,15 @@
+explain XXXXX in english without using word XXXXX
+
+explain XXXXX in english without using word yardmer
+
+i have understood that using a letter like this is considered a word (it can be followed by words like yard, XXXXX, etc). i would like to know if english doesn't have a word for "XXXXX", since my application has an entire sentence to explain:
+
+the city of philadelphia has a well-established police force called the philadelphia police department. most of the force works for the city of philadelphia and has the responsibility for patrol and crime control.
+this officer was transferred out as part of a budget reduction. it appears that the new department needs to do some training or hire some new officers, and will pay overtime as the police department's budget is cut by $200,000.
+
+since there are no words for a police officer, i would like to use one word. what words should i use?
+
+a:
+
+since ‘yard’ and ‘XXXXX’ are two very common words for police officers, there is no need for specialized terminology. 
+i would advise you to use the word police, not ‘policeman’, as the name of the job and the name of the department are commonly

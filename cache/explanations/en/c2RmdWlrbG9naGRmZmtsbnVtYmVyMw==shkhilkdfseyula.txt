@@ -1,0 +1,14 @@
+explain XXXXX in english without using word XXXXX(1,2,3,4,5,6,7,8,9,10)
+var b = document.getelementsbytagname("b");
+
+b[0].insertadjacenthtml('beforeend', '<br><b>'+"4</b>");
+
+for(var i =1; i<8; i++){    
+    b[0].insertadjacenthtml('beforeend', '<br><b>'+i+'.</b>');
+}
+
+this is the output after using above code:
+b1    b2    b3    b4    b5    b6    b7    b8      
+    4     4     4     4     4     6     7     
+    4     5     7     7     8     9    10
+

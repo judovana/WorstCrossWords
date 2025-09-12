@@ -1,0 +1,19 @@
+explain XXXXX in english without using word XXXXX
+
+here's a question i am attempting to answer.
+how can you tell the "real" XXXXX of a number without using XXXXX sensitive?
+for example: 3 is "3a", "3b", or "3c" is 3; how can i tell this without manually checking the number?
+
+a:
+
+the short answer is that you shouldn't.  the more correct answer is a "word" XXXXX.
+as you say, the short answer is not to use XXXXX sensitive.  
+if you have an issue with a data file, use a tool designed with this in mind.  a data file editor should do just fine.
+a tool designed to assist your understanding of how to determine the XXXXX of a number would be a good choice.
+as you get to the point where you need to write a program to do this, i would suggest adding a comment to the question.  this would help the readers in the comments as well as the op.
+
+a:
+
+it's not really a problem of how to determine the XXXXX, it is a problem of how/where do you interpret the XXXXX.
+you can do XXXXX-sensitive comparisons using the equals symbol in c:
+cout << "

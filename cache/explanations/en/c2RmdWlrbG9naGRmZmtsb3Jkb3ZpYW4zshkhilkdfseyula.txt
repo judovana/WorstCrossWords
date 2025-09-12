@@ -1,0 +1,13 @@
+explain XXXXX in english without using word XXXXX as a word
+
+i think that i have a difficulty understanding how a topological space comes from a metric space. that i am asking is this correct:
+a topological space $x$ is an hausdorff space that contains a countable collection of open sets $k_n$.
+the metric $d(x,y)$ is the number of open sets contained in $k_n$ which contain $x$ and $y$ separately.
+so how can we have that $x$ is in the collection?
+i have read that this is wrong, but i do not know how to get around this.
+edit: my problem is that i cannot understand the definitions properly.
+
+a:
+
+a space is hausdorff if its subsets are closed. a function which does not increase the set of open sets is a metric on the space such that the intersection of any two neighborhoods is open. a metric space is hausdorff iff every function defined by this metric is continuous. when the universe is countable, every topological space is hausdorff.
+

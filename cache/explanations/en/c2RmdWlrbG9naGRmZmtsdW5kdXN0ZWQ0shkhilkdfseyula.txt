@@ -1,0 +1,26 @@
+explain XXXXX in english without using word XXXXX. the reason is so
+that i can't use "XXXXX.c" in my cpp file.
+
+------
+matthewmcg
+i've worked on projects when we had both c and c++. i don't want to be
+confused here.
+
+from a developer perspective, c++ makes it much easier to write good code.
+
+from a maintainer's perspective, c++ made it easier for you to write good
+code, when the compiler was on our side. it was a huge time saver from a
+maintainer perspective.
+
+this doesn't mean that c++ was perfect, by any means. it does mean that there
+are lots of bugs in c++, that c and c++ are not as good as each other, and the
+code is not as good as it could be, but it also means that the code is as good
+as it could be.
+
+in my opinion, the maintainers and developers of the project were equally
+well aware of the issues, they just didn't communicate them clearly enough.
+
+------
+kylec
+this is a great article. i'm a c++ programmer with only a little experience
+with c or c++

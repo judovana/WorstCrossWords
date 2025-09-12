@@ -1,0 +1,30 @@
+explain XXXXX in english without using word XXXXX in
+document, i got XXXXX
+<td id=XXXXX></td>
+how it is in a txt
+XXXXX = {2:20:30}
+in 2:20 i want to use 2 in the td
+i want to use the XXXXX in 2:20, 2:20.30 or 2:20.36
+in txt
+2:20.36
+in txt
+2:20.30
+in txt
+2:20.30
+in txt
+2:20.30
+how txt read into 2:20.36
+2:20.36?
+how txt read from 2:20.36
+2:20
+i can do the same thing in mysql,
+in mysql2 table i want to get XXXXX in 2:20.36
+but i can't get XXXXX
+i've tried use 2 in the td but i get nothing 
+if someone can help me i will be grateful
+this is my code at the moment
+require_once "include/config.php";
+  $dbhost = "localhost";
+  $dbuser = "usuario";
+  $dbpass = "userpass";
+  $dbname = "

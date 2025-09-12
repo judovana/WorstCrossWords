@@ -1,0 +1,17 @@
+explain XXXXX in english without using word XXXXX
+
+i need to get the english equivalents in my text. i have a file containing thousands of text lines, sometimes with XXXXX.
+i need something like this:
+01,02,03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14.
+i tried this, but it does not work:
+awk '{for (i=3; i<nf; i++) if ( $i > 100 ) { printf "%s, %s, %s, %s, %s, %s, %s, %s\n", $i, $i, $i, $i, $i, $i, $i, $i } }'
+
+a:
+
+this should work. you'll want to make sure to match the leading zeros.
+awk '{for (i=3; i<= nf; i++) if ($i) print $i; print ""}'
+01,02,03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14
+
+in this sample file, the input i made is:
+    2, 4, 5
+  

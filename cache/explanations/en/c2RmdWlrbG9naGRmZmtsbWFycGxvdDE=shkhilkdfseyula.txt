@@ -1,0 +1,15 @@
+explain XXXXX in english without using word XXXXX:
+
+XXXXX <- function(x,...){
+ m <- matrix(c(rep(na, 100), rep(na, 100), rep(na, 100)), ncol=3)
+ m <- rbind(m, matrix(c(1, 2, 3, 1, 2, 2, 3, 3, 1, 2, 3, 1), ncol=2, dimnames = c(1,2)))
+ m <- rbind(m, matrix(m.subset(m, c("a", "b")))
+ m <- merge(m, m.subset(m, c("a", "b")))
+  return(m)
+}
+
+i have problem with it. i think i need to use a function or something. i can't use function rbind(m, m.subset(m, c("a", "b"))) as it is a matrix.
+
+a:
+
+this is a pretty broad topic, but i'm not aware of any existing packages that take a model object and return a suitable matrix. i'd try to use a list of matrices and combine them then - this is not the best idea though; it is generally

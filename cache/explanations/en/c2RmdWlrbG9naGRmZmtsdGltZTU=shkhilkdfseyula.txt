@@ -1,0 +1,13 @@
+explain XXXXX in english without using word XXXXX.
+
+a:
+
+the standard is: https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/date/setdate
+it looks like it returns a new date() that is passed a date in the format yyyy-mm-dd.
+the problem is that "saved" means "added from the database as a dateXXXXX".
+if you want to add the XXXXXstamp to a date, the best option is to use moment.js to add the XXXXXstamp to the moment object.
+for example,
+var newdate = moment('2013--12--01').add('hour:12:00', 'hours');
+
+in practice, i would use moment.js in this situation.
+

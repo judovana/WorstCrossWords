@@ -1,0 +1,25 @@
+explain XXXXX in english without using word XXXXX
+
+i have a website running under localhost. i am trying to use the following code to undestand my website, not working.
+<html><body>
+<a href="/index.php">XXXXX</a>
+</body></html>
+
+it doesn't work.
+you can see the code here: https://github.com/petermoehle/undrust
+any suggestions?
+
+a:
+
+you need to create a htm file. here's an example:
+<html><body><a href="{{ url }}">XXXXX</a></body></html>
+
+notice how the "{{ url }}" in your <a href=""></a> tag is replaced by the link's actual value.
+you can then use your htm file like so:
+<html><body>
+<a href="{{url}}">XXXXX</a>
+</body></html>
+
+you can check out the link above to see how this works with the code in your question.
+also, when your site is running under a specific ip address, the browser will not load your content, it will only load the index.html file.
+

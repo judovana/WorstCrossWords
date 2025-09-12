@@ -1,0 +1,10 @@
+explain XXXXX in english without using word XXXXX, then XXXXX is equivalent to XXXXX_id so XXXXX_id.
+and i cannot set foreign key constraints in php as i'm not able to get what i want with php. if these tables are related then i must use a join statement using php.
+what is the correct syntax for getting what i want with php and if possible without using joins.
+
+a:
+
+it may well be that you have one table with a foreign key to another table. this is called an association, and is represented by the parent_id field, which is a foreign key referencing XXXXX.
+as it stands at the moment you can't do this. you could try adding a foreign key to XXXXX that links to parent and try to get the relationship.
+another way to do this is to use join syntax to query the second table, that will be able to see if there is a foreign key between the two tables
+

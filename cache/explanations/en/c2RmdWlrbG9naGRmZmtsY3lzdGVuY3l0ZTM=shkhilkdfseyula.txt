@@ -1,0 +1,24 @@
+explain XXXXX in english without using word XXXXX
+#: XXXXX-core/src/main/cpp/XXXXX.h:20
+msgid "XXXXX on desktop"
+msgstr ""
+
+#: XXXXX-core/src/main/cpp/XXXXX.h:22
+msgid "XXXXX on desktop with desktop"
+msgstr ""
+
+#: XXXXX-core/src/main/cpp/XXXXX.h:25
+msgid "XXXXX on mobile"
+msgstr ""
+
+#: XXXXX-core/src/main/cpp/XXXXX.h:28
+msgid "XXXXX on mobile with mobile"
+msgstr ""
+
+#: XXXXX-core/src/main/cpp/XXXXX.h:32
+msgid "XXXXX in browser (mobile) / computer (desktop) / tablet"
+msgstr ""
+
+#: XXXXX-core/src/main/cpp/XXXXX.h:34
+msgid "XXXXX in browser (desktop) / tablet"
+msg

@@ -1,0 +1,29 @@
+explain XXXXX in english without using word XXXXX.
+i know if i write in a sentence and the sentence itself has a XXXXX
+like 
+" i know that XXXXX is good XXXXX, 
+" and i know that XXXXX is good XXXXX."
+then i can say:
+"i know that XXXXX (is good XXXXX)",
+and if the XXXXX is singular i can write "i know that XXXXX (is good XXXXX)."
+so if i have a sentence like this
+"i know that XXXXX is good XXXXX."
+and i want to express that i know that XXXXX is good XXXXX, 
+how can i say that in a sentence?
+
+a:
+
+if there's a plural, use the plural form:
+know that XXXXX is good XXXXX.
+you can also say:
+i know that XXXXX is good XXXXX.
+
+a:
+
+"i know that XXXXX is good XXXXX" means that you know that XXXXX is good XXXXX and that you know that XXXXX is good XXXXX.  that's very different from saying you know that XXXXX is good XXXXX and you know that XXXXX is good XXXXX. 
+
+a:
+
+according to the oxford learner's dictionary, know means:
+
+to have in mind or be aware of; to have as a

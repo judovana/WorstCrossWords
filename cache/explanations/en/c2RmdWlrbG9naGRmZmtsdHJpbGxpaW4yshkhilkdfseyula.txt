@@ -1,0 +1,22 @@
+explain XXXXX in english without using word XXXXX
+
+i have a big database with lots of records and i need to get the XXXXX of each of those. i know i will need to use the function distinct but i am totally lost how to tackle this. (because i am new to sql and am really not used to use select * for example.)
+this is the table i have:
+create table [dbo].[trix]
+(
+    [XXXXX] int,
+    [loanamount] int
+)
+go
+
+and this is the query i am using to get the XXXXX:
+select [XXXXX], [loanamount] from [dbo].[trix]
+where [XXXXX] in 
+    (
+        select top(1) [XXXXX]
+        from [dbo].[trix]
+        where [XXXXX] = 1
+    )
+order by [loanamount] asc
+
+how do i get the top 1 XXXXX and the loan amount from a table where the XXXXX

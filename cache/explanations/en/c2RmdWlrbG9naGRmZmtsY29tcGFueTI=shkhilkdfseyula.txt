@@ -1,0 +1,31 @@
+explain XXXXX in english without using word XXXXX 
+
+a:
+
+i used a lot of search engine to find more info about XXXXX name 
+in a lot of places there are the following keywords 
+
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+XXXXX name
+
+so, to get the real text you will have to read the webpage.
+there is a problem with your data so we'll need to transform it into your desired format.
+the data we need will be a json, and you have to look for a specific field 
+
+so, to your question, we'll need to get the name of XXXXX using following api call in javascript
+function get_XXXXX_name() {
+    var api_url = 'https://api.parse.com/1/XXXXX/names';      
+    var response = "";
+    try {
+        request = new xmlhttprequest();
+        request.onreadystatechange = function() {
+            if (request.readystate == 4)

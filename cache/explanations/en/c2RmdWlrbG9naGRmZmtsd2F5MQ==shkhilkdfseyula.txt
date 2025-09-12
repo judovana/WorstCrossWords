@@ -1,0 +1,29 @@
+explain XXXXX in english without using word XXXXX
+
+a:
+
+i use the sentence: 
+
+i am not a man,
+  you are not a man,
+  i am a human,
+  you are a person,
+  i am a person.
+
+a:
+
+from the dictionary.com's definition:
+
+man : plural
+     a male, particularly in social and economic contexts
+     as: a man from a certain time, class, etc.
+     a human being as a person
+     a male by birth, or a female in the context of marriage or
+     the biracial community that has adopted certain customs and
+     behaviors 
+     a person who is either innately or acquired a certain social or
+     economic status
+
+"not a man" means "not a human being", "not a person" means "not a male or a female" ("not a man" is the plural of "man"). the third part of not a man (or "not a male") could be omitted for instance, but it would be understood. from here:
+
+the plural of "man" is "

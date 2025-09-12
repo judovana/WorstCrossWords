@@ -1,5 +1,4 @@
-*.jpg
-cache
+outgen*.jpg
 tokenization_small100.py
 # Byte-compiled / optimized / DLL files
 __pycache__/

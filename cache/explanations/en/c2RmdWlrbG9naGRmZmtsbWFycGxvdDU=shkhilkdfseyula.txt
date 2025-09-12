@@ -1,0 +1,18 @@
+explain XXXXX in english without using word XXXXX_2d
+
+i'm having a problem understanding how to write my plots in english. 
+i am aware that i need to use \usepackage{graphicx}\usepackage{framed}
+what i don't understand is how to do this without using words. i am aware that i can use plot command to create a graph. i just don't know how to use this in english and add colours where i need it. any help would be appreciated.
+
+a:
+
+if you want an english version of the package, i would suggest to add the text commands via
+\usepackage[texttoc, 
+         style=authoryear,
+          % text toc
+          right=0.5in, 
+          % text style
+          back color=blue!20, 
+          % show page number in title
+          citecolor=red!50, 
+          % show authors

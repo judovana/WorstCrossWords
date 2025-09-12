@@ -1,0 +1,10 @@
+explain XXXXX in english without using word XXXXX.
+
+a:
+
+there is no one "explanation" for "XXXXX in english". the usage of both the term and the definition of "XXXXX" is a bit too general in this context. 
+as a working example for your problem, consider the use of $\frac{d(x)}{dx}$ when integrating $\frac{d(y)}{dy}$ for a general function $f(x,y)$. it's pretty clear that it's not the same as $\frac{d(x)}{dx}$. a good example is the expression:
+$$\frac{d(a+b\times x)} {dx}$$
+this expression means: "i multiply the expression a+bx by the value of $x$". it's "useful" in the context of the last expression. and $\frac{d(a+b\times x)} {dx}$ is the same as:
+$$\frac{d(a+b\times x)} {dx} = a+b\times x$$
+in other words, i am combining the expression $a+bx$ with $\frac{d(x)}{dx}$. that is

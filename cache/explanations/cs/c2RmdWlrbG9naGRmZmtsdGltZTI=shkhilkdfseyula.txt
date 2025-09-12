@@ -1,0 +1,1 @@
+vysvětlit xxxxx v angličtině bez použití slova xxxxx například a: pro c++11: #include <future> typedef std::shared_future<void> f; pomocí namespace std; void do_stuff() { auto f = f(); f.get() { // použijte funkční tělo zde } } } int main() { f f1; cout << f1.get(.get() << endl; do_stuff(); cout << f1.get().get() << endl; cout << endl; }

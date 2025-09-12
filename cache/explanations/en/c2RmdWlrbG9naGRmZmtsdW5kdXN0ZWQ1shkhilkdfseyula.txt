@@ -1,0 +1,14 @@
+explain XXXXX in english without using word XXXXX
+
+hello!
+i have an question, i have a linux server under my vnc for my friend... and i want that the client can install any file he/she wants, without me having to tell him, he can't put it to the server... how do i do that?
+
+i guess this is a more general question for ubuntu users as much as for people who are familiar with windows, but it is not always so easy the way people here think it is.
+
+when you look at the list of installed applications on your server, you will notice that the file manager is included in that list. so if you want to use the file manager without asking the user, then you will need to change the /var/log/messages file.
+
+i suggest you start with the /usr/share/applications/ directory, and then move up, you will find a lot of files there that you need to fix and make sure they are executable.
+
+just have a look at the file in this directory and see what it is doing for you and your friend. if you have some difficulty with the file manager or even your friend, have a look at the man file, or the manpages.
+
+it's

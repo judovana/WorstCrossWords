@@ -1,0 +1,35 @@
+explain XXXXX in english without using word XXXXX
+
+this is a discussion on explain XXXXX in english without using word XXXXX within the beginner php, mysql & php forum, part of the community forums category; well i just wanted to ask...
+
+explain XXXXX in english without using word XXXXX
+
+well i just wanted to ask in english if the above code is understandable without using the word XXXXX?
+
+if any one can help me would be greatly appreciated
+
+thanks,
+
+anirudh
+
+hi anirudh,
+
+i have also tried using this syntax in my code and some others.
+
+explain XXXXX in english without using word XXXXX
+
+well i just wanted to ask in english if the above code is understandable without using the word XXXXX?
+
+if any one can help me would be greatly appreciated
+
+thanks,
+
+anirudh
+
+hi anirudh,
+
+i have also tried using this syntax in my code and some others.
+
+you can also use:
+
++$this->db->query("select * from `users` where `name` like '%". $name

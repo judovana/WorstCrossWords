@@ -1,0 +1,23 @@
+explain XXXXX in english without using word XXXXX in english
+
+this is a discussion on explain XXXXX in english without using word XXXXX in english within the computer science stack exchange forums, part of the tech.se category; i am working to understand c++ and some of its constructs and one part...
+
+explain XXXXX in english without using word XXXXX in english
+
+i have a program in c++ where i need to make a file which i will send to a customer over the internet. i need to know how quickly this file gets sent (in seconds) for the two cases i am working with. i am using the XXXXX::now
+
+for the 1st case, i used:
+
+XXXXX::now()-milliseconds/2 + millisecond;
+
+for the 2nd case, i used:
+
+XXXXX::now()-milliseconds/5 + millisecond;
+
+for both cases i am a little confused. from what i can tell, the 5 millisecond case is the most intuitive. how does the 1st line get interpreted as a XXXXX stamp? what is the proper way to interpret this? i need the proper way to interpret this for my app.
+
+2:25
+
+hello,
+
+my apologies for the delay. i have a

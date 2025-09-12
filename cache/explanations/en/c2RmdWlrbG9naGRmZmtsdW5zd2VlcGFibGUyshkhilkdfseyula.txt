@@ -1,0 +1,20 @@
+explain XXXXX in english without using word XXXXX)
+
+a:
+
+i haven't seen anything in the wild, but this is what i would do:
+
+function is_in() {
+    return $('.checkbox input[type="checkbox"]').prop('checked').index($(this)).length >= 0; // this checks for element
+}
+
+$('.checkbox input[type="checkbox"]).on('change', function(){
+    if(!is_in()) {
+        $('.checkbox input[type="checkbox"]').prop('checked', false); // or else we could use jquery selector, but that does not look very reliable
+    }
+});
+
+$('.checkbox input[type="checkbox"]:checked').removeattr('checked').prop('checked', true);
+
+i haven't tested this, but that should be something you can try!
+

@@ -1,0 +1,55 @@
+explain XXXXX in english without using word XXXXX
+
+1.a (one) a
+1.an (a) an
+
+2.e e
+2.ë (ë) e
+
+3.e (an)
+3.ë së
+
+4.e (u)
+4.ë së
+
+5.e (an) an
+5.ë së
+
+6.i i
+6.ë së
+
+7.i i
+7.ë së
+
+8.i (a)
+8.ë së
+
+9.a (one) o
+9.ë së
+
+10.e (u)
+10.ë së
+
+11.e (an) o
+11.ë së
+
+12.e (u) u
+12.ë së
+
+13.i i
+13.ë së
+
+14.i (a) i
+14.ë së
+
+15.i (an) i
+15.ë së
+
+16.e (u) e
+16.ë së
+
+17.e (an) u
+17.ë së
+
+18.i i
+18.ë së

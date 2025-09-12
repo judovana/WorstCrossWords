@@ -1,0 +1,1 @@
+vysvětlit xxxxx v angličtině bez použití slova xxxxx :) a: nejjednodušší způsob, jak vidět, co jste měli na mysli, je otevřít nový dokument (ctrl+f), pak pravým kliknutím na první část a vyberte "najdět v výběru" v kontextu menu. alternativně, pokud budete muset použít procesor slov (např. knihovny spisovatel), můžete jednoduše kliknout na část a vyberte "převrat".

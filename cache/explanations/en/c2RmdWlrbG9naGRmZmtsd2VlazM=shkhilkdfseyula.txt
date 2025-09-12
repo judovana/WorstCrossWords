@@ -1,0 +1,26 @@
+explain XXXXX in english without using word XXXXX
+
+i need a formula that will show me how to explain the current date as XXXXX number
+for example ive had this XXXXX and next day of course and if i wanted to explain how the current XXXXX is
+what i need is a formula that will show me the XXXXX number from today
+
+a:
+
+there are a number of issues with your question.
+
+XXXXX starts on sunday, no one can be the monday of the first XXXXX
+XXXXX starts on monday, no one can be the first monday of the second XXXXX
+XXXXX starts on monday and ends on sunday, no one can be the second sunday of the second XXXXX
+XXXXX starts on monday and ends on sunday, no one can be the second sunday of the third XXXXX
+etc.
+
+i'll address these issues first.
+XXXXX starts on sunday:
+first, the current XXXXX begins on sunday.
+therefore, sunday is the first day of the XXXXX.
+second, sunday is the only day of the XXXXX that has a value of 1, hence there is not a XXXXX.
+since XXXXX starts on sunday:
+
+first day of the XXXXX is sunday
+for every other day of the XXXXX, there is exactly one day of the XXXXX that it is a monday
+for

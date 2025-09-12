@@ -1,0 +1,17 @@
+explain XXXXX in english without using word XXXXX or untweepable as shown below
+var XXXXX = true;
+function addXXXXX() {
+    var value = document.createelement("p");
+    value.id = "un\u00e9veable";
+    document.getelementsbytagname("p")[0].appendchild(value);
+}
+
+function removeXXXXX() {
+    var value = document.getelementbyid("un\u00e9veable");
+    if (value.style.display!== "none") {
+        value.style.display = "none";
+        var parent = values.length > 0? values[values.length - 1] : null;
+        while (parent!= null) {
+            if (parent.style.display!== "none") {
+                parent.style.display = "block";
+           

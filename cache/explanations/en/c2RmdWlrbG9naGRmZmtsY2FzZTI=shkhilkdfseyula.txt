@@ -1,0 +1,8 @@
+explain XXXXX in english without using word XXXXX
+
+hi,
+i need some help. i have a website that uses the word XXXXX to indicate the use of XXXXX on the words, such as 'XXXXX sensitive' on the words 'coupon'. but my site, which has about 600 words, needs to be edited or reformatted. the website is currently being made for a client using wordpress. i want to change the word 'coupon' in the wordpress template to 'XXXXX sensitive'. if 'XXXXX sensitive' is changed to 'XXXXX insensitive', the site would be a lot more readable. my client would like the client logo to include the word XXXXX sensitive on it, but i am not sure how to do this. i don't want to create a whole new wordpress site, because it costs too much. (if this is an option, i want it done in wordpress, not in wordpress plugins for wordpress).
+here are the words that i want to use in the wordpress template for the word 'XXXXX sensitive':
+
+hi,
+i have a website that uses the word XXXXX to indicate the use of XXXXX on the words, such as 'XXXXX sensitive' on the words 'coupon'. but my site, which has about 600 words, needs

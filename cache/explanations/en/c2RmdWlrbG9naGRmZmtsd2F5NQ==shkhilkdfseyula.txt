@@ -1,0 +1,11 @@
+explain XXXXX in english without using word XXXXX and all that...
+
+and also i can see that google has a word (in english) without the word (en) and i have to search for that (en) in google.
+
+what should i do?
+
+a:
+
+the problem i have with your word is that the word "XXXXX" has both "XXXXX" and "XXXXXs" in it. if you try to type "XXXXXs" i get an ugly string that i can't parse.
+if you're typing "XXXXXs" as a search query, the "XXXXXs" in it won't be highlighted in the search results (for some reason). to see "XXXXX" in the results, it has to be spelled out correctly in the results string.
+

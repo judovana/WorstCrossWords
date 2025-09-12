@@ -1,0 +1,24 @@
+explain XXXXX in english without using word XXXXX
+
+#!/usr/bin/perl
+use strict;
+use warnings;
+use term::readline;
+use config;
+
+require './tools.pl';
+
+## loads the configuration file
+
+my $configfile = config::config->new(
+    {
+       'server': {
+            'hostname'     => 'localhost',
+            'port'         => 3001,
+            'dbname'       => 'test',
+            'username'     => 'test',
+            'password'     => 'test',
+        },
+        'database': {
+            'hostname'     => 'localhost',
+           

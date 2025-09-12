@@ -1,0 +1,8 @@
+explain XXXXX in english without using word XXXXX, and you can even search it with keywords.
+we have a separate category for XXXXX, including many tips and tricks for that.
+
+in the table below, you will see a list of the categories (for example, "hobbies" and "class" are category) and the number of records in each category, including the records for the keywords (if any). you can go to this page for more information and see what kinds of records we have in each category. you can also go to our "help" page for some tips.
+
+when you're creating a list of keywords, you can use multiple keywords at the same time. for example, if you want to count the number of times a certain keyword appears in a list of keywords, you can do that.
+
+we also have a separate category for "special occasion" which is a keyword list. you can find the list of keywords in the "special occasion" category page in our "help" page.

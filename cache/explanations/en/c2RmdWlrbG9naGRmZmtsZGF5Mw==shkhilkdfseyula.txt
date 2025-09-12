@@ -1,0 +1,34 @@
+explain XXXXX in english without using word XXXXX or XXXXX=1 or XXXXX[1]
+
+a:
+
+you need the brackets 
+XXXXX{1} 
+
+or 
+XXXXX(1) 
+
+or 
+XXXXX('') 
+
+and then, after :
+XXXXX = ''
+
+a:
+
+python syntax
+XXXXX{1}
+
+or 
+XXXXX[1]
+
+python dictionary syntax
+dict = {'XXXXX': {'XXXXX1':1},':first': {'first1':'XXXXX'},'second':{'second':'second'},':third': {'third':'third'}}
+
+dictionaries are unordered collections of key/value pairs.
+
+a:
+
+you can use the dictionary syntax to create a dictionary with the XXXXX value as string. i've defined first XXXXX with the first keyword and second XXXXX with the second keyword which you can use to set the XXXXX values.
+{'first':'XXXXX','second':'second','third':'third'}
+

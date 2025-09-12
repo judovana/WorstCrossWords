@@ -1,0 +1,10 @@
+explain XXXXX in english without using word XXXXX
+
+question: a family lives on the second floor of a large apartment with a wall that is 2 feet long and has 2 horizontal holes in it so that people can climb through.
+now the family have this wall. now the first person gets up and starts climbing through the hole in the wall. now as the person goes down it starts to rain. now if the child sits on the wall. that person can't get up. so what should the family do?
+
+a:
+
+if you have a family of 4 people, with only two children, there are only two viable routes. either 4 people can simultaneously go through the hole, or either a single member of the same family can go through the hole.  there is no third route, and it is therefore impossible.
+the reason is that the family must first select which of the holes to go through based on which members it has children who would be able to fit through the other holes, and then determine which hole has the higher probability of bringing them all to safety.  
+for example, if all the holes, each of which has the same probability, have 3 children, that is easy.  but if a hole has 1 child, and there is only 1 other hole, then

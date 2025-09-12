@@ -1,0 +1,14 @@
+explain XXXXX in english without using word XXXXX_
+
+i am working on a project where i am using a service to fetch the data from the cloud using a rest api.
+now i am using the below url to fetch the data from the service : https://api.guru.sh/guru-services/rest-api/v1/find.html
+i am able to fetch the data using the below code:
+   public list<list> fetchdata(){
+        string url = "https://api.guru.sh/guru-services/rest-api/v1/find.html";
+        url url_response = client.execute(url);
+        list<list> result = new arraylist<list>();
+        bufferedreader bufferedreader = new bufferedreader(new inputstreamreader(
+                url_response.getinputstream()));
+        string inputline;
+        while ((inputline = bufferedreader.readline())!= null) {
+ 

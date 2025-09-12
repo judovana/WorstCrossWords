@@ -1,0 +1,14 @@
+explain XXXXX in english without using word XXXXX in arabic.
+i am new in this program. may you guide me me how to do this? what program to create english to arabic translation?
+thanks a lot
+
+a:
+
+the best XXXXX is use a commercial tool like google translate api, google translate python client or linguist's translate toolkit.  
+
+for the first step, you can use a free and open-source project like google translate api or google translate python client.
+the third step is to use another open-source tool like linguist's translate toolbox or linguist's translate toolkit.
+
+it will be easier to do this with a commercial tool. 
+if you are new to the field, don't forget to read the documentation in this page.
+

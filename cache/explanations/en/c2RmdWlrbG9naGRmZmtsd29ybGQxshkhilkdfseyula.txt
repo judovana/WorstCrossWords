@@ -1,0 +1,39 @@
+explain XXXXX in english without using word XXXXX i have this code to translate this string :
+
+there is no translation found for
+  "there is no translation for
+  "there is no translation for
+
+but i am doing a search for 'there is no translation' and i can find many strings like:
+
+there is no translation for what a fabulous
+  surprise!
+there is no translation for
+  there is no translation for
+
+i want to have a string that contains something like:
+
+there is no translation for "there is no
+
+how do i do this?
+thanks
+
+a:
+
+i'm not sure about the question, but i'll give an answer.
+you can use this function:
+function translate(str) {
+    return str.replace(/\s+/g,'');
+}
+
+then you should be able to use it as:
+
+the string "there is" will return "there is".
+"there is" will remove the first spaces.
+
+a:
+
+the string "there is" will return "there is". you can do a replace like:
+
+function translate(str) {
+  return str.replace(/\s/g,'');

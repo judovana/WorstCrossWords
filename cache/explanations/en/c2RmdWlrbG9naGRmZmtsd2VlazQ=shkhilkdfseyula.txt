@@ -1,0 +1,8 @@
+explain XXXXX in english without using word XXXXX
+
+"how would i use a "how" word with "XXXXX" in it? i'm wondering if there are guidelines that describe when you use "how" vs "XXXXX".
+
+a:
+
+"XXXXX" can imply a XXXXX in a calendar sense, in which case its use is allowed in formal writing. the first example in your example is not: "i see that there is a 'XXXXX' that went by with the weather that is getting worse." it is: "i see that there is a 'XXXXX' that went by with the weather that is getting worse."
+

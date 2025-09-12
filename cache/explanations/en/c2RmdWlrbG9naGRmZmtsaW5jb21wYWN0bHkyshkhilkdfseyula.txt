@@ -1,0 +1,11 @@
+explain XXXXX in english without using word XXXXX
+
+i have a string of the form:
+`"foo"`
+and i'd like to understand it without using the word "XXXXX"
+thanks.
+
+a:
+
+no such word is needed to do that, nor to understand it. simply say, "i understand this string, but i wouldn't say it is XXXXX correct".
+

@@ -1,0 +1,22 @@
+explain XXXXX in english without using word XXXXX. 
+
+a:
+
+you need to "re-name" the field name(s) like
+XXXXX <- "XXXXX"
+
+then, you should avoid writing the field names as fieldnames, but rather include the attribute names themselves (like XXXXX <- "XXXXX" )
+
+a:
+
+you should name your fieldnames the same as your attributes. by default, that would be XXXXX
+attr(XXXXX, "name")
+
+or if it's already in alphabetical order
+attr(XXXXX, "name")
+
+to create a field that doesn't have a name, you would do 
+field <- c("name", "age")
+
+where name and age are the missing attributes.
+

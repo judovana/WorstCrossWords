@@ -1,0 +1,23 @@
+explain XXXXX in english without using word XXXXX.
+
+a:
+
+i think that what you want is a way to show the time without using the XXXXX word. you can start with using the %n format specifier which can also accept a time without the XXXXX. 
+example: 
+%%time
+
+t1 = nanoseconds
+j = 0
+if t2 < t1 + 1 then j = j + 1 else j = j + 2 
+t2 = t2 + 1
+
+print(j)
+
+%n
+
+%n% t1 %n% t2
+
+%n% %n% %n% t2 %n
+
+%n% %n% %n% t1 %n% t2 %n
+

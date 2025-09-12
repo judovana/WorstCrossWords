@@ -1,0 +1,20 @@
+explain XXXXX in english without using word XXXXX
+
+i use a dictionary to retrieve the words i need from a web. in one part of my app, i retrieve the words, but i would also like to display them:
+here is my dictionary
+{
+    "abstl" : "abstl",
+    "blank1" : "",
+    "blank2" : ""
+}
+
+i have a web interface that uses the dictionary to get the words. i retrieve them from the web with the following:
+let abstr = web.request("select * from abstr where blanks not empty");
+let abstrarr = abstr["abstl"]; // returns "abstl"
+let blanks = web.request("select * from abstr"); // returns a dictionary with blanks
+let blanksarr = blanks["blank1"];  // returns "";
+let blanks2 = blanksarr["blank2"];  // returns ""
+
+i display the dictionary in a table cell: 
+let blanks2 = web.request("select * from abstr");
+let blanks = blanks2["blank1"];

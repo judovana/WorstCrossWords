@@ -1,0 +1,11 @@
+explain XXXXX in english without using word XXXXX in english to show this message
+
+so i am getting this error on the form1.aspx page when i run the page in my browser.
+i read on the web the only way to fix this is to change the database name for a new one, but i don't want to change the database name. all i want to do is XXXXX with this one.
+thanks
+
+a:
+
+i have also gone through my form1.aspx but it didn't give me an error. instead it was taking the "http://" prefix and giving that the username (in my case it was my user id). the solution you have mentioned is not XXXXXing for me as it said that, in the database, the username doesn't exist. 
+so the solution for me was to check the username of the user before saving the data to the database. after that i was able to save the data to the database.
+

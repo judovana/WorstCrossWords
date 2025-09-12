@@ -1,0 +1,14 @@
+explain XXXXX in english without using word XXXXX)
+
+a:
+
+i suggest you to read the official documentation and try to google some sentences that are quite similar to your question.
+i got my answer in these questions:
+
+https://docs.google.com/document/d/1qp1qgi7g0nhh_f4dcmljntn7x6_cvq_1g1wv-ftqw/
+https://www.quora.com/what-are-photoreceptors?s=0
+
+the most important one:
+
+you see the term photoreceptors first, though it’s not strictly necessary to read all that. basically, there are several types of photoreceptors. as well as ganglion cells, bipolar and horizontal cells are some of the photoreceptors found in the retina.
+

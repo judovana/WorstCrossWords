@@ -1,0 +1,12 @@
+explain XXXXX in english without using word XXXXX, but it is good to know how to use XXXXX in english, if you do not know this then learn it later so that you cannot misunderstand the question.
+
+a:
+
+here is a comprehensive answer for XXXXX sensitivity.
+for reference, feel free to also read on wikipedia:
+
+when a phrase is capitalized in an error-prone font or in a script that lacks XXXXX mappings, and when the initial letters of the word or phrase are not in the same XXXXX as the word or phrase, and there is a rule stating that, when a word has more than one XXXXX, it must be capitalized regardless of XXXXX, and the words should use their capitalized forms. this rule is used for the english language.
+the rule also applies in other scripts not governed by the unicode character database.
+
+in XXXXX you are worried about the XXXXX ambiguity, it will just break to the end of your sentence. i will use the example below to demonstrate the difference:
+suppose you are at a wedding and the lady in red is not in a red suit but she is wearing a white dress. here is a sentence: “this is the first wedding i have attended”. this is obviously an error and clearly not correct:

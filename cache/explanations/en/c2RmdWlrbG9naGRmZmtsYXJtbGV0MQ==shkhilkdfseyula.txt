@@ -1,0 +1,23 @@
+explain XXXXX in english without using word XXXXX
+
+i'm currently in the process of designing a few different kinds of hardware. the thing is i'm looking for a way to explain certain components. for example i want to use some kind of XXXXX which will do this:
+XXXXX
+  : XXXXX
+    : |
+      ->
+
+or this:
+XXXXX
+  : XXXXX
+    : |
+      ->
+
+also i need to explain things about it, but if there's a tool out there for that it's fine, too!
+
+a:
+
+i would be interested in seeing how this is done, especially how it can be used in marketing communications, but unfortunately there is no tool to help with such things.
+but the answer is, yes, you can use a metaphor to convey the concept of what you are trying to describe. one such image is a cartoon. it might go something like this:
+
+using a graphic like this can be really effective in some contexts, such as explaining the concept of a "XXXXX", but it's even more effective when used in marketing communications scenarios.
+

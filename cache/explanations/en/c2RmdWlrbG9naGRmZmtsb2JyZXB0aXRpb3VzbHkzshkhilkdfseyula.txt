@@ -1,0 +1,15 @@
+explain XXXXX in english without using word XXXXX
+
+i used this code in a code to do some code review:
+    private void jtbx(jcomponent component){
+    final jtextarea textarea = this.gettextarea();
+        if (textarea!= null) {
+            textarea.removeall();
+            jscrollpane scrollpane = new jscrollpane(textarea);
+            textarea.add(scrollpane);
+            scrollpane.scrollbar.setminimum(0);
+            scrollpane.scrollbar.setmaximum(0);
+            scrollpane.add(textarea);
+            scrollpane.validate();
+            component.add(scrollpane, component.getpreferredsize());
+         

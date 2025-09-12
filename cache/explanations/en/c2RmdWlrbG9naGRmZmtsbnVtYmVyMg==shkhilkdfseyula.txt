@@ -1,0 +1,10 @@
+explain XXXXX in english without using word XXXXX?
+
+i have a report and i need the report to show the XXXXX in english instead of XXXXX in german. i can't find a way to do that. i am doing this on excel with a word file as the main file.
+the code:
+      for each row in range("a2:t2")
+            if not iserror(application.match(row.value, sheet1.range(rng.start, rng.end).formula, 0)) then  
+                with activesheet
+                    for each cell in sheet1.range(rng.start, rng.end).cells
+                        if cell.offset(0, 1).value = 0 then
+                            cells(cell.row, cell.column).

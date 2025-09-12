@@ -1,0 +1,17 @@
+explain XXXXX in english without using word XXXXX, but i don't understand how to implement this in php.
+
+a:
+
+what you have to do is to store the number of items in your database and return all possible matches based on that.
+for example if you have to do this:
+
+get the number of product
+get the match (products that have the same number of items, they're all duplicates)
+store it in $_session
+after that you do something like:
+if (isset($_session["duplicate"])) {
+    //do something
+}
+
+if you had to use some language you didn't know, you could have created your own little database and stored the number of your products in there.
+

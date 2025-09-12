@@ -1,0 +1,22 @@
+explain XXXXX in english without using word XXXXX
+
+i was trying to make this code more pythonic but it's impossible for me to keep all the variables names in python to be lowercase.
+for example i will have the variable called $p_a
+so i need it to have $p_a, $p_b
+i tried to use the if statement to get all the variables but it's not working.
+this is my code
+(the variables are the same as above)
+import numpy as np
+import pandas as pd
+
+def get_data(name, p_a=none, p_b=none):
+     #print('name:  %s'%name)
+     #print('p_a:%s'%p_a)
+     #print('p_b:%s'%p_b)
+
+     p_a = p_a if p_a else 0
+     p_b = p_b if p_b else 0
+
+      return p_a,p_b
+
+p_a,p_b = get_data('p_a','p_b

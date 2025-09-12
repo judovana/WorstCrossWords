@@ -1,0 +1,32 @@
+explain XXXXX in english without using word XXXXX?
+
+how can i explain the XXXXX in english without using word XXXXX.like how i explain the XXXXX with word XXXXX.
+this is my current code:
+package com.example.product;
+
+public class question1 {
+
+public static void main(string[] args) {
+    string answer = "hello there!";
+    string XXXXX = "my XXXXX";
+
+    system.out.println("the XXXXX is: " + answer);
+    system.out.println("answer: " + XXXXX);
+    system.out.println("answer: " + answer);
+    system.out.println("here is the XXXXX's address: " + answer);
+
+}
+
+}
+
+but this doesn't work. i want to explain the XXXXX in english instead of how i explain the XXXXX in english.
+
+a:
+
+you should use java.lang.string instead of string.
+public class question1 {
+
+    public static void main(string[] args) {
+        string answer = "hello there!";
+        string XXXXX = "my XXXXX";
+

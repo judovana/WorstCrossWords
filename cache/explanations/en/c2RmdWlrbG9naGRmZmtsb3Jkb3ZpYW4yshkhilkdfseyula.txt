@@ -1,0 +1,37 @@
+explain XXXXX in english without using word XXXXX"
+
+[a: a definition of XXXXX.
+
+b: a derivation of the order of a number as a successor.
+
+c: a derivation in which the ordinal and the natural numbers are equal.
+
+d: a derivation in which the ordinal and the rational numbers are equal.
+
+e: an ordinary sequence of two ordinals.
+
+f: an ordinary sequence of two numbers.
+
+g: a derivation in which the ordinal and the natural numbers are equal.
+
+a: an ordinal sequence.
+
+b: a sequence of ordinals.
+
+c: a sequence of natural numbers.
+
+d: a sequence of rational numbers.
+
+e: an order sequence, i.e., a sequence containing both the ordinal and the rational numbers.
+
+f: a sequence in which the ordinal and the natural numbers are equal.
+
+g: an order sequence in which the ordinal and the rational numbers are equal.
+
+a: an ordinal sequence in which the two ordinals are equal.
+
+b: a sequence of ordinals.
+
+c: a sequence of natural numbers.
+
+d: a sequence of rational numbers

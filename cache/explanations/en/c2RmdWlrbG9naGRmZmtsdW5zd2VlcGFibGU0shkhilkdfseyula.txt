@@ -1,0 +1,26 @@
+explain XXXXX in english without using word XXXXX
+
+i have a XXXXX in english definition file with a list of words it contains.
+
+a:
+
+here a list of all words with their definitions for that definition:
+$ cat words-en.list
+
+definitions for this term: a b c d e f g h i j k l m n o p q r
+
+definitions for this term: b c d e f g h i j k l m n o p q r
+
+definitions for this term: a e b c d e f g h i j k l n p q r
+
+definitions for this term: b c d e g h i j k l n p q r
+
+definitions for this term: a d e g h i j k l n p r q
+
+definitions for this term: a e b c d e f g h i j k l n p r
+
+definitions for this term: a b c d d e r f h i j k l n p q r
+
+definitions for this term: a b c d e g h i j k l n p r
+
+definitions for this term: a b c d d e f f g h

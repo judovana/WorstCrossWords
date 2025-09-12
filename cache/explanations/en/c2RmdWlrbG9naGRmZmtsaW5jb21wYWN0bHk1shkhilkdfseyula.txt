@@ -1,0 +1,15 @@
+explain XXXXX in english without using word XXXXX
+
+i'm trying to write a short piece of code in a language that i know the exact meaning of.
+for example: i want to write a code that works as such:
+
+"hello, my name is john. and i want to say hello to you as well so
+  is this a greeting or a 'hello' or something else?"
+
+how can i write such code? 
+i'm using c#, so i'd like an explanation in the format of not using words or phrases. thanks!
+
+a:
+
+you do this quite well in another language by actually using a set of language constructs to describe them.  there are a handful of languages that have this level of detail and clarity - for example, there is no more verbose way to tell the difference between "inheritance" and "displacement" than a short phrase (a small collection of phrases - one or two words - often the same).  so, i'd definitely recommend you use something like this.  it's much clearer than what you're trying to write.
+in a nutshell, you should only ever use a single word in this situation and always with the same meaning - so "inheritance" and "displ

@@ -1,0 +1,19 @@
+explain XXXXX in english without using word XXXXX;)
+
+a:
+
+this is the solution i came up with:
+$result = 'XXXXX in english';
+
+$XXXXXzone = 'utc';
+
+$date = str_replace($result, '', $date);
+
+$date = date_create($date, $XXXXXzone);
+
+$result = date_format($date, str_XXXXXstamp). " ". $XXXXXzone;
+
+echo $result;
+
+thanks to @kelvin.
+

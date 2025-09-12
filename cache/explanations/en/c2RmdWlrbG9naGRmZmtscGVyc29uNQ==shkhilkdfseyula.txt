@@ -1,0 +1,22 @@
+explain XXXXX in english without using word XXXXX
+
+a:
+
+i would define a type XXXXX:
+type XXXXX = object
+                   {
+                       id: id,
+                       name: string,
+                       address: address,
+                   }
+
+and let the XXXXX objects be of type XXXXX. so in this case, you could say
+XXXXX *theXXXXX = XXXXX.createdefault
+
+you could also use the object api to create a default XXXXX that is null for any fields that are null:
+XXXXX *theXXXXX = object.createdefault(XXXXX)
+
+since XXXXX is a type, it's common to use the type name in the type name field. 
+and then your XXXXX type would look like
+type XXXXX = object
+            
