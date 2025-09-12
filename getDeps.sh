@@ -18,6 +18,45 @@ else
   SUDO=
 fi
 
+
+if [ "x$SELF_INIT" == "xTrue" ] ; then
+  $SUDO dnf install -y git
+  $SUDO useradd game
+  $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
+fi
+
+if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
+  $SUDO dnf install -y python pip
+  $SUDO dnf install -y python-tkinter
+fi
+
+if [ ! -e tokenization_small100.py ] ; then
+  curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
+fi
+
+
+if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
+  pip install diffusers
+  pip install torch
+  pip install accelerate
+  pip install transformers
+  pip install sentencepiece
+  pip install pillow
+fi
+
+if [ "x$GEN_MODELS" == "xTrue" -o  "x$GEN_MODELS" == "x" ] ; then
+  set -e
+  #download the 2/3 models
+  python translate.py en koza
+  python explain.py  lion
+  #check gui
+  #python show_image.py  "${BASH_SOURCE[0]}" || echo  'run xhost +"local:podman@" and add "-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t -e DISPLAY=$DISPLAY" to your  container run'
+  #download the 3/3 models
+  NO_SHOW=True python generateImage.py sixtieths
+  rm outgen*.jpg
+fi
+
+
 if [ "x$CONTAINER_BUILD" == "xTrue" ] ; then
   echo "Building containres."
   echo "1. full one. This contain some caches already as simle (35GB..) demo. This container do not need (and should not have the mount (the -v))"
@@ -62,6 +101,7 @@ RUN ls -R
   fi
   podman build --file full --tag worstcrosswords .
   if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then  podman save -o WorstCrossWords.tar worstcrosswords ; fi
+  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?";  podman push worstcrosswords  quay.io/judovana/worstcrosswords ; fi
   rm full
   echo "FROM worstcrosswords_base
 RUN pwd
@@ -71,6 +111,7 @@ RUN ls -R
 " > empty
   podman build --file empty --tag worstcrosswords_empty .
   if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then podman save -o WorstCrossWords_full.tar worstcrosswords_full ; fi
+  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?";  podman push worstcrosswords_full  quay.io/judovana/worstcrosswords ; fi
   rm -rf ${CBUILD_DIR}
   rm empty
   echo "2: emptyone, where you have to mount local cache, as -v=<your_local_dir_with_ai_cahe>:/home/game/WorstCrossWords/cache"
@@ -86,45 +127,3 @@ RUN ls -R
   echo "primarily 'game.py' of course"
   exit 0
 fi
-
-
-if [ "x$SELF_INIT" == "xTrue" ] ; then
-  $SUDO dnf install -y git
-  $SUDO useradd game
-  $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
-fi
-
-if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
-  $SUDO dnf install -y python pip
-  $SUDO dnf install -y python-tkinter
-fi
-
-if [ ! -e tokenization_small100.py ] ; then
-  curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
-fi
-
-
-if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
-  pip install diffusers
-  pip install torch
-  pip install accelerate
-  pip install transformers
-  pip install sentencepiece
-  #pip install python-tk
-  pip install pillow
-  #pip install tkinter
-fi
-
-if [ "x$GEN_MODELS" == "xTrue" -o  "x$GEN_MODELS" == "x" ] ; then
-  set -e
-  #download the 2/3 models
-  python translate.py en koza
-  python explain.py  lion
-  #check gui
-  #python show_image.py  "${BASH_SOURCE[0]}" || echo  'run xhost +"local:podman@" and add "-v /tmp/.X11-unix:/tmp/.X11-unix:ro -e \"DISPLAY\" --security-opt label=type:container_runtime_t -e DISPLAY=$DISPLAY" to your  container run'
-  #download the 3/3 models
-  NO_SHOW=True python generateImage.py sixtieths
-  rm outgen*.jpg
-fi
-
-
