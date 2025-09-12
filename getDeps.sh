@@ -32,10 +32,12 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
   if [ ! -e tokenization_small100.py ] ; then
     curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
   fi
-  if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
+  if [ "x$PIP_INSTALL1" == "xTrue" -o  "x$PIP_INSTALL1" == "x" ] ; then
     pip install diffusers
     pip install torch
     pip install accelerate
+  fi
+  if [ "x$PIP_INSTALL2" == "xTrue" -o  "x$PIP_INSTALL2" == "x" ] ; then
     pip install transformers
     pip install sentencepiece
     pip install pillow
