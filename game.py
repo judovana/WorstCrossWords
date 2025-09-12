@@ -308,8 +308,8 @@ def main():
     desk=generateWords.generate(words, wcount)
     for index, wwp in enumerate(desk.wordsWithPlacement):
         word=wwp.word
-        #print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing " + word)
-        print(str(index)+"/"+str(len(desk.wordsWithPlacement))+" processing ")
+        #print(str(index+1)+"/"+str(len(desk.wordsWithPlacement))+" processing " + word)
+        print(str(index+1)+"/"+str(len(desk.wordsWithPlacement))+" processing ")
         translatedId=caches.getTranslated(lang, word)
         explanationFilesTransalted=caches.getFilesFromTransaltedAiExplainCache(lang, translatedId)
         if not explanationFilesTransalted:
