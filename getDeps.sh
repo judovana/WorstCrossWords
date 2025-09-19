@@ -36,8 +36,8 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
     pip install torch==2.8.0
     pip install diffusers==0.35.1
     pip install accelerate==1.10.1
-    pip install transformers=4.56.2
-    pip install sentencepiece=0.2.1
+    pip install transformers==4.56.2
+    pip install sentencepiece==0.2.1
     pip install pillow
   fi
   if [ "x$GEN_MODELS1" == "xTrue" -o  "x$GEN_MODELS1" == "x" ] ; then
