@@ -33,11 +33,11 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
     curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
   fi
   if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
-    pip install torch
-    pip install diffusers
-    pip install accelerate
-    pip install transformers
-    pip install sentencepiece
+    pip install torch==2.8.0
+    pip install diffusers==0.35.1
+    pip install accelerate==1.10.1
+    pip install transformers=4.56.2
+    pip install sentencepiece=0.2.1
     pip install pillow
   fi
   if [ "x$GEN_MODELS1" == "xTrue" -o  "x$GEN_MODELS1" == "x" ] ; then
