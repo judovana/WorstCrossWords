@@ -22,7 +22,7 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
   if [ "x$SELF_INIT" == "xTrue" ] ; then
     $SUDO dnf install -y git
     $SUDO useradd game
-    $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout main"
+    $SUDO su game -c "cd ~ && git clone https://github.com/judovana/WorstCrossWords.git && cd ~/WorstCrossWords && git checkout cont2"
   fi
   if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
     $SUDO dnf install -y python pip
@@ -32,10 +32,8 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
   if [ ! -e tokenization_small100.py ] ; then
     curl -k -f -L -O https://huggingface.co/alirezamsh/small100/raw/main/tokenization_small100.py
   fi
-  if [ "x$PIP_INSTALL1" == "xTrue" -o  "x$PIP_INSTALL1" == "x" ] ; then
+  if [ "x$PIP_INSTALL" == "xTrue" -o  "x$PIP_INSTALL" == "x" ] ; then
     pip install torch
-  fi
-  if [ "x$PIP_INSTALL2" == "xTrue" -o  "x$PIP_INSTALL2" == "x" ] ; then
     pip install diffusers
     pip install accelerate
     pip install transformers
