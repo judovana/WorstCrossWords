@@ -1,7 +1,7 @@
 # used by CONTAINER_BUILD=True sh getDeps.sh
 FROM fedora:42
 RUN dnf install -y sudo /usr/bin/which
-RUN curl -k -f -L -O https://raw.githubusercontent.com/judovana/WorstCrossWords/refs/heads/cont2/getDeps.sh
+RUN curl -k -f -L -O https://raw.githubusercontent.com/judovana/WorstCrossWords/refs/heads/main/getDeps.sh
 RUN SELF_INIT=True ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=False sh -ex getDeps.sh
 RUN SELF_INIT=False ROOT_INSTALL=True PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=False sh -ex getDeps.sh
 RUN rm getDeps.sh
