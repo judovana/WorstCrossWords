@@ -104,7 +104,7 @@ RUN ls -R
   fi
   podman build --file full --tag worstcrosswords .
   if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then  podman save -o WorstCrossWords.tar worstcrosswords ; fi
-  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?";  podman push worstcrosswords  quay.io/judovana/worstcrosswords ; fi
+  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?email/pass";  podman push worstcrosswords  quay.io/judovana/worstcrosswords ; fi
   rm full
   echo "FROM worstcrosswords_base
 RUN pwd
@@ -114,7 +114,7 @@ RUN ls -R
 " > empty
   podman build --file empty --tag worstcrosswords_empty .
   if [ "x$CONTAINER_SAVE" == "xTrue" ] ; then podman save -o WorstCrossWords_full.tar worstcrosswords_full ; fi
-  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?";  podman push worstcrosswords_full  quay.io/judovana/worstcrosswords ; fi
+  if [ "x$CONTAINER_PUBLISH" == "xTrue" ] ; then echo "podman login quay.io#?email/pass";  podman push worstcrosswords_full  quay.io/judovana/worstcrosswords ; fi
   rm -rf ${CBUILD_DIR}
   rm empty
   echo "2: emptyone, where you have to mount local cache, as -v=<your_local_dir_with_ai_cahe>:/home/game/WorstCrossWords/cache"
