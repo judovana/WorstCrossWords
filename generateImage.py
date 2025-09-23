@@ -48,6 +48,13 @@ def generate(prompt):
     return generateTo(prompt, fileName)
 
 def main():
+    if len(sys.argv) == 2 and sys.argv[1] == "--version":
+        print(sys.argv[0]+" version 1.0")
+        sys.exit(0)
+    if len(sys.argv) == 2 and sys.argv[1] == "--init":
+        print(sys.argv[0]+" init")
+        initialize()
+        sys.exit(0)
     if len(sys.argv) != 2:
         print("expects exactly one argument - description sentence")
         sys.exit(1)

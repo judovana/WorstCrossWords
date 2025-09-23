@@ -14,11 +14,17 @@ def removearticles(text):
             rest.append(word)
     return ' '.join(rest)
 
-def initialize():
+def __init1():
     global model
     model = M2M100ForConditionalGeneration.from_pretrained("alirezamsh/small100")
+
+def __init2():
     global tokenizer
     tokenizer  = SMALL100Tokenizer.from_pretrained("alirezamsh/small100")
+
+def initialize():
+    __init1()
+    __init2()
     global initialized
     initialized=True
 
@@ -40,6 +46,21 @@ def translateTo(text, lang):
     return translated;
 
 def main():
+    if len(sys.argv) == 2 and sys.argv[1] == "--version":
+        print(sys.argv[0]+" version 1.0")
+        sys.exit(0)
+    if len(sys.argv) == 2 and sys.argv[1] == "--init":
+        print(sys.argv[0]+" init")
+        initialize()
+        sys.exit(0)
+    if len(sys.argv) == 2 and sys.argv[1] == "--init1":
+        print(sys.argv[0]+" init1")
+        __init1()
+        sys.exit(0)
+    if len(sys.argv) == 2 and sys.argv[1] == "--init2":
+        print(sys.argv[0]+" init2")
+        __init2()
+        sys.exit(0)
     if len(sys.argv) == 1:
         print("exactly one word/sentence expected. ")
         print("If you put more then ne word/sentence, then the first argument is language, and all others are words/sentence to transalte")
