@@ -27,6 +27,7 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
   if [ "x$ROOT_INSTALL" == "xTrue" -o  "x$ROOT_INSTALL" == "x" ] ; then
     $SUDO dnf install -y python pip
     $SUDO dnf install -y python-tkinter
+    $SUDO dnf install -y python-pillow-tk
   fi
 
   if [ ! -e tokenization_small100.py ] ; then
