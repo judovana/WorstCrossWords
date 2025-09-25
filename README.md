@@ -557,3 +557,7 @@ delTnumber[a-z] to remove Nth text. Check by Tn before
 The game works fine in headlees (no gui, terminal only) mode. Surprisngly better experience is in defaut `ASYNC=True` mode, which consumes more exceptions.
 Of course you can not show images, and I'm, not going to reimplemen https://github.com/judovana/ConsoleImageViewer. The images are terrible enough.
 Hiowever playing only with text hints, is extreamly difficult, nearly impossible
+
+# Playing in container
+You can export the game to container, via `CONTAINER_BUILD=True sh getDeps.sh`. Or you can use released ones:<br>
+cosult: https://github.com/judovana/WorstCrossWords/releases/tag/worstcrosswords-1.0#cont
