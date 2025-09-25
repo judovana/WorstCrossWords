@@ -359,7 +359,10 @@ Image cache (shared for al languages)  is cache/images
    * once you have the content of file cached, you can play crosswords without hours of waiting
    * You can verify content of caches by ` python  caches.py  lang print`. eg ` python  caches.py  cs print` (as all except images are translated somewhere in process)
 
-  * to avoid need of gui, there is backup image-show: ascii images `python imageToAscii.py  <filename>`
+   <hr>
+
+  * to avoid need of gui, there is backup image-show: ASCII-ART
+  * `python imageToAscii.py  <filename>`
 <details>
 
 ```
@@ -410,7 +413,7 @@ lr*?[ezz7a!{cvvv)<<)%lIeTfywL?*7yy!xI![7u##LtIrlccx%%{[zLL7tIcivvv)<)|)<i{aznJfy
    * In game the width is based on board size, and monochrome is False.
      * If you really need monochrome, then the complexity of game rises again
      * Overwrite `ASCII_MONOCHROME="True"` only if you really need
-     * Overwrite `ASCII_WIDTH=xyz"` as you need to have as big image as neccessary
+     * Overwrite `ASCII_WIDTH=xyz` as you need to have as big image as neccessary
 
 
 ## crosswords generation issue:
@@ -576,12 +579,15 @@ L[a-z] length of given word
 Each word can be described to you by image or explanmation:
 ```
 I[a-z] to show next image (from all) for given word
+Y[a-z] to show next image (from all) for given word in ASCII-ART
 T[a-z] to show next hint (from all) for given word
 G[a-z] to show next hint (from all) for given word in external window
 Inumber[a-z] to show Nth image (from all) for given word
+Ynumber[a-z] to show Nth image (from all) for given word in ASCII-ART
 Tnumber[a-z] to show Nth hint (from all) for given word
 Gnumber[a-z] to show Nth hint (from all) for given word in external window
 II[a-z] to show all images for given word
+YY[a-z] to show all images for given word in ASCII-ART
 TT[a-z] to show all texts for given word
 GG[a-z] to show all texts for given word in external window
 ```
@@ -595,6 +601,7 @@ GG[a-z] to show all texts for given word in external window
    * `IIa`  wil show all images for word AAAA
    * `TTb`  wil show all texts for word BBBBB
    * `GGg`  wil show all texts for word GGGG in standalone window
+   * Same would go for `Y` and derivates
 
 ## Generating hints during runtime
 During play, you can run `caches.py` as usually (above same subset file), the freshly cached images/texts will be immediately used
@@ -611,6 +618,7 @@ delTnumber[a-z] to remove Nth text. Check by Tn before
 The game works fine in headlees (no gui, terminal only) mode. Surprisngly better experience is in defaut `ASYNC=True` mode, which consumes more exceptions.
 Of course you can not show images, and I'm, not going to reimplemen https://github.com/judovana/ConsoleImageViewer. The images are terrible enough.
 Hiowever playing only with text hints, is extreamly difficult, nearly impossible
+You can use ASCII art `Y` images as compromise, but... you will see on your own.
 
 # Playing in container
 You can export the game to container, via `CONTAINER_BUILD=True sh getDeps.sh`. Or you can use released ones:<br>
