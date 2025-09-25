@@ -40,6 +40,7 @@ if [ ! "x$CONTAINER_BUILD" == "xTrue" ] ; then
     pip install transformers==4.56.2
     pip install sentencepiece==0.2.1
     pip install pillow
+    pip install ascii_magic
   fi
   if [ "x$GEN_MODELS1" == "xTrue" -o  "x$GEN_MODELS1" == "x" ] ; then
     set -e
