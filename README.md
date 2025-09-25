@@ -356,8 +356,62 @@ Image cache (shared for al languages)  is cache/images
 ```
 </details>
 
-   * once you have the content of file cached, yuo can play croswords withiout hours of waiting
-   * You can verify content of caches by ` python  caches.py  lang print`. eg ` python  caches.py  cs print` (as all except images are transalted somwhere in process)
+   * once you have the content of file cached, you can play crosswords without hours of waiting
+   * You can verify content of caches by ` python  caches.py  lang print`. eg ` python  caches.py  cs print` (as all except images are translated somewhere in process)
+
+  * to avoid need of gui, there is backup image-show: ascii images `python imageToAscii.py  <filename>`
+<details>
+
+```
+ASCII_WIDTH=80 ASCII_MONOCHROME="True" python imageToAscii.py cache/images/c2RmdWlrbG9naGRmZmtsd2hpdGViaXJkMg==shkhilkdfseyula.jpg
+
+{{}!ouuo]{cxv)<)|"///////////"|)vIz#CJnjzo[Isl?7TJJ#nujzoat1[?{lccxvi>\\>cI][[!}
+srrs*![Isx>\\)||""/""/////""||\\)s[7zoa[!*rciv*tL##uzo1!?I}}*II!!?*lv><%{!11!}r%
+x%%viiii>\)||"""""++"))ii>\\)\<)c*[ooa[Ir%)><>i%ls{{{}II!]1aozzot!{xiil*??I{cv)<
+<\)||"""""""""""|i[TqXk&&AGd5j*xrI1tt]*cviv%%xcllrr{*I!1oLTJCJno[{%ivxrsrcvivxlr
+"//////"///"|\){tn555JLfXO@DMN@Gya??*rcv%xrs{{*I?]1e7LTJwfyywJLa}c%xlrlccl{]oLT#
+|"|||||<c?eu#y6qFT77L%)!hGk&8$DMM8wcvivcs}!]!??1oLTJwffyyfw#Lo1Ilclrrrs*]enfF6mm
+><<<\<x*I}sr*!ez#ywfpqgddEGbO&$KBB@Cvxs?1ouJJ#ujLT##TnuLj7e1!*rllrsllr{I[aju#Jwf
+%%vi>>>>>)ivi)ivstw6qSSmSgEPZkAU$@@U5tzjLTwyywjt[11[]?I}}*{rcvvlrrlllr{rc%vxl{?[
+lcx%vvvv%%%x%%%vv)i?#ypmgdEPbYk&U$@$85##Tu7t?r%v%xxxxcr*II{cvil{sl%%xcxv><<ic{I?
+rlcx%%%%xcxx%%%%%vi%u5SVdEXGbYkA8$@KUSza!{xi>>)ivvvvc{?[[!Ilc{I?}li)><\|)<icr*I?
+rlc%vv%%xccx%%vvi))<7FSV4gPbkA&8@DWNWKgw1rv)ivv%%%%c{?[t[Is{?[1[?r%)<\))<i%ls**{
+lc%viivv%%vvvi))<<)|1p6hXPGbYA88@@&8$@DD$kE3e*cccrr{*III{{}!tt1?{c%vvviiiv%xcllr
+{slxi))ii))>><\)|"""rmgghEPZbbYO&kd6q4XGYA&8OX27!{{*}{rccs}??}rxvv%ccccxxxxxccr{
+e1]?*rcxv)><<\|"/+"|iwpqmmhEPGZbYb4pwwff5qg4XPXgfL[*rlxc*II*lv))vxl{}??I}}I}III?
+TnL7t]?}{lcv>\||""|)\zJy5FpgVdEXPGGg6TnuL#Cw5pqgSS5Jo?[1!I{lv><)vc*?[teoooooeeee
+a7jzet[!I*rc%i<\)))\\{Tyww5qhhd4EggESj??!]eoaoTuJ2ww55wu7]*{l%iiv%l}]tae7junnTTT
+zoattt1[]?*rcxxi><<>)<InCTJfFqShd4EXXdy[sv<>?!vxl!jT3SF3fo]7[?*rcvv%cls*?[tojuT#
+23fCu7t]?!][!{lcv><<>\)l1ozjuCy5pmShV4ggEh5#T#ute*vvs[zL#CJuli}[*lx%%vvv%xclsI[e
+T#JwCn71Irr*?Is%>\\\\\<<x*?]![oLnJw2p6Sgd4gXX4hFfjtt]?I}?t7j1I}I??*****}II}}{lx%
+jnuuLj7ot!scl{{li<>))iiiiivl}*I]tee7uCfy2pqh4EXXgg4gp5yCLe1a[{I!I!t[!![te7zz7e]*
+oLujjLLj7e1?**{rcxcllccvii><vlsr{]ttte7LnuL#6ShdVhhgmF6mqm5JLe!?sc?e!I?!tejuunuj
+ee7jz77oeat111!II***{rxvii))><)i>icr*I!]]]!7LJp6CT#Cfww3Fmqq6Fwj1{sI?!{r{I!1e7jL
+e!?aLuj7eeaa1111[?*{cv>iiv%%%%x%vi)><\<)>>%!7fgdJ%<)c}]oTyFp53Ju7LnLIvv%xxxcr*!1
+Irvr[juj7atttaa1[?s%><<>)i%xclllc%vv)))<|"/v[eT5#v\<>><<)%{1Twa?[anF6n}v>)>>)ivc
+*cvv{[e7z7oeeaat]?*c)\<<>i%clrlcxI!%")<>vxlsr%v?]?{r%)\\)\<<v?j7et[tjJCzs>\<>ivv
+sxv)vr}!1taaeeee1]??*cclrs{{{{lr?15rvlr{{{s{r%*1ae1}c)\\ic{}{x%{euuzoeoLL1{x%%xv
+rx%v%ls{}I?][1aeeattttt1[[]!II}{[%e1{{**srss)v}![[?s%iixr**{{{{{lr[L#yJ##I%vccv)
+{rrll{}I*{*I??!!1ao7jjot[!?IIIax%}*?1**}1[l}cr*{**scxlrsrs{{s}?][]?I!tLCTj!>/\v)
+}III?![[]??]1t11teoo7oe]}lx%vi)|"\>c!juLa!{sr%r**{{{}I*rxvvcsItjuuunno!s{tjjI<"\
+I!]1aaaeeeojn###nuLL7a?sci<<<\))\\<)[[?>is*{{*}I}}II}sci>\))l!oLuuuLjjzt*]w2fLIv
+*?!!?}**I![teeoeeea1!*ci><\)\\i)is)]aiiv*{s*I??III*sl%iivvxlsI]tt11]?I{lst#35ynt
+[11[?}{lx%xxclrs*}*scv><\||||v*{1]1o1vi*{s*![[tejLzo[I{s{{{**}*{{rc%i)>>)seufwT7
+eaett[!!?I*srrllrr{{rcv)<|))|\|l%ej?1r}I?!1t1[[t7nTTnL7[Isrsrlxv>\|"||)\)r]ouu7t
+taeea[]!?}{rrs{sssssrcv>\)\)||i%>*L7I?1ttt1[?*srs?aLJffw#j!r%i<)"""""|)\)c}[eoe7
+sI!]!!][[?{rrllllc%v)>\>%lrlv>)>cojIItttt[?{x%%crr{?auwy2fT[c><\\\\|||\<ic}1eojT
+lr*?[ezz7a!{cvvv)<<)%lIeTfywL?*7yy!xI![7u##LtIrlccx%%{[zLL7tIcivvv)<)|)<i{aznJfy
+
+```
+</details>
+
+   * Out of program call, two variables controls output: `ASCII_WIDTH=number` and  `ASCII_MONOCHROME=True/False`
+   * Non of them is mandatory, and default is `ASCII_WIDTH=80` and  `ASCII_MONOCHROME="False"`
+   * In game the width is based on board size, and monochrome is False.
+     * If you really need monochrome, then the complexity of game rises again
+     * Overwrite `ASCII_MONOCHROME="True"` only if you really need
+     * Overwrite `ASCII_WIDTH=xyz"` as you need to have as big image as neccessary
+
 
 ## crosswords generation issue:
 Soetimes jsut single or two words puzzle is generated. The generation is random, and bad things happen. But there is worse issue:

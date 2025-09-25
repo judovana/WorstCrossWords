@@ -22,6 +22,9 @@ class DeskWithWords:
         self.wordsWithPlacement = wordsWithPlacement
         self.desk = desk
 
+    def width(self):
+        return len(self.desk[0])
+
     def hideAll(self):
         for index,wwp in enumerate(self.wordsWithPlacement):
             wwp.hideAll()

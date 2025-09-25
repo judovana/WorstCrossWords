@@ -2,6 +2,7 @@ import show_image
 import show_images
 import caches
 import generateWords
+import imageToAscii
 
 import traceback
 import threading
@@ -173,6 +174,16 @@ def processInTnGnaz(cmd, desk, lang):
         else:
             syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
+    if ccmd == "Y":
+        allFiles=getAllImageFilesFor(word, lang)
+        if index >= len(allFiles) or index < 0:
+            print(cchar + " have only 1-" + str(len(allFiles))+" items")
+        else:
+            ttl=title+" " + str(index+1)+"/"+str(len(allFiles))
+            print(ttl)
+            imageToAscii.imgToAscii(allFiles[index], desk.width()*2)
+            print(ttl)
+        return True
 
 def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
     cchar=cmd[1:][0].upper()
@@ -209,6 +220,17 @@ def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
             textIndexes[cchar]=0
         syncOrAsync(allFiles[index], title+" " + str(index+1)+"/"+str(len(allFiles)))
         return True
+    if ccmd == "Y":
+        index=createOrPlusPlus(imagesIndexes, cchar)
+        allFiles=getAllImageFilesFor(word, lang)
+        if index >= len(allFiles):
+            index=0
+            textIndexes[cchar]=0
+        ttl=title+" " + str(index+1)+"/"+str(len(allFiles))
+        print(ttl)
+        imageToAscii.imgToAscii(allFiles[index], desk.width()*2)
+        print(ttl)
+        return True
 
 def processIITTGGaz(cmd, desk,lang):
     cchar=cmd[2:][0].upper()
@@ -229,6 +251,12 @@ def processIITTGGaz(cmd, desk,lang):
     if ccmd == "II":
         for file in getAllImageFilesFor(word, lang):
             syncOrAsync(file, title)
+        return True
+    if ccmd == "YY":
+        for file in getAllImageFilesFor(word, lang):
+            print(title)
+            imageToAscii.imgToAscii(file, desk.width()*2)
+        print(title)
         return True
 
 def task():
@@ -272,6 +300,7 @@ def main():
     print("environment variable "+generateWords.SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
     print("environment variable "+ASYNC_ENV+"=False removes ability to show more images in parallel )may be better playgame actually)") 
     print("environment variable "+WRAP_ENV+"=number is setting the forced wrap for text windows") 
+    print("environment variables "+imageToAscii.ASCII_WIDTH+"=80 and "+imageToAscii.ASCII_MONOCHROME+"=False controls the ascii art")
     wordsFile="cs"
     if len(sys.argv) <= 1:
         print("You must specify file to read words from")
@@ -324,7 +353,7 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="help exit giveup L ? ?n ?? (? ?n ?? I In II T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
+    qhelp="help exit giveup L ? ?n ?? (? ?n ?? I Y In Yn II YY T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
     history=[];
     comandsUsage = {}
     imagesIndexes={}
@@ -351,12 +380,15 @@ def main():
             print("Type `exit` to gave up (solution and statistics will be printed)");
             print("---- suggestions ----")
             print("I[a-z] to show next image (from all) for given word")
+            print("Y[a-z] to show next image (from all) for given word as ASCII-ART")
             print("T[a-z] to show next hint (from all) for given word")
             print("G[a-z] to show next hint (from all) for given word in external window")
             print("Inumber[a-z] to show Nth image (from all) for given word")
+            print("Ynumber[a-z] to show Nth image (from all) for given word as ASCII-ART")
             print("Tnumber[a-z] to show Nth hint (from all) for given word")
             print("Gnumber[a-z] to show Nth hint (from all) for given word in external window")
             print("II[a-z] to show all images for given word")
+            print("YY[a-z] to show all images for given word as ASCII-ART")
             print("TT[a-z] to show all texts for given word")
             print("GG[a-z] to show all texts for given word in external window")
             print("---- operations and actions ----")
@@ -372,7 +404,7 @@ def main():
                 print("delTnumber[a-z] to remove Nth text. Check by Tn before")
             print("everything else is considered as guess (and dont forget sub!)")
             continue
-        if cmd.startswith('II') or cmd.startswith('TT') or cmd.startswith('GG'):
+        if cmd.startswith('II') or cmd.startswith('YY') or cmd.startswith('TT') or cmd.startswith('GG'):
             # FIXME show all dialogs in paralel (needs global master window)
             try:
                 if processIITTGGaz(cmd, desk, lang):
@@ -381,7 +413,7 @@ def main():
                 traceback.print_exc()
                 print("XX[A-Z] expected")
                 continue
-        if cmd.startswith('I') or cmd.startswith('T') or cmd.startswith('G'):
+        if cmd.startswith('I') or cmd.startswith('Y') or cmd.startswith('T') or cmd.startswith('G'):
             if re.match(".*[0-9].*", cmd)  == None:
                 try:
                     if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
