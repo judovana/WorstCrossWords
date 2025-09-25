@@ -4,6 +4,10 @@ import re
 import os
 
 SIZE_VAR="SIZE"
+RECYCLE_VAR="RECYCLE"
+recycle=True
+if os.environ.get(RECYCLE_VAR) == "False":
+  recycle=False
 
 def readWorlist(file):
     print("reding all interesting words in " + file)
@@ -242,6 +246,12 @@ def init(width, height):
             a.append(".");
     return desk
 
+def popik(words):
+    word = words.pop()
+    if recycle:
+        words=[word]+words
+    return word; 
+
 def generate(words, maxWords):
     userWidth=15
     userHeight=24
@@ -250,12 +260,12 @@ def generate(words, maxWords):
         userHeight=int(re.sub(".*x", "", os.environ.get(SIZE_VAR)))
     desk=init(userWidth, userHeight)
     wordsWithPlacement = []
-    word=words.pop();
+    word=popik(words)
     # to place first randmly w/h is changing the order in theb elow loop...
     while True:
         LX=len(desk[0])-len(word)-2
         if (LX<0):
-            word=words.pop();
+            word=popik(words);
             continue
         initx=int(random.randint(0, LX)/2*2)
         break
@@ -265,16 +275,18 @@ def generate(words, maxWords):
     inity=int(random.randint(0, LY)/2*2)
     placeHor(desk, initx, inity, word);
     wordsWithPlacement.append(WordWithPlacement(initx,inity,word, ">"))
-    while maxWords > 0 and len(words) > 1: #two pops in below
-        maxWords-=1
-        word=words.pop();
+    maxIterations=0
+    origLenWords=len(words)*3
+    while len(wordsWithPlacement)<maxWords and maxIterations < origLenWords and len(words) > 1: #two pops in below
+        maxIterations+=1
+        word=popik(words);
         placed=False
         for y in range(0, len(desk), 2):
             for x in range(0, len(desk[y]), 2):    
                 if canPlaceVer(desk, x, y, word):
                     placeVer(desk, x, y, word);
                     wordsWithPlacement.append(WordWithPlacement(x,y,word, "ˇ"))
-                    word=words.pop();
+                    word=popik(words);
                     placed=True
                     break
             if placed:
@@ -288,6 +300,7 @@ def generate(words, maxWords):
                     break
             if placed:
                 break
+    print(str(maxIterations)+"/"+str(maxWords)+ " - " + str(recycle))
     return DeskWithWords(wordsWithPlacement, desk)
 
 def placeHor(desk, x, y, word):
@@ -416,6 +429,7 @@ def reusableHelp():
 def main():
     print("mandatory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
     print("environment variable "+SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
+    print("environment variable "+RECYCLE_VAR+"=False will disable recycling of words. Useful - necessary -  for huge vocabularies") 
     wordFile=None
     if len(sys.argv) <= 1:
         print("You must specify file to read words from")

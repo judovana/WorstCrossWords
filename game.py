@@ -298,6 +298,7 @@ def main():
     print("WARNING the language is detected from file name. Be sure the only letters in the filename are identifying the lang as `cs` `en` or `de`") 
     print("Warning. environment vat "+caches.NOTRANS_VAR+"set to True, will skipp transaltion step.Note it may corrupt the caches, backup them before. Noe the AI being asked for different, then english words is weird")
     print("environment variable "+generateWords.SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
+    print("environment variable "+generateWords.RECYCLE_VAR+"=False will disable recycling of words. Useful - necessary -  for huge vocabularies") 
     print("environment variable "+ASYNC_ENV+"=False removes ability to show more images in parallel )may be better playgame actually)") 
     print("environment variable "+WRAP_ENV+"=number is setting the forced wrap for text windows") 
     print("environment variables "+imageToAscii.ASCII_WIDTH+"=80 and "+imageToAscii.ASCII_MONOCHROME+"=False controls the ascii art")
