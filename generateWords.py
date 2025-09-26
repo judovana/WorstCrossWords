@@ -2,6 +2,7 @@ import random
 import sys
 import re
 import os
+import cmd
 
 SIZE_VAR="SIZE"
 RECYCLE_VAR="RECYCLE"
@@ -426,6 +427,37 @@ def reusableHelp():
         print("`sub[A-Z] guess` try to fill matching guess SUBSTRING to selected word")
         print("`sub guess` try to fill matching guess SUBSTRING to ALL words (")
 
+def qhelp():
+    print ("L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] `sub[A-Z] guess` help exit giveup")
+
+class CmdMainShell(cmd.Cmd):
+    prompt = '$ '
+
+    def __init__(self, desk):
+        super().__init__()
+        self.desk=desk
+
+    def onecmd(self, line):
+        qhelp()
+        cmd=line.strip()
+        if 'exit' == cmd:
+            self.desk.gaveUp()
+            return True
+        if 'giveup' == cmd.lower():
+            self.desk.gaveUp()
+            self.desk.prettyPrint()
+            return True
+        if 'help' == cmd:
+            print("Type `exit` to gave up (solution will be printed)");
+            print("Type `cheat` to reprint all words");
+            reusableHelp()
+            print("everything else is considered as guess")
+            return False
+        if reusableRepl(cmd, self.desk):
+            return False
+        return False
+
+
 def main():
     print("mandatory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
     print("environment variable "+SIZE_VAR+" in format WxH may be used to set size of  desk (be carefull)") 
@@ -447,26 +479,8 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="L ? ?number ?[a-z] ?number[a-z] ?? ??[a-z] `sub[A-Z] guess` help exit giveup"
-    print(qhelp)
-    for line in sys.stdin:
-        print(qhelp)
-        cmd=line.strip()
-        if 'exit' == cmd:
-            desk.gaveUp()
-            break
-        if 'giveup' == cmd.lower():
-            desk.gaveUp()
-            desk.prettyPrint()
-            break
-        if 'help' == cmd:
-            print("Type `exit` to gave up (solution will be printed)");
-            print("Type `cheat` to reprint all words");
-            reusableHelp()
-            print("everything else is considered as guess")
-            continue
-        if reusableRepl(cmd, desk):
-            continue
+    qhelp()
+    CmdMainShell(desk).cmdloop()
 
 if __name__ == "__main__":
     main()
