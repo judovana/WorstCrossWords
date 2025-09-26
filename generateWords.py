@@ -417,6 +417,9 @@ def reusableRepl(cmd, desk) :
     return True;
 
 def reusableHelp():
+        print("Type `exit` to exit withotu solution");
+        print("Type `giveup` to gave up (solution will be printed)");
+        print("Type `cheat` to reprint all words");
         print("? to fill random letter")
         print("?number to fill random Nth letter")
         print("?[a-z] to fill random letter of selected word")
@@ -448,8 +451,6 @@ class CmdMainShell(cmd.Cmd):
             self.desk.prettyPrint()
             return True
         if 'help' == cmd:
-            print("Type `exit` to gave up (solution will be printed)");
-            print("Type `cheat` to reprint all words");
             reusableHelp()
             print("everything else is considered as guess")
             return False

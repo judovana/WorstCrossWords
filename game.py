@@ -378,7 +378,6 @@ def main():
             break
         if 'help' == cmd:
             # each cmd with [a-z] should write length of that word
-            print("Type `exit` to gave up (solution and statistics will be printed)");
             print("---- suggestions ----")
             print("I[a-z] to show next image (from all) for given word")
             print("Y[a-z] to show next image (from all) for given word as ASCII-ART")
