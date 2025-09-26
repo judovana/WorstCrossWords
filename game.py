@@ -13,6 +13,7 @@ import pathlib
 import sys
 import re
 import os
+import cmd
 import tkinter as tk
 from tkinter import *
 
@@ -92,7 +93,7 @@ def delete(cmd, desk, lang):
     idL=cmd[4:][0].upper()
     idInt=generateWords.letterToId(idL)
     ccmd=cmd[:4]
-    print(ccmd)
+    files=None
     if idInt >= len(desk.wordsWithPlacement):
         print("We have  have only " + str(len(desk.wordsWithPlacement))+" words")
         return True
@@ -107,7 +108,7 @@ def delete(cmd, desk, lang):
     if len(files) <= index:
         print("in cache is only " + str(len(files)) + "items")
         return True
-    if file:
+    if files:
         file=files[index]
         print("would delete " + file)
         print("For now, please remove manually")
@@ -143,7 +144,12 @@ def processInTnGnaz(cmd, desk, lang):
     intNth=re.sub('[^0-9]+', '', cmd)
     index=int(intNth)-1
     cmd=re.sub('[0-9]+', '', cmd)
-    cchar=cmd[1:][0].upper()
+    try:
+        cchar=cmd[1:][0].upper()
+    except:
+        traceback.print_exc()
+        print("Xn expected")
+        return True
     idInt=generateWords.letterToId(cchar)
     ccmd=cmd[:1].upper()
     if idInt >= len(desk.wordsWithPlacement):
@@ -186,7 +192,12 @@ def processInTnGnaz(cmd, desk, lang):
         return True
 
 def processITGaz(cmd, desk, textIndexes, imagesIndexes,lang):
-    cchar=cmd[1:][0].upper()
+    try:
+        cchar=cmd[1:][0].upper()
+    except:
+        traceback.print_exc()
+        print("X expected")
+        return True
     idInt=generateWords.letterToId(cchar)
     ccmd=cmd[:1].upper()
     if idInt >= len(desk.wordsWithPlacement):
@@ -290,6 +301,119 @@ class AsyncParent():
     def close(self):
         self.queue.append("destroy");
 
+def qhelp():
+    print ("help exit giveup L ? ?n ?? (? ?n ?? I Y In Yn II YY T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`")
+
+class CmdMainShell(cmd.Cmd):
+    prompt = '$ '
+
+    def __init__(self, desk, lang, history, comandsUsage, imagesIndexes, textIndexes):
+        super().__init__()
+        self.desk=desk
+        self.lang=lang
+        self.history=history
+        self.comandsUsage=comandsUsage
+        self.imagesIndexes=imagesIndexes
+        self.textIndexes=textIndexes
+
+    def onecmd(self, line):
+        #helpers beggin
+        desk=self.desk
+        lang=self.lang
+        history=self.history
+        comandsUsage=self.comandsUsage
+        imagesIndexes=self.imagesIndexes
+        textIndexes=self.textIndexes
+        #helpers end
+        qhelp()
+        cmd=line.strip()
+        history.append(cmd);
+        createOrPlusPlus(comandsUsage, cmd)
+        if 'exit' == cmd:
+            if ASYNC:
+                asyncParent.close()
+            desk.gaveUp()
+            return True
+        if 'giveup' == cmd.lower():
+            if ASYNC:
+                asyncParent.close()
+            desk.gaveUp()
+            desk.prettyPrint()
+            return True
+        if 'help' == cmd:
+            # each cmd with [a-z] should write length of that word
+            print("---- suggestions ----")
+            print("I[a-z] to show next image (from all) for given word")
+            print("Y[a-z] to show next image (from all) for given word as ASCII-ART")
+            print("T[a-z] to show next hint (from all) for given word")
+            print("G[a-z] to show next hint (from all) for given word in external window")
+            print("Inumber[a-z] to show Nth image (from all) for given word")
+            print("Ynumber[a-z] to show Nth image (from all) for given word as ASCII-ART")
+            print("Tnumber[a-z] to show Nth hint (from all) for given word")
+            print("Gnumber[a-z] to show Nth hint (from all) for given word in external window")
+            print("II[a-z] to show all images for given word")
+            print("YY[a-z] to show all images for given word as ASCII-ART")
+            print("TT[a-z] to show all texts for given word")
+            print("GG[a-z] to show all texts for given word in external window")
+            print("---- operations and actions ----")
+            generateWords.reusableHelp()
+            print("---- calls to AI models ----")
+            if imgCacheWrite:
+                print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync")
+                print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
+                print("delInumber[a-z] to remove Nth image. Check by In before")
+            if exCacheWrite:
+                print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync")
+                print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
+                print("delTnumber[a-z] to remove Nth text. Check by Tn before")
+            print("everything else is considered as guess (and dont forget sub!)")
+            return False
+        if cmd.startswith('II') or cmd.startswith('YY') or cmd.startswith('TT') or cmd.startswith('GG'):
+            # FIXME show all dialogs in paralel (needs global master window)
+            try:
+                if processIITTGGaz(cmd, desk, lang):
+                    return False
+            except:
+                traceback.print_exc()
+                print("XX[A-Z] expected")
+                return False
+        if cmd.startswith('I') or cmd.startswith('Y') or cmd.startswith('T') or cmd.startswith('G'):
+            if re.match(".*[0-9].*", cmd)  == None:
+                try:
+                    if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
+                        return False
+                except:
+                    traceback.print_exc()
+                    print("X[A-Z] expected")
+                    return False
+            else:
+                if processInTnGnaz(cmd, desk, lang):
+                    return False
+                print("Xn[A-Z] expected")
+                return False
+        if cmd.startswith('newsI') or cmd.startswith('newsT') or cmd.startswith('newI') or cmd.startswith('newT'):
+            if cmd.startswith('news'):
+                lnarg=6
+            else:
+                lnarg=5
+            try:
+                if len(cmd)<lnarg:
+                    print("missing ID of word")
+                    return False
+                ccmd=cmd[:lnarg-1]
+                idL=cmd[lnarg-1:][0].upper()
+                if newITnewsIT(ccmd, idL, lang, desk):
+                    return False
+            except:
+                traceback.print_exc()
+            return False
+        if cmd.startswith('delI') or cmd.startswith('delT'):
+            delete(cmd, desk, lang)
+            return False
+        if generateWords.reusableRepl(cmd, desk):
+            return False
+        return False
+
 def main():
     global imgCacheWrite
     global exCacheWrite
@@ -354,100 +478,12 @@ def main():
     print()
     desk.hideAll()
     desk.prettyPrint()
-    qhelp="help exit giveup L ? ?n ?? (? ?n ?? I Y In Yn II YY T G Tn TT GG newI newT delIn delTn)[a-z] `sub[A-Z] guess`"
     history=[];
     comandsUsage = {}
     imagesIndexes={}
     textIndexes={}
-    print(qhelp)
-    for line in sys.stdin:
-        print(qhelp)
-        cmd=line.strip()
-        history.append(cmd);
-        createOrPlusPlus(comandsUsage, cmd)
-        if 'exit' == cmd:
-            if ASYNC:
-                asyncParent.close()
-            desk.gaveUp()
-            break
-        if 'giveup' == cmd.lower():
-            if ASYNC:
-                asyncParent.close()
-            desk.gaveUp()
-            desk.prettyPrint()
-            break
-        if 'help' == cmd:
-            # each cmd with [a-z] should write length of that word
-            print("---- suggestions ----")
-            print("I[a-z] to show next image (from all) for given word")
-            print("Y[a-z] to show next image (from all) for given word as ASCII-ART")
-            print("T[a-z] to show next hint (from all) for given word")
-            print("G[a-z] to show next hint (from all) for given word in external window")
-            print("Inumber[a-z] to show Nth image (from all) for given word")
-            print("Ynumber[a-z] to show Nth image (from all) for given word as ASCII-ART")
-            print("Tnumber[a-z] to show Nth hint (from all) for given word")
-            print("Gnumber[a-z] to show Nth hint (from all) for given word in external window")
-            print("II[a-z] to show all images for given word")
-            print("YY[a-z] to show all images for given word as ASCII-ART")
-            print("TT[a-z] to show all texts for given word")
-            print("GG[a-z] to show all texts for given word in external window")
-            print("---- operations and actions ----")
-            generateWords.reusableHelp()
-            print("---- calls to AI models ----")
-            if imgCacheWrite:
-                print("newsI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - sync")
-                print("newI[a-z] to generate and add new image for given word. Use all instead of a-z to generate all - async")
-                print("delInumber[a-z] to remove Nth image. Check by In before")
-            if exCacheWrite:
-                print("newsT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - sync")
-                print("newT[a-z] to generate and add new text for given word. Use all instead of a-z to generate all - async")
-                print("delTnumber[a-z] to remove Nth text. Check by Tn before")
-            print("everything else is considered as guess (and dont forget sub!)")
-            continue
-        if cmd.startswith('II') or cmd.startswith('YY') or cmd.startswith('TT') or cmd.startswith('GG'):
-            # FIXME show all dialogs in paralel (needs global master window)
-            try:
-                if processIITTGGaz(cmd, desk, lang):
-                    continue
-            except:
-                traceback.print_exc()
-                print("XX[A-Z] expected")
-                continue
-        if cmd.startswith('I') or cmd.startswith('Y') or cmd.startswith('T') or cmd.startswith('G'):
-            if re.match(".*[0-9].*", cmd)  == None:
-                try:
-                    if processITGaz(cmd, desk, textIndexes, imagesIndexes, lang):
-                        continue
-                except:
-                    traceback.print_exc()
-                    print("X[A-Z] expected")
-                    continue
-            else:
-                if processInTnGnaz(cmd, desk, lang):
-                    continue
-                print("Xn[A-Z] expected")
-                continue
-        if cmd.startswith('newsI') or cmd.startswith('newsT') or cmd.startswith('newI') or cmd.startswith('newT'):
-            if cmd.startswith('news'):
-                lnarg=6
-            else:
-                lnarg=5
-            try:
-                if len(cmd)<lnarg:
-                    print("missing ID of word")
-                    continue
-                ccmd=cmd[:lnarg-1]
-                idL=cmd[lnarg-1:][0].upper()
-                if newITnewsIT(ccmd, idL, lang, desk):
-                    continue
-            except:
-                traceback.print_exc()
-            continue
-        if cmd.startswith('delI') or cmd.startswith('delT'):
-            delete(cmd, desk, lang)
-            continue
-        if generateWords.reusableRepl(cmd, desk):
-            continue
+    qhelp()
+    CmdMainShell(desk, lang, history, comandsUsage, imagesIndexes, textIndexes).cmdloop()
     print("Shuting down, that may take a while...")
 
 if __name__ == "__main__":
