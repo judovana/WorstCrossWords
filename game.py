@@ -428,8 +428,7 @@ def main():
     print("environment variables "+imageToAscii.ASCII_WIDTH+"=80 and "+imageToAscii.ASCII_MONOCHROME+"=False controls the ascii art")
     wordsFile="cs"
     if len(sys.argv) <= 1:
-        print("You must specify file to read words from")
-        sys.exit(2)
+      generateWords.hackMissingArg()
     if ASYNC:
         global asyncParent
         asyncParent = AsyncParent()

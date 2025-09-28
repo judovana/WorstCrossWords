@@ -458,6 +458,17 @@ class CmdMainShell(cmd.Cmd):
             return False
         return False
 
+def hackMissingArg():
+        print("Warning, you should specify file to read words from. Some preconfigured files:")
+        langFiles=os.listdir("langs")
+        langFiles.sort()
+        for index,lfile in enumerate(langFiles):
+            print(str(index) + ") " + lfile)
+        print("Type the number and press enter")
+        userInput = sys.stdin.readline().strip()
+        if (userInput == "" or userInput == "exit" or userInput == "quit"):
+          sys.exit(0)
+        sys.argv=sys.argv+["langs/"+langFiles[int(userInput)]]
 
 def main():
     print("mandatory first argument is  argument file with all words. Optional second argument may follow - number of words.") 
@@ -465,8 +476,7 @@ def main():
     print("environment variable "+RECYCLE_VAR+"=False will disable recycling of words. Useful - necessary -  for huge vocabularies") 
     wordFile=None
     if len(sys.argv) <= 1:
-        print("You must specify file to read words from")
-        sys.exit(2)
+        hackMissingArg()
     if len(sys.argv) > 1:
         wordFile=sys.argv[1]
     wcount=10
