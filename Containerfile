@@ -46,3 +46,4 @@ RUN python translate.py  --init2
 RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=True GEN_MODELS2=False GEN_MODELS3=False sh -ex getDeps.sh
 RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=True GEN_MODELS3=False sh -ex getDeps.sh
 RUN SELF_INIT=False ROOT_INSTALL=False PIP_INSTALL=False GEN_MODELS1=False GEN_MODELS2=False GEN_MODELS3=True sh -ex getDeps.sh
+RUN echo '#!/bin/bash' > play && echo 'python game.py' >> play && chmod 777 play ;
