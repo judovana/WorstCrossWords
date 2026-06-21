@@ -623,3 +623,32 @@ You can use ASCII art `Y` images as compromise, but... you will see on your own.
 # Playing in container
 You can export the game to container, via `CONTAINER_BUILD=True sh getDeps.sh`. Or you can use released ones:<br>
 cosult: https://github.com/judovana/WorstCrossWords/releases/tag/worstcrosswords-1.0#cont
+
+# NVIDIA support 
+When you have NVIDIA card, and enabled support for AI, then even in containers, one of the (word or image) main providers will be accelerated. I have failed to make the second (not sure which is whcih, I have no longer nvidia based PC)
+* you need rpmfusion enabled
+  *  eg: https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
+  *  eg: sudo dnf install   https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+Then execute similar list of installs to support nvidia at all
+* sudo dnf upgrade --refresh
+* sudo reboot
+* sudo dnf install akmod-nvidia
+* sudo dnf install xorg-x11-drv-nvidia-cuda
+* sudo dnf install akmod-nvidia
+* sudo reboot
+* test:
+  * nvidia-smi
+ 
+Nvidia support for accelerated containers from official nvida repos
+* curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo |   sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+* sudo dnf-config-manager --enable nvidia-container-toolkit-experimental
+* sudo dnf install nvidia-container-toolkit-base
+* sudo nvidia-ctk runtime configure --runtime=docker
+* sudo systemctl restart docker
+* sudo systemctl restart podman  (?!?!!?)
+* sudo nvidia-ctk runtime configure --runtime=podman
+* sudo systemctl restart nvidia-cdi-refresh.service
+* test
+  * nvidia-ctk --debug cdi list
+ 
+IIRC, all was executed on host. Feedback on this section heavili welcomed
