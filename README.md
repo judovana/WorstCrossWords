@@ -1,3 +1,15 @@
+* [WorstCrossWords](#worstcrosswords)
+  * [How it works](#how-it-works)
+  * [dependencies](#dependencies)
+  * [individual components](#individual-components)
+  * [crosswords generation issue:](#crosswords-generation-issue)
+* [Play](#play)
+  * [Getting hints](#getting-hints)
+  * [Generating hints during runtime](#generating-hints-during-runtime)
+  * [Playing in headless mode](#playing-in-headless-mode)
+* [Playing in container](#playing-in-container)
+* [NVIDIA support](#nvidia-support)
+
 # WorstCrossWords
  * This is AI powered, multi-language, *terminal*,  worst crossword game ever created
  * it is powered by awesome `transformers` and `diffusers` by https://huggingface.co
@@ -624,7 +636,7 @@ You can use ASCII art `Y` images as compromise, but... you will see on your own.
 You can export the game to container, via `CONTAINER_BUILD=True sh getDeps.sh`. Or you can use released ones:<br>
 cosult: https://github.com/judovana/WorstCrossWords/releases/tag/worstcrosswords-1.0#cont
 
-# NVIDIA support 
+# NVIDIA support
 When you have NVIDIA card, and enabled support for AI, then even in containers, one of the (word or image) main providers will be accelerated. I have failed to make the second (not sure which is whcih, I have no longer nvidia based PC)
 * you need rpmfusion enabled
   *  eg: https://docs.fedoraproject.org/en-US/quick-docs/rpmfusion-setup/
